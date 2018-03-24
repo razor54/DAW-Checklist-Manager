@@ -1,11 +1,23 @@
 spring:
   application:
     name: checklist manager
- datasource:
+  datasource:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/daw_database?createDatabaseIfNotExist=true
     username: postgres
     password: postgres
+  jpa:
+    hibernate:
+     ddl-auto: update
+
+    show-sql: true
+
+    database: postgresql
+
+    properties:
+     hibernate:
+      dialect: org.hibernate.dialect.PostgreSQLDialect
+
 
 server:
   port: 8080

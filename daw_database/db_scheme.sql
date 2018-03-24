@@ -15,16 +15,18 @@ CREATE TABLE users(
 );
 
 -- checklist DEFAULT scheme 
+
 CREATE TABLE checklist(
 
     id BIGSERIAL PRIMARY KEY, 
     name varchar(30),
-    completionDate Timestamp,
+    completion_date Timestamp,
     user_id INT REFERENCES users
  
 );
 
 -- item default scheme 
+
 CREATE TABLE item(
     
     id BIGSERIAL PRIMARY KEY,
