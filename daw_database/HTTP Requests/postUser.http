@@ -1,0 +1,8 @@
+POST http://localhost:8080/listing/users
+Content-Type: application/json
+Accept: application/xml
+
+{
+    "name":"Pot",
+    "pass":"123"
+}
