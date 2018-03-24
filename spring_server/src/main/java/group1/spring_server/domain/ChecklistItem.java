@@ -17,7 +17,10 @@ public class ChecklistItem {
 
     private String description;
 
-    private int listId;
+
+    @ManyToOne
+    @JoinColumn(name = "listId")
+    private Checklist checklist;
 
 
 
@@ -61,12 +64,12 @@ public class ChecklistItem {
 
 
 
-    public int getListId() {
-        return listId;
+    public Checklist getChecklist() {
+        return checklist;
     }
 
-    public void setListId(int list_id) {
-        this.listId = list_id;
+    public void setChecklist(Checklist checklist) {
+        this.checklist = checklist;
     }
 
 

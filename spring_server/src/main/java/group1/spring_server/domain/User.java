@@ -3,6 +3,7 @@ package group1.spring_server.domain;
 
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name= "users", schema = "public")
@@ -15,7 +16,12 @@ public class User {
 
     private String name;
 
+
     private String pass;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private Set<Checklist> checklists;
+
 
 
     public int getId() {
@@ -40,5 +46,14 @@ public class User {
 
     public void setPass(String password) {
         this.pass = password;
+    }
+
+
+    public Set<Checklist> getChecklists() {
+        return checklists;
+    }
+
+    public void setChecklists(Set<Checklist> checklists) {
+        this.checklists = checklists;
     }
 }

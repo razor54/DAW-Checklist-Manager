@@ -6,6 +6,7 @@ import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
 @Table(name = "checklist", schema = "public")
@@ -20,7 +21,16 @@ public class Checklist {
 
     private Date completionDate;
 
-    private int user_id;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+
+    @OneToMany(mappedBy = "checklist", cascade = CascadeType.ALL)
+    private Set<ChecklistItem> items;
+
+
 
     @Transient
     static final DateFormat df = new SimpleDateFormat("uuuu-MM-dd HH:mm:ss.SSS");
@@ -39,13 +49,6 @@ public class Checklist {
         this.completionDate = completionDate;
     }
 
-    public int getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
-    }
 
     public String getName() {
         return name;
@@ -61,5 +64,22 @@ public class Checklist {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+    public Set<ChecklistItem> getItems() {
+        return items;
+    }
+
+    public void setItems(Set<ChecklistItem> items) {
+        this.items = items;
     }
 }
