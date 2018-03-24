@@ -1,13 +1,14 @@
 package group1.spring_server.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name= "item",schema = "public")
 public class ChecklistItem {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(columnDefinition = "bigserial")
     private int id;
 
     private String name;
@@ -19,7 +20,7 @@ public class ChecklistItem {
     private int listId;
 
 
-    @Id
+
     public int getId() {
         return id;
     }
