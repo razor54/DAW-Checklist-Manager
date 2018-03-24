@@ -2,6 +2,7 @@ package group1.spring_server.service;
 
 
 import group1.spring_server.domain.User;
+import group1.spring_server.exceptions.FailedAddUserException;
 import group1.spring_server.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,13 +14,16 @@ public class UserService {
     UserRepository userRepository;
 
 
-    /*public CheckListService(CheckListRepository repository){
-        this.userRepository = repository;
-    } */
+    //public CheckListService(CheckListRepository repository){this.userRepository = repository;}
 
-    public User addUser(User user){
-        userRepository.save(user);
-        return user;
+    public User addUser(User user) throws FailedAddUserException {
+
+        try {
+            return userRepository.save(user);
+        }
+        catch (Exception e){
+            throw new FailedAddUserException();
+        }
     }
 
 

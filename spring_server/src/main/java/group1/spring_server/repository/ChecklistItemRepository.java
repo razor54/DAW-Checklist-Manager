@@ -5,5 +5,5 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CheckListItemRepository extends CrudRepository<ChecklistItem,Integer> {
+public interface ChecklistItemRepository extends CrudRepository<ChecklistItem,Integer> {
 }
