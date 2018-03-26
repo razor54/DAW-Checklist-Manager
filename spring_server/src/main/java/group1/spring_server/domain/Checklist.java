@@ -1,5 +1,8 @@
 package group1.spring_server.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Timestamp;
@@ -22,12 +25,12 @@ public class Checklist {
     private Date completionDate;
 
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+
+    private int user_id;
 
 
-    @OneToMany(mappedBy = "checklist", cascade = CascadeType.ALL)
+    @OneToMany( cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
+    @JoinColumn(name = "list_id")
     private Set<ChecklistItem> items;
 
 
@@ -68,12 +71,12 @@ public class Checklist {
 
 
 
-    public User getUser() {
-        return user;
+    public int getUser_id() {
+        return user_id;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
     }
     public Set<ChecklistItem> getItems() {
         return items;

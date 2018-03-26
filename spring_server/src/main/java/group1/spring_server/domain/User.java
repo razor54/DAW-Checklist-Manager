@@ -19,7 +19,8 @@ public class User {
 
     private String pass;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany( cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
     private Set<Checklist> checklists;
 
 

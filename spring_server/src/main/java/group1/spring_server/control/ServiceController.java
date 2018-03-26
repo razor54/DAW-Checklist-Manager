@@ -4,9 +4,7 @@ package group1.spring_server.control;
 import group1.spring_server.domain.Checklist;
 import group1.spring_server.domain.ChecklistItem;
 import group1.spring_server.domain.User;
-import group1.spring_server.domain.outputModel.CheckListOM;
-import group1.spring_server.domain.outputModel.ChecklistItemOM;
-import group1.spring_server.domain.outputModel.UserOM;
+
 import group1.spring_server.exceptions.*;
 import group1.spring_server.service.ChecklistItemService;
 import group1.spring_server.service.ChecklistService;
@@ -45,20 +43,20 @@ public class ServiceController {
     }
 
     @GetMapping("/users")
-    public Iterable<UserOM> getUsers() {
+    public Iterable<User> getUsers() {
         //TODO TEST ONLY
         return StreamSupport
                 .stream(userService.getUsers().spliterator(), false)
-                .map(UserOM::new).collect(Collectors.toList());
+                .collect(Collectors.toList());
 
 
     }
 
     @GetMapping("/checklist/{listId}")
-    public CheckListOM getCheckList(HttpServletResponse res, @PathVariable("listId") int listId) throws IOException {
+    public Checklist getCheckList(HttpServletResponse res, @PathVariable("listId") int listId) throws IOException {
 
         try {
-            return new CheckListOM(checklistService.getChecklist(listId));
+            return checklistService.getChecklist(listId);
 
         } catch (NoSuchChecklistException e) {
             res.sendError(e.error(), e.getMessage());
@@ -67,10 +65,10 @@ public class ServiceController {
     }
 
     @GetMapping("/checklist/item/{itemId}")
-    public ChecklistItemOM getChecklistItem(HttpServletResponse res, @PathVariable("itemId") int itemId) throws IOException {
+    public ChecklistItem getChecklistItem(HttpServletResponse res, @PathVariable("itemId") int itemId) throws IOException {
 
         try {
-            return new ChecklistItemOM(checklistItemService.getChecklistItem(itemId));
+            return checklistItemService.getChecklistItem(itemId);
 
         } catch (NoSuchChecklistItemException e) {
             res.sendError(e.error(), e.getMessage());
@@ -79,10 +77,10 @@ public class ServiceController {
     }
 
     @PostMapping("/users")
-    public UserOM addUser(HttpServletResponse res, @RequestBody User user) throws IOException {
+    public User addUser(HttpServletResponse res, @RequestBody User user) throws IOException {
 
         try {
-            return new UserOM(userService.addUser(user));
+            return userService.addUser(user);
 
         } catch (FailedAddUserException e) {
             res.sendError(e.error(), e.getMessage());
@@ -94,10 +92,11 @@ public class ServiceController {
 
 
     @PostMapping("/checklist")
-    public CheckListOM addChecklist(HttpServletResponse res, @RequestBody Checklist checklist) throws IOException {
+    public Checklist addChecklist(HttpServletResponse res, @RequestBody Checklist checklist) throws IOException {
 
         try {
-            return new CheckListOM(checklistService.addChecklist(checklist));
+
+            return checklistService.addChecklist(checklist);
 
         } catch (FailedAddChecklistException e) {
             res.sendError(e.error(), e.getMessage());
@@ -108,10 +107,10 @@ public class ServiceController {
     }
 
     @PostMapping("/checklist/item")
-    public ChecklistItemOM addChecklistItem(HttpServletResponse res, @RequestBody ChecklistItem checklistItem) throws IOException {
+    public ChecklistItem addChecklistItem(HttpServletResponse res, @RequestBody ChecklistItem checklistItem) throws IOException {
 
         try {
-            return new ChecklistItemOM(checklistItemService.addCheckListItem(checklistItem));
+            return checklistItemService.addCheckListItem(checklistItem);
 
         } catch (FailedAddCheklistItemException e) {
             res.sendError(e.error(), e.getMessage());
