@@ -3,6 +3,6 @@ Content-Type: application/json
 Accept: application/xml
 
 {
-    "name":"Pot",
+    "name":"Rui Manel",
     "pass":"123"
 }
