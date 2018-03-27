@@ -6,30 +6,25 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name= "users", schema = "public")
+@Table(name= "user", schema = "public")
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(columnDefinition = "bigserial")
-    private int id;
+    private String id;
 
     private String name;
 
-
-    private String pass;
 
     @OneToMany( cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private Set<Checklist> checklists;
 
 
-
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -40,15 +35,6 @@ public class User {
     public void setName(String name) {
         this.name = name;
     }
-
-    public String getPass() {
-        return pass;
-    }
-
-    public void setPass(String password) {
-        this.pass = password;
-    }
-
 
     public Set<Checklist> getChecklists() {
         return checklists;

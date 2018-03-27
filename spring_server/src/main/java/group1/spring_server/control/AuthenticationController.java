@@ -1,12 +1,16 @@
 package group1.spring_server.control;
 
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import group1.spring_server.domain.User;
+import group1.spring_server.exceptions.FailedAddUserException;
+import group1.spring_server.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.util.Base64Utils;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.Hashtable;
 
 
@@ -15,58 +19,31 @@ import java.util.Hashtable;
 public class AuthenticationController {
 
 
+
     //Storage where will be saved the cookie's of the following users that access and login in the api
     private static final Hashtable<Integer, String> cookieStorage = new Hashtable<>();
     private static final String cookieName = "dawserver_logincookie";
 
-    @GetMapping("/register")
-    public String getRegister(HttpServletResponse res, @RequestParam("user") String user, @RequestParam("pass") String passoword) {
+
+    @Autowired
+    private UserService userService;
+
+    @PostMapping("/register")
+    public void getRegister(HttpServletResponse res, @RequestParam("username") String username, @RequestParam ("password") String password) throws IOException {
+
+
+        User user = new User();
+
+        String sessionId = Base64Utils.encodeToString((username + ":" + password).getBytes());
+
+        user.setId(sessionId);
+        user.setName(username);
 
         try {
-
-
-            // addUser(user,passoword);
-
-            res.sendRedirect("login");
-
-        } catch (Exception e) {
-
+            userService.addUser(user);
+        } catch (FailedAddUserException e) {
+            res.sendError(e.error(), e.getMessage());
         }
-
-        return null;
-    }
-
-    @GetMapping("/login")
-    public String get(HttpServletResponse res, @RequestParam("user") String username, @RequestParam("pass") String passoword) {
-/*
-        try{
-
-            int user = getUser(username,passoword);
-
-
-            String value = getCookie(user);
-
-            //this method only adds the cookie if does not exist's same header name
-            res.addCookie(new Cookie(cookieName,value));
-
-        }catch (Exception e){
-
-        }
-        */
-        return null;
-
-    }
-
-
-    public String getCookie(int user) {
-
-
-        if (cookieStorage.containsKey(user)) return cookieStorage.get(user);
-
-        //generate random value for cookie
-        String value = Long.toHexString(Double.doubleToLongBits(Math.random()));
-
-        return cookieStorage.putIfAbsent(user, value);
 
     }
 }

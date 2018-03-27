@@ -1,6 +1,7 @@
 package group1.spring_server.control;
 
 
+import group1.spring_server.domain.AuthCredentials;
 import group1.spring_server.domain.Checklist;
 import group1.spring_server.domain.ChecklistItem;
 import group1.spring_server.domain.User;
@@ -12,6 +13,7 @@ import group1.spring_server.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.stream.Collectors;
@@ -32,15 +34,6 @@ public class ServiceController {
 
     @Autowired
     private ChecklistItemService checklistItemService;
-    private HttpServletResponse res;
-    private int itemId;
-
-    @GetMapping("/checklists")
-    public Iterable<Checklist> getCheckLists(HttpServletResponse res) {
-
-        return null;
-
-    }
 
     @GetMapping("/users")
     public Iterable<User> getUsers() {
@@ -49,6 +42,26 @@ public class ServiceController {
                 .stream(userService.getUsers().spliterator(), false)
                 .collect(Collectors.toList());
 
+
+    }
+
+    @GetMapping("/checklists")
+    public Iterable<Checklist> getCheckLists(HttpServletResponse res, AuthCredentials authCredentials) throws IOException {
+
+
+        String sessionCode = authCredentials.getSessionCode();
+
+        try {
+            User user = userService.getUser(sessionCode);
+
+            return user.getChecklists();
+
+        } catch (NoSuchUserException e) {
+            res.sendError(e.error(),e.getMessage());
+        }
+
+
+        return null;
 
     }
 

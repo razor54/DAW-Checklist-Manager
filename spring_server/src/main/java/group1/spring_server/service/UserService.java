@@ -3,9 +3,12 @@ package group1.spring_server.service;
 
 import group1.spring_server.domain.User;
 import group1.spring_server.exceptions.FailedAddUserException;
+import group1.spring_server.exceptions.NoSuchUserException;
 import group1.spring_server.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -33,9 +36,13 @@ public class UserService {
         return as;
     }
 
-    public User getUser(int id){
+    public User getUser(String id) throws NoSuchUserException {
 
-        //todo throw exception if err
-        return userRepository.findById(id).get();
+        Optional<User> user = userRepository.findById(id);
+
+        if(user.isPresent()) return user.get();
+
+        throw  new NoSuchUserException();
+
     }
 }
