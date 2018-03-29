@@ -25,14 +25,12 @@ public class Checklist {
     private Date completionDate;
 
 
-
     private String user_id;
 
 
-    @OneToMany( cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JoinColumn(name = "list_id")
     private Set<ChecklistItem> items;
-
 
 
     @Transient
@@ -70,7 +68,6 @@ public class Checklist {
     }
 
 
-
     public String getUser_id() {
         return user_id;
     }
@@ -78,6 +75,7 @@ public class Checklist {
     public void setUser_id(String user_id) {
         this.user_id = user_id;
     }
+
     public Set<ChecklistItem> getItems() {
         return items;
     }

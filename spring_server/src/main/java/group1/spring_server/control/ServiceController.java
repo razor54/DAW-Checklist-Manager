@@ -10,6 +10,7 @@ import group1.spring_server.exceptions.*;
 import group1.spring_server.service.ChecklistItemService;
 import group1.spring_server.service.ChecklistService;
 import group1.spring_server.service.UserService;
+import group1.spring_server.util.RequiresAuthentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -45,9 +46,25 @@ public class ServiceController {
 
     }
 
+    /**
+     * User checklists
+     *
+     * @param res             http response
+     * @param authCredentials refers to the fact that authentication is required
+     * @return User checkLists
+     * @throws IOException
+     */
+
     @GetMapping("/checklists")
+    @RequiresAuthentication
     public Iterable<Checklist> getCheckLists(HttpServletResponse res, AuthCredentials authCredentials) throws IOException {
 
+
+        //TODO Verify if Authorization token is present
+
+        if (authCredentials == null) {
+            // send error 402 not authorized
+        }
 
         String sessionCode = authCredentials.getSessionCode();
 
@@ -57,7 +74,7 @@ public class ServiceController {
             return user.getChecklists();
 
         } catch (NoSuchUserException e) {
-            res.sendError(e.error(),e.getMessage());
+            res.sendError(e.error(), e.getMessage());
         }
 
 
@@ -65,11 +82,25 @@ public class ServiceController {
 
     }
 
+    @RequiresAuthentication
     @GetMapping("/checklist/{listId}")
-    public Checklist getCheckList(HttpServletResponse res, @PathVariable("listId") int listId) throws IOException {
+    public Checklist getCheckList(HttpServletResponse res, @PathVariable("listId") int listId, AuthCredentials authCredentials) throws IOException {
 
         try {
-            return checklistService.getChecklist(listId);
+            //TODO
+            if (authCredentials == null) {
+                //do something
+                return null;
+            }
+
+            Checklist checklist = checklistService.getChecklist(listId);
+
+            if (checklist.getUser_id().compareTo(authCredentials.getSessionCode()) != 0) {
+                //send 403 forbidden
+                return null;
+            }
+
+            return checklist;
 
         } catch (NoSuchChecklistException e) {
             res.sendError(e.error(), e.getMessage());
@@ -78,12 +109,34 @@ public class ServiceController {
     }
 
     @GetMapping("/checklist/item/{itemId}")
-    public ChecklistItem getChecklistItem(HttpServletResponse res, @PathVariable("itemId") int itemId) throws IOException {
+    public ChecklistItem getChecklistItem(HttpServletResponse res, @PathVariable("itemId") int itemId, AuthCredentials authCredentials) throws IOException {
 
         try {
-            return checklistItemService.getChecklistItem(itemId);
+            //TODO
+            if (authCredentials == null) {
+                //do something
+                return null;
+            }
+
+            ChecklistItem checklistItem = checklistItemService.getChecklistItem(itemId);
+
+            int listId = checklistItem.getlist_id();
+
+            Checklist checklist = checklistService.getChecklist(listId);
+
+            if(checklist.getUser_id().compareTo(authCredentials.getSessionCode())!=0){
+                // res.sendError(403) access denied
+                return null;
+            }
+
+            return checklistItem;
 
         } catch (NoSuchChecklistItemException e) {
+            res.sendError(e.error(), e.getMessage());
+            return null;
+            // TODO maybe just catch (NoSuchChecklistItemException|NoSuchChecklistException e)
+            //and catch both exceptions treating them equally??
+        } catch (NoSuchChecklistException e) {
             res.sendError(e.error(), e.getMessage());
             return null;
         }
@@ -105,10 +158,16 @@ public class ServiceController {
 
 
     @PostMapping("/checklist")
-    public Checklist addChecklist(HttpServletResponse res, @RequestBody Checklist checklist) throws IOException {
+    public Checklist addChecklist(HttpServletResponse res, @RequestBody Checklist checklist, AuthCredentials authCredentials) throws IOException {
 
         try {
 
+            String sessionCode = authCredentials.getSessionCode();
+            if (sessionCode == null){
+                //402 not authorized
+                return null;
+            }
+            checklist.setUser_id(sessionCode);
             return checklistService.addChecklist(checklist);
 
         } catch (FailedAddChecklistException e) {
@@ -120,17 +179,38 @@ public class ServiceController {
     }
 
     @PostMapping("/checklist/item")
-    public ChecklistItem addChecklistItem(HttpServletResponse res, @RequestBody ChecklistItem checklistItem) throws IOException {
+    public ChecklistItem addChecklistItem(HttpServletResponse res, @RequestBody ChecklistItem checklistItem,AuthCredentials authCredentials) throws IOException {
 
         try {
+            if(authCredentials.getSessionCode()==null){
+                return null;
+            }
+
+            Checklist ch = checklistService.getChecklist( checklistItem.getlist_id() );
+
+            if(ch.getUser_id().compareTo(authCredentials.getSessionCode())!=0){
+
+                //403 forbidden access to that list
+                return null;
+
+            }
+
             return checklistItemService.addCheckListItem(checklistItem);
 
         } catch (FailedAddCheklistItemException e) {
             res.sendError(e.error(), e.getMessage());
             return null;
+        } catch (NoSuchChecklistException e) {
+            //Not a valid list id
+            e.printStackTrace();
+            return null;
         }
 
 
     }
+
+    //TODO POST NEW Template
+    //TODO Create the checklist and its items based on template
+    //TODO Read a Template
 
 }

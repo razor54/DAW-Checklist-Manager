@@ -15,10 +15,11 @@ public class User {
     private String name;
 
 
-    @OneToMany( cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
+    @OneToMany( cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private Set<Checklist> checklists;
 
+    //TODO add list of Templates
 
     public String getId() {
         return id;

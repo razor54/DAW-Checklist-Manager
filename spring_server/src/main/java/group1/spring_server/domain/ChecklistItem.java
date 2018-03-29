@@ -18,7 +18,7 @@ public class ChecklistItem {
     private String description;
 
 
-    
+    //TODO Devia ter acesso ao objeto Checklist associado...
     private int list_id;
 
 
