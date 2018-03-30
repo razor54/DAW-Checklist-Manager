@@ -4,6 +4,7 @@ import group1.spring_server.domain.Checklist;
 import group1.spring_server.domain.ChecklistItem;
 import group1.spring_server.exceptions.FailedAddChecklistException;
 import group1.spring_server.exceptions.FailedAddCheklistItemException;
+import group1.spring_server.exceptions.ForbiddenException;
 import group1.spring_server.exceptions.NoSuchChecklistException;
 import group1.spring_server.repository.ChecklistRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,12 +36,22 @@ public class ChecklistService {
         return checklistRepository.findAll();
     }
 
-    public Checklist getChecklist(int id) throws NoSuchChecklistException {
+    public Checklist getChecklist(int id, String userId) throws NoSuchChecklistException, ForbiddenException {
 
-        Optional<Checklist> checklist= checklistRepository.findById(id);
+        Optional<Checklist> optionalChecklist= checklistRepository.findById(id);
 
-        if(checklist.isPresent()) return checklist.get();
 
-        throw new NoSuchChecklistException();
+        //verification if lists exists in database
+        if(!optionalChecklist.isPresent()) throw new NoSuchChecklistException();
+
+
+        Checklist checklist  = optionalChecklist.get();
+
+        //verification of user access to the list of the item
+        if(checklist.getUser_id().compareTo(userId)!=0) throw  new ForbiddenException();
+
+
+        return checklist;
+
     }
 }

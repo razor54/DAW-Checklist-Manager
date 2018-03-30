@@ -1,6 +1,6 @@
 package group1.spring_server.exceptions;
 
-public class FailedAddChecklistException extends Exception{
+public class FailedAddChecklistException extends MyException{
 
     @Override
     public String getMessage(){

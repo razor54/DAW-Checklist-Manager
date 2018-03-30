@@ -1,7 +1,7 @@
 package group1.spring_server.exceptions;
 
 
-public class NoSuchChecklistException extends Exception {
+public class NoSuchChecklistException extends MyException {
 
 
     @Override

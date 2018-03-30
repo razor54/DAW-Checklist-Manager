@@ -26,6 +26,10 @@ public class ServiceController {
 
 
     //TODO see if refactor can do the job with constructor
+    //TODO POST NEW Template
+    //TODO Create the checklist and its items based on template
+    //TODO Read a Template
+
 
     @Autowired
     private UserService userService;
@@ -46,39 +50,22 @@ public class ServiceController {
 
     }
 
-    /**
-     * User checklists
-     *
-     * @param res             http response
-     * @param authCredentials refers to the fact that authentication is required
-     * @return User checkLists
-     * @throws IOException
-     */
-
     @GetMapping("/checklists")
     @RequiresAuthentication
     public Iterable<Checklist> getCheckLists(HttpServletResponse res, AuthCredentials authCredentials) throws IOException {
 
-
-        //TODO Verify if Authorization token is present
-
-        if (authCredentials == null) {
-            // send error 402 not authorized
-        }
-
-        String sessionCode = authCredentials.getSessionCode();
-
         try {
+
+
+            String sessionCode = authCredentials.getSessionCode();
             User user = userService.getUser(sessionCode);
 
             return user.getChecklists();
 
-        } catch (NoSuchUserException e) {
-            res.sendError(e.error(), e.getMessage());
+        } catch (MyException e ){
+            res.sendError(e.error(),e.getMessage());
+            return null;
         }
-
-
-        return null;
 
     }
 
@@ -87,22 +74,12 @@ public class ServiceController {
     public Checklist getCheckList(HttpServletResponse res, @PathVariable("listId") int listId, AuthCredentials authCredentials) throws IOException {
 
         try {
-            //TODO
-            if (authCredentials == null) {
-                //do something
-                return null;
-            }
+            return checklistService.getChecklist(
+                    listId,
+                    authCredentials.getSessionCode()
+            );
 
-            Checklist checklist = checklistService.getChecklist(listId);
-
-            if (checklist.getUser_id().compareTo(authCredentials.getSessionCode()) != 0) {
-                //send 403 forbidden
-                return null;
-            }
-
-            return checklist;
-
-        } catch (NoSuchChecklistException e) {
+        } catch (MyException e) {
             res.sendError(e.error(), e.getMessage());
             return null;
         }
@@ -112,49 +89,34 @@ public class ServiceController {
     public ChecklistItem getChecklistItem(HttpServletResponse res, @PathVariable("itemId") int itemId, AuthCredentials authCredentials) throws IOException {
 
         try {
-            //TODO
-            if (authCredentials == null) {
-                //do something
-                return null;
-            }
+            return checklistItemService.getChecklistItem(
+                    itemId,
+                    authCredentials.getSessionCode()
+            );
 
-            ChecklistItem checklistItem = checklistItemService.getChecklistItem(itemId);
-
-            int listId = checklistItem.getlist_id();
-
-            Checklist checklist = checklistService.getChecklist(listId);
-
-            if(checklist.getUser_id().compareTo(authCredentials.getSessionCode())!=0){
-                // res.sendError(403) access denied
-                return null;
-            }
-
-            return checklistItem;
-
-        } catch (NoSuchChecklistItemException e) {
-            res.sendError(e.error(), e.getMessage());
-            return null;
-            // TODO maybe just catch (NoSuchChecklistItemException|NoSuchChecklistException e)
-            //and catch both exceptions treating them equally??
-        } catch (NoSuchChecklistException e) {
+        } catch (MyException e) {
             res.sendError(e.error(), e.getMessage());
             return null;
         }
     }
 
+    /*
+    /* TODO this method is realy necessary ?
+    /*
     @PostMapping("/users")
     public User addUser(HttpServletResponse res, @RequestBody User user) throws IOException {
 
         try {
             return userService.addUser(user);
 
-        } catch (FailedAddUserException e) {
+        } catch (MyException e) {
             res.sendError(e.error(), e.getMessage());
             return null;
         }
-
-
     }
+    */
+
+
 
 
     @PostMapping("/checklist")
@@ -163,54 +125,34 @@ public class ServiceController {
         try {
 
             String sessionCode = authCredentials.getSessionCode();
-            if (sessionCode == null){
-                //402 not authorized
-                return null;
-            }
+
             checklist.setUser_id(sessionCode);
+
             return checklistService.addChecklist(checklist);
 
-        } catch (FailedAddChecklistException e) {
+        } catch (MyException e) {
             res.sendError(e.error(), e.getMessage());
             return null;
         }
-
-
     }
 
     @PostMapping("/checklist/item")
     public ChecklistItem addChecklistItem(HttpServletResponse res, @RequestBody ChecklistItem checklistItem,AuthCredentials authCredentials) throws IOException {
 
         try {
-            if(authCredentials.getSessionCode()==null){
-                return null;
-            }
 
-            Checklist ch = checklistService.getChecklist( checklistItem.getlist_id() );
-
-            if(ch.getUser_id().compareTo(authCredentials.getSessionCode())!=0){
-
-                //403 forbidden access to that list
-                return null;
-
-            }
+            Checklist ch = checklistService.getChecklist(
+                        checklistItem.getlist_id(),
+                        authCredentials.getSessionCode()
+                    );
 
             return checklistItemService.addCheckListItem(checklistItem);
 
-        } catch (FailedAddCheklistItemException e) {
+        } catch (MyException e) {
             res.sendError(e.error(), e.getMessage());
             return null;
-        } catch (NoSuchChecklistException e) {
-            //Not a valid list id
-            e.printStackTrace();
-            return null;
         }
-
-
     }
 
-    //TODO POST NEW Template
-    //TODO Create the checklist and its items based on template
-    //TODO Read a Template
 
 }

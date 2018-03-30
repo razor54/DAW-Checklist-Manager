@@ -1,6 +1,6 @@
 package group1.spring_server.exceptions;
 
-public class FailedAddUserException extends Exception {
+public class FailedAddUserException extends MyException {
 
     @Override
     public String getMessage(){

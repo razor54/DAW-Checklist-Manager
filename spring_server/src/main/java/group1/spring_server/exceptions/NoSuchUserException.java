@@ -1,6 +1,6 @@
 package group1.spring_server.exceptions;
 
-public class NoSuchUserException extends Exception{
+public class NoSuchUserException extends MyException{
 
     @Override
     public String getMessage(){
@@ -8,6 +8,6 @@ public class NoSuchUserException extends Exception{
     }
 
     public int error(){
-        return 404;
+        return 402;
     }
 }
