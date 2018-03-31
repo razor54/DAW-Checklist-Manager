@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.text.DateFormat;
@@ -20,11 +21,12 @@ public class Checklist {
     @Column(columnDefinition = "bigserial")
     private int id;
 
+    @NotNull
     private String name;
 
     private Date completionDate;
 
-
+    @NotNull
     private String user_id;
 
 

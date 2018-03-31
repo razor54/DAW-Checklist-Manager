@@ -3,6 +3,7 @@ package group1.spring_server.domain;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 @Entity
@@ -12,8 +13,8 @@ public class User {
     @Id
     private String id;
 
+    @NotNull
     private String name;
-
 
     @OneToMany( cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")

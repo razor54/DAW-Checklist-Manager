@@ -1,6 +1,7 @@
 package group1.spring_server.domain;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name= "item",schema = "public")
@@ -11,16 +12,16 @@ public class ChecklistItem {
     @Column(columnDefinition = "bigserial")
     private int id;
 
+    @NotNull
     private String name;
 
+    @NotNull
     private String state;
 
     private String description;
 
-
-    //TODO Devia ter acesso ao objeto Checklist associado...
+    @NotNull
     private int list_id;
-
 
 
     public int getId() {
