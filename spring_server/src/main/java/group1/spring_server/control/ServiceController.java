@@ -1,20 +1,14 @@
 package group1.spring_server.control;
 
 
-import group1.spring_server.domain.AuthCredentials;
-import group1.spring_server.domain.Checklist;
-import group1.spring_server.domain.ChecklistItem;
-import group1.spring_server.domain.User;
+import group1.spring_server.domain.*;
 
 import group1.spring_server.exceptions.*;
-import group1.spring_server.service.ChecklistItemService;
-import group1.spring_server.service.ChecklistService;
-import group1.spring_server.service.UserService;
+import group1.spring_server.service.*;
 import group1.spring_server.util.RequiresAuthentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.stream.Collectors;
@@ -40,6 +34,12 @@ public class ServiceController {
     @Autowired
     private ChecklistItemService checklistItemService;
 
+    @Autowired
+    private TemplateService templateService;
+
+    @Autowired
+    private TemplateItemService templateItemService;
+
     @GetMapping("/users")
     public Iterable<User> getUsers() {
         //TODO TEST ONLY
@@ -62,8 +62,8 @@ public class ServiceController {
 
             return user.getChecklists();
 
-        } catch (MyException e ){
-            res.sendError(e.error(),e.getMessage());
+        } catch (MyException e) {
+            res.sendError(e.error(), e.getMessage());
             return null;
         }
 
@@ -100,24 +100,6 @@ public class ServiceController {
         }
     }
 
-    /*
-    /* TODO this method is realy necessary ?
-    /*
-    @PostMapping("/users")
-    public User addUser(HttpServletResponse res, @RequestBody User user) throws IOException {
-
-        try {
-            return userService.addUser(user);
-
-        } catch (MyException e) {
-            res.sendError(e.error(), e.getMessage());
-            return null;
-        }
-    }
-    */
-
-
-
 
     @PostMapping("/checklist")
     public Checklist addChecklist(HttpServletResponse res, @RequestBody Checklist checklist, AuthCredentials authCredentials) throws IOException {
@@ -137,14 +119,14 @@ public class ServiceController {
     }
 
     @PostMapping("/checklist/item")
-    public ChecklistItem addChecklistItem(HttpServletResponse res, @RequestBody ChecklistItem checklistItem,AuthCredentials authCredentials) throws IOException {
+    public ChecklistItem addChecklistItem(HttpServletResponse res, @RequestBody ChecklistItem checklistItem, AuthCredentials authCredentials) throws IOException {
 
         try {
 
             Checklist ch = checklistService.getChecklist(
-                        checklistItem.getlist_id(),
-                        authCredentials.getSessionCode()
-                    );
+                    checklistItem.getlist_id(),
+                    authCredentials.getSessionCode()
+            );
 
             return checklistItemService.addCheckListItem(checklistItem);
 
@@ -154,5 +136,53 @@ public class ServiceController {
         }
     }
 
+    @PostMapping("/template")
+    public Template addTemplate(HttpServletResponse res, @RequestBody Template template, AuthCredentials authCredentials) throws IOException {
+
+
+        try {
+
+            template.setUser_id(authCredentials.getSessionCode());
+
+            return templateService.addTemplate(template);
+
+        } catch (MyException e) {
+            res.sendError(e.error(), e.getMessage());
+            return null;
+        }
+    }
+
+    @PostMapping("/template/item")
+    public TemplateItem addTemplateItem(HttpServletResponse res, @RequestBody TemplateItem templateItem, AuthCredentials authCredentials) throws IOException {
+
+        try {
+
+            Template ch = templateService.getTemplate(
+                    templateItem.getTemplate_id(),
+                    authCredentials.getSessionCode()
+            );
+
+            return templateItemService.addTemplateItem(templateItem);
+
+        } catch (MyException e) {
+            res.sendError(e.error(), e.getMessage());
+            return null;
+        }
+    }
+
+
+    @PostMapping("checklist/template/{templateID}")
+    public Checklist addListFromTemplate(HttpServletResponse res,@PathVariable("templateID")int templateId, @RequestParam("listName") String listName, AuthCredentials authCredentials) throws IOException {
+        try {
+            Template template = templateService.getTemplate(templateId,authCredentials.getSessionCode());
+            //TODO if template is null throw some exception
+            return templateService.useTemplate(template,listName);
+
+        }catch (MyException e){
+            res.sendError(e.error(),e.getMessage());
+            return null;
+        }
+
+    }
 
 }

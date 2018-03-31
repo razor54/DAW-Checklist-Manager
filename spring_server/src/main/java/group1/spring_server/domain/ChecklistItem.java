@@ -4,7 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name= "item",schema = "public")
+@Table(name = "item", schema = "public")
 public class ChecklistItem {
 
     @Id
@@ -33,7 +33,6 @@ public class ChecklistItem {
     }
 
 
-
     public String getName() {
         return name;
     }
@@ -41,7 +40,6 @@ public class ChecklistItem {
     public void setName(String name) {
         this.name = name;
     }
-
 
 
     public String getState() {
@@ -53,7 +51,6 @@ public class ChecklistItem {
     }
 
 
-
     public String getDescription() {
         return description;
     }
@@ -61,7 +58,6 @@ public class ChecklistItem {
     public void setDescription(String description) {
         this.description = description;
     }
-
 
 
     public int getlist_id() {

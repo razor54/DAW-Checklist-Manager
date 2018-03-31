@@ -1,13 +1,14 @@
 package group1.spring_server.domain;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 
 @Entity
 @Table(name = "template_item", schema = "public")
 public class TemplateItem {
 
-
+    @NotNull
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(columnDefinition = "bigserial")
@@ -17,6 +18,8 @@ public class TemplateItem {
 
     private String description;
 
+    @NotNull
+    private String name;
 
     public int getId() {
         return id;
@@ -40,5 +43,13 @@ public class TemplateItem {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

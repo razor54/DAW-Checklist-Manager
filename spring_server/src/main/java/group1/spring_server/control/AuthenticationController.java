@@ -19,7 +19,6 @@ import java.util.Hashtable;
 public class AuthenticationController {
 
 
-
     //Storage where will be saved the cookie's of the following users that access and login in the api
     private static final Hashtable<Integer, String> cookieStorage = new Hashtable<>();
     private static final String cookieName = "dawserver_logincookie";
@@ -29,7 +28,7 @@ public class AuthenticationController {
     private UserService userService;
 
     @PostMapping("/register")
-    public void getRegister(HttpServletResponse res, @RequestParam("username") String username, @RequestParam ("password") String password) throws IOException {
+    public void getRegister(HttpServletResponse res, @RequestParam("username") String username, @RequestParam("password") String password) throws IOException {
 
 
         User user = new User();

@@ -1,15 +1,12 @@
 package group1.spring_server.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.sql.Date;
-import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.util.Set;
 
 @Entity
@@ -24,6 +21,7 @@ public class Checklist {
     @NotNull
     private String name;
 
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private Date completionDate;
 
     @NotNull
@@ -38,9 +36,10 @@ public class Checklist {
     @Transient
     static final DateFormat df = new SimpleDateFormat("uuuu-MM-dd HH:mm:ss.SSS");
 
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @Transient
     public String getDateCompletionFormatted() {
-        return df.format(completionDate);
+        return completionDate != null ? df.format(completionDate) : null;
     }
 
 

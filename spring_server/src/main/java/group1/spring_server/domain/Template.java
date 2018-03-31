@@ -1,6 +1,7 @@
 package group1.spring_server.domain;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 @Entity
@@ -10,6 +11,7 @@ public class Template {
     private String user_id;
 
     private String name;
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
