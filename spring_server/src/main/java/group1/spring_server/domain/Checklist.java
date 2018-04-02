@@ -1,6 +1,8 @@
 package group1.spring_server.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import group1.spring_server.OutputModel;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -11,7 +13,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "checklist", schema = "public")
-public class Checklist {
+public class Checklist extends MyData  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,6 +26,7 @@ public class Checklist {
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private Date completionDate;
 
+    @JsonIgnore
     @NotNull
     private String user_id;
 

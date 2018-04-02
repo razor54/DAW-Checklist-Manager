@@ -6,7 +6,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "template", schema = "public")
-public class Template {
+public class Template extends MyData {
 
     private String user_id;
 

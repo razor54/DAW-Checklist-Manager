@@ -5,7 +5,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "item", schema = "public")
-public class ChecklistItem {
+public class ChecklistItem extends MyData  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

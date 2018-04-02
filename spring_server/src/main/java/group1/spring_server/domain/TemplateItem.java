@@ -6,7 +6,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "template_item", schema = "public")
-public class TemplateItem {
+public class TemplateItem extends MyData {
 
     @NotNull
     @Id

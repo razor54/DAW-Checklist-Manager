@@ -1,6 +1,7 @@
 package group1.spring_server.control;
 
 
+import group1.spring_server.OutputModel;
 import group1.spring_server.domain.*;
 
 import group1.spring_server.exceptions.*;
@@ -71,7 +72,7 @@ public class ServiceController {
 
     @RequiresAuthentication
     @GetMapping("/checklist/{listId}")
-    public Checklist getCheckList(HttpServletResponse res, @PathVariable("listId") int listId, AuthCredentials authCredentials) throws IOException {
+    public OutputModel getCheckList(HttpServletResponse res, @PathVariable("listId") int listId, AuthCredentials authCredentials) throws IOException {
 
         try {
             return checklistService.getChecklist(

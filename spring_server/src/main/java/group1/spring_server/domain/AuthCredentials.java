@@ -1,8 +1,9 @@
 package group1.spring_server.domain;
 
+import group1.spring_server.OutputModel;
 import group1.spring_server.exceptions.UnauthorizedException;
 
-public class AuthCredentials {
+public class AuthCredentials extends MyData {
 
 
     private final String sessionCode;

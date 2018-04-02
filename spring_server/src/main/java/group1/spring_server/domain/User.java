@@ -7,7 +7,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "user", schema = "public")
-public class User {
+public class User extends MyData {
 
     @Id
     @NotNull
