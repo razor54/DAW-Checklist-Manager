@@ -1,8 +1,7 @@
 package group1.spring_server.control;
 
 
-import group1.spring_server.domain.User;
-import group1.spring_server.exceptions.FailedAddUserException;
+import group1.spring_server.domain.model.User;
 import group1.spring_server.exceptions.MyException;
 import group1.spring_server.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,6 @@ import org.springframework.util.Base64Utils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.util.Hashtable;
 
 

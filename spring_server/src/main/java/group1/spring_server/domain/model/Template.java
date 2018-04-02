@@ -1,12 +1,11 @@
-package group1.spring_server.domain;
+package group1.spring_server.domain.model;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 @Entity
 @Table(name = "template", schema = "public")
-public class Template extends MyData {
+public class Template {
 
     private String user_id;
 

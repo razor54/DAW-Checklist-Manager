@@ -1,7 +1,7 @@
 package group1.spring_server.repository;
 
 
-import group1.spring_server.domain.Template;
+import group1.spring_server.domain.model.Template;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,14 +1,14 @@
 package group1.spring_server.service;
 
-import group1.spring_server.domain.Checklist;
-import group1.spring_server.domain.ChecklistItem;
+import group1.spring_server.domain.model.Checklist;
 import group1.spring_server.exceptions.FailedAddChecklistException;
-import group1.spring_server.exceptions.FailedAddCheklistItemException;
 import group1.spring_server.exceptions.ForbiddenException;
 import group1.spring_server.exceptions.NoSuchChecklistException;
 import group1.spring_server.repository.ChecklistRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -30,12 +30,12 @@ public class ChecklistService {
         }
     }
 
-
+    @Transactional(propagation=Propagation.REQUIRED, readOnly=true, noRollbackFor=Exception.class)
     public Iterable<Checklist> getChecklists() {
 
         return checklistRepository.findAll();
     }
-
+    @Transactional(propagation= Propagation.REQUIRED, readOnly=true, noRollbackFor=Exception.class)
     public Checklist getChecklist(int id, String userId) throws NoSuchChecklistException, ForbiddenException {
 
         Optional<Checklist> optionalChecklist= checklistRepository.findById(id);

@@ -1,4 +1,4 @@
-package group1.spring_server.domain;
+package group1.spring_server.domain.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -6,7 +6,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "template_item", schema = "public")
-public class TemplateItem extends MyData {
+public class TemplateItem {
 
     @NotNull
     @Id

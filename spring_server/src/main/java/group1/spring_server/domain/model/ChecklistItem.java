@@ -1,11 +1,11 @@
-package group1.spring_server.domain;
+package group1.spring_server.domain.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "item", schema = "public")
-public class ChecklistItem extends MyData  {
+public class ChecklistItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

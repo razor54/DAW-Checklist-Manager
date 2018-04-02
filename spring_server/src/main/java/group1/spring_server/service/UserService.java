@@ -1,12 +1,14 @@
 package group1.spring_server.service;
 
 
-import group1.spring_server.domain.User;
+import group1.spring_server.domain.model.User;
 import group1.spring_server.exceptions.FailedAddUserException;
 import group1.spring_server.exceptions.NoSuchUserException;
 import group1.spring_server.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -29,13 +31,13 @@ public class UserService {
         }
     }
 
-
+    @Transactional(propagation= Propagation.REQUIRED, readOnly=true, noRollbackFor=Exception.class)
     public Iterable<User> getUsers(){
 
-        Iterable<User> as = userRepository.findAll();
-        return as;
+        return userRepository.findAll();
     }
 
+    @Transactional(propagation=Propagation.REQUIRED, readOnly=true, noRollbackFor=Exception.class)
     public User getUser(String id) throws NoSuchUserException {
 
         Optional<User> user = userRepository.findById(id);

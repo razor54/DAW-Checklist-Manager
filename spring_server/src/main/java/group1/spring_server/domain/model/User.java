@@ -1,5 +1,7 @@
-package group1.spring_server.domain;
+package group1.spring_server.domain.model;
 
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -7,7 +9,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "user", schema = "public")
-public class User extends MyData {
+public class User {
 
     @Id
     @NotNull
@@ -16,12 +18,15 @@ public class User extends MyData {
     @NotNull
     private String name;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id")
+    //TODO LAZY FETCH
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "user_id",fetch = FetchType.EAGER,orphanRemoval = true)
+    //@JoinColumn(name = "user_id")
     private Set<Checklist> checklists;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id")
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "user_id",fetch = FetchType.EAGER,orphanRemoval = true)
+    //@JoinColumn(name = "user_id")
     private Set<Template> templates;
 
 

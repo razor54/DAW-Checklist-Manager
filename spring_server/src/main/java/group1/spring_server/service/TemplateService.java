@@ -1,22 +1,20 @@
 package group1.spring_server.service;
 
-import group1.spring_server.domain.Checklist;
-import group1.spring_server.domain.ChecklistItem;
-import group1.spring_server.domain.Template;
-import group1.spring_server.domain.TemplateItem;
+import group1.spring_server.domain.model.Checklist;
+import group1.spring_server.domain.model.ChecklistItem;
+import group1.spring_server.domain.model.Template;
+import group1.spring_server.domain.model.TemplateItem;
 import group1.spring_server.exceptions.FailedAddChecklistException;
 import group1.spring_server.exceptions.FailedAddCheklistItemException;
 import group1.spring_server.exceptions.ForbiddenException;
 import group1.spring_server.exceptions.NoSuchChecklistException;
-import group1.spring_server.repository.TemplateItemRepository;
 import group1.spring_server.repository.TemplateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.util.Optional;
-import java.util.Set;
-import java.util.stream.Stream;
 
 @Service
 public class TemplateService {
@@ -45,6 +43,7 @@ public class TemplateService {
         return templateRepository.findAll();
     }
 
+    @Transactional(propagation= Propagation.REQUIRED, readOnly=true, noRollbackFor=Exception.class)
     public Template getTemplate(int id, String userId) throws NoSuchChecklistException, ForbiddenException {
 
         Optional<Template> optionalTemplate = templateRepository.findById(id);

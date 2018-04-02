@@ -35,4 +35,6 @@ dependencies {
 	compile "org.springframework.boot:spring-boot-devtools:$springBootVersion"
 
     runtime('com.fasterxml.jackson.dataformat:jackson-dataformat-xml')
+
+	compile("org.springframework.boot:spring-boot-starter-hateoas")
 }

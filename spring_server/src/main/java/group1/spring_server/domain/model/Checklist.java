@@ -1,8 +1,7 @@
-package group1.spring_server.domain;
+package group1.spring_server.domain.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import group1.spring_server.OutputModel;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -13,7 +12,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "checklist", schema = "public")
-public class Checklist extends MyData  {
+public class Checklist {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,7 +30,9 @@ public class Checklist extends MyData  {
     private String user_id;
 
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    //TODO LAZY fetch--->Mandatory
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.EAGER)
     @JoinColumn(name = "list_id")
     private Set<ChecklistItem> items;
 
