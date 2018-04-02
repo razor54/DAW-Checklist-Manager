@@ -2,9 +2,14 @@ package group1.spring_server.service;
 
 import group1.spring_server.domain.model.TemplateItem;
 import group1.spring_server.exceptions.FailedAddCheklistItemException;
+import group1.spring_server.exceptions.ForbiddenException;
+import group1.spring_server.exceptions.NoSuchChecklistException;
+import group1.spring_server.exceptions.NoSuchTemplateItemException;
 import group1.spring_server.repository.TemplateItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class TemplateItemService {
@@ -26,4 +31,21 @@ public class TemplateItemService {
     }
 
 
+    public TemplateItem getTemplateItem(int itemId, String userId) throws NoSuchTemplateItemException, ForbiddenException, NoSuchChecklistException {
+
+        Optional<TemplateItem> checklistItemOptional = templateItemRepository.findById(itemId);
+
+        //verification if item exists in database
+        if (!checklistItemOptional.isPresent()) throw new NoSuchTemplateItemException();
+
+        TemplateItem templateItem = checklistItemOptional.get();
+
+        //verification of user access to the list of the item
+        templateService.getTemplate(
+                templateItem.getId(),
+                userId
+        );
+
+        return templateItem;
+    }
 }
