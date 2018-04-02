@@ -1,13 +1,27 @@
 package group1.spring_server.exceptions;
 
+import org.springframework.http.HttpStatus;
+
 public class NoSuchChecklistItemException extends MyException{
 
     @Override
     public String getMessage(){
-        return "Invalid ChecklistItem ID";
+        return "The requested checklist item doesn't exist in the database ";
     }
 
-    public int error(){
-        return 404;
+    @Override
+    public HttpStatus error(){
+        return HttpStatus.BAD_REQUEST;
     }
+
+    @Override
+    public String type() {
+        return "invalid-id";
+    }
+
+    @Override
+    public String title() {
+        return "Invalid checklist item ID";
+    }
+
 }

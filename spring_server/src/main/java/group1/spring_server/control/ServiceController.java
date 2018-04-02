@@ -53,136 +53,88 @@ public class ServiceController {
 
     @GetMapping("/checklists")
     @RequiresAuthentication
-    public Iterable<Checklist> getCheckLists(HttpServletResponse res, AuthCredentials authCredentials) throws IOException {
+    public Iterable<Checklist> getCheckLists(HttpServletResponse res, AuthCredentials authCredentials) throws MyException {
 
-        try {
+        String sessionCode = authCredentials.getSessionCode();
+        User user = userService.getUser(sessionCode);
 
-
-            String sessionCode = authCredentials.getSessionCode();
-            User user = userService.getUser(sessionCode);
-
-            return user.getChecklists();
-
-        } catch (MyException e) {
-            res.sendError(e.error(), e.getMessage());
-            return null;
-        }
+        return user.getChecklists();
 
     }
 
     @RequiresAuthentication
     @GetMapping("/checklist/{listId}")
-    public OutputModel getCheckList(HttpServletResponse res, @PathVariable("listId") int listId, AuthCredentials authCredentials) throws IOException {
+    public OutputModel getCheckList(HttpServletResponse res, @PathVariable("listId") int listId, AuthCredentials authCredentials) throws MyException {
 
-        try {
-            return checklistService.getChecklist(
-                    listId,
-                    authCredentials.getSessionCode()
-            );
+        return checklistService.getChecklist(
+                listId,
+                authCredentials.getSessionCode()
+        );
 
-        } catch (MyException e) {
-            res.sendError(e.error(), e.getMessage());
-            return null;
-        }
     }
 
     @GetMapping("/checklist/item/{itemId}")
-    public ChecklistItem getChecklistItem(HttpServletResponse res, @PathVariable("itemId") int itemId, AuthCredentials authCredentials) throws IOException {
+    public ChecklistItem getChecklistItem(HttpServletResponse res, @PathVariable("itemId") int itemId, AuthCredentials authCredentials) throws MyException {
 
-        try {
-            return checklistItemService.getChecklistItem(
-                    itemId,
-                    authCredentials.getSessionCode()
-            );
+        return checklistItemService.getChecklistItem(
+                itemId,
+                authCredentials.getSessionCode()
+        );
 
-        } catch (MyException e) {
-            res.sendError(e.error(), e.getMessage());
-            return null;
-        }
     }
 
 
     @PostMapping("/checklist")
-    public Checklist addChecklist(HttpServletResponse res, @RequestBody Checklist checklist, AuthCredentials authCredentials) throws IOException {
+    public Checklist addChecklist(HttpServletResponse res, @RequestBody Checklist checklist, AuthCredentials authCredentials) throws MyException {
 
-        try {
+        String sessionCode = authCredentials.getSessionCode();
 
-            String sessionCode = authCredentials.getSessionCode();
+        checklist.setUser_id(sessionCode);
 
-            checklist.setUser_id(sessionCode);
+        return checklistService.addChecklist(checklist);
 
-            return checklistService.addChecklist(checklist);
-
-        } catch (MyException e) {
-            res.sendError(e.error(), e.getMessage());
-            return null;
-        }
     }
 
     @PostMapping("/checklist/item")
-    public ChecklistItem addChecklistItem(HttpServletResponse res, @RequestBody ChecklistItem checklistItem, AuthCredentials authCredentials) throws IOException {
+    public ChecklistItem addChecklistItem(HttpServletResponse res, @RequestBody ChecklistItem checklistItem, AuthCredentials authCredentials) throws MyException {
 
-        try {
+        Checklist ch = checklistService.getChecklist(
+                checklistItem.getlist_id(),
+                authCredentials.getSessionCode()
+        );
 
-            Checklist ch = checklistService.getChecklist(
-                    checklistItem.getlist_id(),
-                    authCredentials.getSessionCode()
-            );
+        return checklistItemService.addCheckListItem(checklistItem);
 
-            return checklistItemService.addCheckListItem(checklistItem);
-
-        } catch (MyException e) {
-            res.sendError(e.error(), e.getMessage());
-            return null;
-        }
     }
 
     @PostMapping("/template")
-    public Template addTemplate(HttpServletResponse res, @RequestBody Template template, AuthCredentials authCredentials) throws IOException {
+    public Template addTemplate(HttpServletResponse res, @RequestBody Template template, AuthCredentials authCredentials) throws MyException {
 
 
-        try {
+        template.setUser_id(authCredentials.getSessionCode());
 
-            template.setUser_id(authCredentials.getSessionCode());
+        return templateService.addTemplate(template);
 
-            return templateService.addTemplate(template);
-
-        } catch (MyException e) {
-            res.sendError(e.error(), e.getMessage());
-            return null;
-        }
     }
 
     @PostMapping("/template/item")
-    public TemplateItem addTemplateItem(HttpServletResponse res, @RequestBody TemplateItem templateItem, AuthCredentials authCredentials) throws IOException {
+    public TemplateItem addTemplateItem(HttpServletResponse res, @RequestBody TemplateItem templateItem, AuthCredentials authCredentials) throws MyException {
 
-        try {
+        Template ch = templateService.getTemplate(
+                templateItem.getTemplate_id(),
+                authCredentials.getSessionCode()
+        );
 
-            Template ch = templateService.getTemplate(
-                    templateItem.getTemplate_id(),
-                    authCredentials.getSessionCode()
-            );
+        return templateItemService.addTemplateItem(templateItem);
 
-            return templateItemService.addTemplateItem(templateItem);
-
-        } catch (MyException e) {
-            res.sendError(e.error(), e.getMessage());
-            return null;
-        }
     }
 
 
     @PostMapping("checklist/template/{templateID}")
-    public Checklist addListFromTemplate(HttpServletResponse res,@PathVariable("templateID")int templateId, @RequestParam("listName") String listName, AuthCredentials authCredentials) throws IOException {
-        try {
-            Template template = templateService.getTemplate(templateId,authCredentials.getSessionCode());
-            //TODO if template is null throw some exception
-            return templateService.useTemplate(template,listName);
-
-        }catch (MyException e){
-            res.sendError(e.error(),e.getMessage());
-            return null;
-        }
+    public Checklist addListFromTemplate(HttpServletResponse res,@PathVariable("templateID")int templateId, @RequestParam("listName") String listName, AuthCredentials authCredentials) throws IOException, MyException {
+        Template template = templateService.getTemplate(templateId,authCredentials.getSessionCode());
+        //TODO if template is null throw some exception
+        return templateService.useTemplate(template,listName);
 
     }
 

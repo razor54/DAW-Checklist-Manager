@@ -3,6 +3,7 @@ package group1.spring_server.control;
 
 import group1.spring_server.domain.User;
 import group1.spring_server.exceptions.FailedAddUserException;
+import group1.spring_server.exceptions.MyException;
 import group1.spring_server.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -28,7 +29,7 @@ public class AuthenticationController {
     private UserService userService;
 
     @PostMapping("/register")
-    public void getRegister(HttpServletResponse res, @RequestParam("username") String username, @RequestParam("password") String password) throws IOException {
+    public void getRegister(HttpServletResponse res, @RequestParam("username") String username, @RequestParam("password") String password) throws MyException {
 
 
         User user = new User();
@@ -38,11 +39,6 @@ public class AuthenticationController {
         user.setId(sessionId);
         user.setName(username);
 
-        try {
-            userService.addUser(user);
-        } catch (FailedAddUserException e) {
-            res.sendError(e.error(), e.getMessage());
-        }
-
+        userService.addUser(user);
     }
 }
