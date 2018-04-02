@@ -1,10 +1,7 @@
 package group1.spring_server.service;
 
 import group1.spring_server.domain.model.TemplateItem;
-import group1.spring_server.exceptions.FailedAddCheklistItemException;
-import group1.spring_server.exceptions.ForbiddenException;
-import group1.spring_server.exceptions.NoSuchChecklistException;
-import group1.spring_server.exceptions.NoSuchTemplateItemException;
+import group1.spring_server.exceptions.*;
 import group1.spring_server.repository.TemplateItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,8 +27,11 @@ public class TemplateItemService {
         }
     }
 
+    public Iterable<TemplateItem> getItemsforTemplate(int templateId,String userId) throws MyException {
+        return templateService.getTemplate(templateId,userId).getItems();
+    }
 
-    public TemplateItem getTemplateItem(int itemId, String userId) throws NoSuchTemplateItemException, ForbiddenException, NoSuchChecklistException {
+    public TemplateItem getTemplateItem(int itemId, String userId) throws MyException {
 
         Optional<TemplateItem> checklistItemOptional = templateItemRepository.findById(itemId);
 
@@ -42,7 +42,7 @@ public class TemplateItemService {
 
         //verification of user access to the list of the item
         templateService.getTemplate(
-                templateItem.getId(),
+                templateItem.getTemplate_id(),
                 userId
         );
 

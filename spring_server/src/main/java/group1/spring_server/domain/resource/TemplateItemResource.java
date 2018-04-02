@@ -21,7 +21,7 @@ public class TemplateItemResource extends ResourceSupport {
                 .withSelfRel());
 
         add(linkTo(methodOn(ServiceController.class)
-                .getTemplateItem(templateItem.getId(),null))
+                .getTemplate(templateItem.getTemplate_id(),null))
                 .withRel("parent"));
     }
 

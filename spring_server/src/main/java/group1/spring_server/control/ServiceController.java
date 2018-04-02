@@ -4,9 +4,7 @@ package group1.spring_server.control;
 import group1.spring_server.domain.*;
 
 import group1.spring_server.domain.model.*;
-import group1.spring_server.domain.resource.ChecklistItemResource;
-import group1.spring_server.domain.resource.ChecklistResource;
-import group1.spring_server.domain.resource.UserResource;
+import group1.spring_server.domain.resource.*;
 import group1.spring_server.exceptions.*;
 import group1.spring_server.service.*;
 import group1.spring_server.util.RequiresAuthentication;
@@ -145,7 +143,7 @@ public class ServiceController {
                 .getCheckListItems(listId, authCredentials)).withSelfRel();
 
         Resources<ChecklistItemResource> resources =
-                new Resources<ChecklistItemResource>(collect, link);
+                new Resources<>(collect, link);
 
         return resources;
 
@@ -161,6 +159,69 @@ public class ServiceController {
                 ));
 
     }
+
+    @GetMapping("/templates")
+    public ResourceSupport getTemplates(AuthCredentials authCredentials) throws UnauthorizedException, NoSuchUserException {
+        String sessionCode = authCredentials.getSessionCode();
+
+        Set<TemplateResource> collect = userService.getUser(sessionCode).getTemplates().stream()
+                .map(template -> {
+                    try {
+                        return new TemplateResource(template);
+
+                    } catch (MyException e) {
+                        return null;
+                    }
+                }).collect(Collectors.toSet());
+
+        Link link = linkTo(methodOn(ServiceController.class)
+                .getTemplates(null))
+                .withSelfRel();
+
+        return new Resources<>(collect, link);
+    }
+
+    @GetMapping("/template/{id}")
+    public ResourceSupport getTemplate(@PathVariable("id") int id, AuthCredentials authCredentials) throws MyException {
+        String sessionCode = authCredentials.getSessionCode();
+
+        return new TemplateResource(templateService.getTemplate(id, sessionCode));
+    }
+
+    @GetMapping("/template/item/{itemId}")
+    public ResourceSupport getTemplateItem(@PathVariable("itemId") int itemId, AuthCredentials authCredentials) throws MyException {
+
+        return new TemplateItemResource(
+                templateItemService.getTemplateItem(
+                        itemId,
+                        authCredentials.getSessionCode()));
+    }
+
+    @GetMapping("/template/{templateId}/items")
+    public ResourceSupport getTemplateItems(@PathVariable("templateId") int templateId, AuthCredentials authCredentials) throws MyException {
+        Iterable<TemplateItem> itemsForTemplate = templateItemService.getItemsforTemplate(
+                templateId,
+                authCredentials.getSessionCode());
+
+        Set<TemplateItemResource> collect = StreamSupport.stream(itemsForTemplate.spliterator(), false
+        ).map(item -> {
+            try {
+                return new TemplateItemResource(item);
+            } catch (MyException e) {
+                e.printStackTrace();
+                return null;
+            }
+        }).collect(Collectors.toSet());
+
+        Link link = linkTo(methodOn(ServiceController.class)
+                .getTemplateItems(templateId,null))
+                .withSelfRel();
+
+        return new Resources<>(collect,link);
+    }
+
+
+
 
     //Maybe receive session code differently
 
@@ -192,17 +253,17 @@ public class ServiceController {
     }
 
     @PostMapping("/template")
-    public Template addTemplate(@RequestBody Template template, AuthCredentials authCredentials) throws MyException {
+    public ResourceSupport addTemplate(@RequestBody Template template, AuthCredentials authCredentials) throws MyException {
 
 
         template.setUser_id(authCredentials.getSessionCode());
 
-        return templateService.addTemplate(template);
+        return new TemplateResource(templateService.addTemplate(template));
 
     }
 
     @PostMapping("/template/item")
-    public TemplateItem addTemplateItem(@RequestBody TemplateItem templateItem, AuthCredentials authCredentials) throws MyException {
+    public ResourceSupport addTemplateItem(@RequestBody TemplateItem templateItem, AuthCredentials authCredentials) throws MyException {
 
         //Throws exception if no user is logged or if no list exists with specified id
         Template ch = templateService.getTemplate(
@@ -210,16 +271,16 @@ public class ServiceController {
                 authCredentials.getSessionCode()
         );
 
-        return templateItemService.addTemplateItem(templateItem);
+        return new TemplateItemResource( templateItemService.addTemplateItem(templateItem));
 
     }
 
 
     @PostMapping("checklist/template/{templateID}")
-    public Checklist addListFromTemplate(@PathVariable("templateID") int templateId, @RequestParam("listName") String listName, AuthCredentials authCredentials) throws IOException, MyException {
+    public ResourceSupport addListFromTemplate(@PathVariable("templateID") int templateId, @RequestParam("listName") String listName, AuthCredentials authCredentials) throws IOException, MyException {
         Template template = templateService.getTemplate(templateId, authCredentials.getSessionCode());
         //TODO if template is null throw some exception
-        return templateService.useTemplate(template, listName);
+        return new ChecklistResource(templateService.useTemplate(template, listName));
 
     }
 }
