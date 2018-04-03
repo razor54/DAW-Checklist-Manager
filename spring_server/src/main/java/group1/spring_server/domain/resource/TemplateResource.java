@@ -3,7 +3,11 @@ package group1.spring_server.domain.resource;
 import group1.spring_server.control.ServiceController;
 import group1.spring_server.domain.model.Template;
 import group1.spring_server.exceptions.*;
+import org.springframework.hateoas.Link;
 import org.springframework.hateoas.ResourceSupport;
+import org.springframework.hateoas.UriTemplate;
+
+import java.io.IOException;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
@@ -12,7 +16,7 @@ public class TemplateResource extends ResourceSupport {
 
     private final Template template;
 
-    public TemplateResource(Template template) throws MyException {
+    public TemplateResource(Template template) throws MyException, IOException {
         this.template = template;
 
         add(linkTo(methodOn(ServiceController.class)
@@ -26,6 +30,12 @@ public class TemplateResource extends ResourceSupport {
         add(linkTo(methodOn(ServiceController.class)
                 .getUser(template.getUser_id(), null))
                 .withRel("user"));
+
+
+        add(linkTo(methodOn(ServiceController.class)
+                .addListFromTemplate(template.getId(),null, null))
+                .withRel("checklist_create"));
+
     }
 
     public Template getTemplate() {

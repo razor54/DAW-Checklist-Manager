@@ -27,6 +27,10 @@ public class TemplateService {
     @Autowired
     private ChecklistItemService checklistItemService;
 
+    @Autowired
+    private TemplateItemService templateItemService;
+
+
 
     public Template addTemplate(Template checklist) throws FailedAddChecklistException {
 
@@ -68,7 +72,7 @@ public class TemplateService {
     }
 
     @Transactional
-    public Checklist useTemplate(Template x, String checkListName) throws FailedAddChecklistException {
+    public Checklist useTemplate(Template x, String checkListName) throws MyException {
 
         Checklist returnList = new Checklist();
         returnList.setName(checkListName);
@@ -77,7 +81,7 @@ public class TemplateService {
         returnList = checklistService.addChecklist(returnList);
 
         Checklist finalReturnList = returnList;
-        x.getItems().forEach(item -> {
+        templateItemService.getItemsforTemplate(x.getId(),x.getUser_id()).forEach(item -> {
             mapTemplateItem(item, finalReturnList.getId());
         });
 

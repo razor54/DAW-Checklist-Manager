@@ -178,7 +178,7 @@ public class ServiceController {
                     try {
                         return new TemplateResource(template);
 
-                    } catch (MyException e) {
+                    } catch (MyException|IOException e) {
                         return null;
                     }
                 }).collect(Collectors.toSet());
@@ -188,20 +188,20 @@ public class ServiceController {
                 .withSelfRel();
         Link user_link = linkTo(methodOn(ServiceController.class)
                 .getUser(sessionCode, null))
-                .withSelfRel();
+                .withRel("user");
 
         return new Resources<>(collect, link, user_link);
     }
 
     @GetMapping("/template/{id}")
-    public ResourceSupport getTemplate(@PathVariable("id") int id, AuthCredentials authCredentials) throws MyException {
+    public ResourceSupport getTemplate(@PathVariable("id") int id, AuthCredentials authCredentials) throws MyException, IOException {
         String sessionCode = authCredentials.getSessionCode();
 
         return new TemplateResource(templateService.getTemplate(id, sessionCode));
     }
 
     @GetMapping("/template/item/{itemId}")
-    public ResourceSupport getTemplateItem(@PathVariable("itemId") int itemId, AuthCredentials authCredentials) throws MyException {
+    public ResourceSupport getTemplateItem(@PathVariable("itemId") int itemId, AuthCredentials authCredentials) throws MyException, IOException {
 
         return new TemplateItemResource(
                 templateItemService.getTemplateItem(
@@ -210,7 +210,7 @@ public class ServiceController {
     }
 
     @GetMapping("/template/{templateId}/items")
-    public ResourceSupport getTemplateItems(@PathVariable("templateId") int templateId, AuthCredentials authCredentials) throws MyException {
+    public ResourceSupport getTemplateItems(@PathVariable("templateId") int templateId, AuthCredentials authCredentials) throws MyException, IOException {
 
         Iterable<TemplateItem> itemsForTemplate = templateItemService.getItemsforTemplate(
                 templateId,
@@ -220,7 +220,7 @@ public class ServiceController {
         ).map(item -> {
             try {
                 return new TemplateItemResource(item);
-            } catch (MyException e) {
+            } catch (MyException|IOException e) {
                 e.printStackTrace();
                 return null;
             }
@@ -268,7 +268,7 @@ public class ServiceController {
     }
 
     @PostMapping("/template")
-    public ResourceSupport addTemplate(@RequestBody Template template, AuthCredentials authCredentials) throws MyException {
+    public ResourceSupport addTemplate(@RequestBody Template template, AuthCredentials authCredentials) throws MyException, IOException {
 
 
         template.setUser_id(authCredentials.getSessionCode());
@@ -278,7 +278,7 @@ public class ServiceController {
     }
 
     @PostMapping("/template/item")
-    public ResourceSupport addTemplateItem(@RequestBody TemplateItem templateItem, AuthCredentials authCredentials) throws MyException {
+    public ResourceSupport addTemplateItem(@RequestBody TemplateItem templateItem, AuthCredentials authCredentials) throws MyException, IOException {
 
         //Throws exception if no user is logged or if no list exists with specified id
         Template ch = templateService.getTemplate(

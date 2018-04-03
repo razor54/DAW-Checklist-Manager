@@ -5,6 +5,8 @@ import group1.spring_server.domain.model.TemplateItem;
 import group1.spring_server.exceptions.MyException;
 import org.springframework.hateoas.ResourceSupport;
 
+import java.io.IOException;
+
 import static com.sun.tools.internal.xjc.reader.Ring.add;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
@@ -13,7 +15,7 @@ public class TemplateItemResource extends ResourceSupport {
 
     private final TemplateItem templateItem;
 
-    public TemplateItemResource(final TemplateItem templateItem) throws MyException {
+    public TemplateItemResource(final TemplateItem templateItem) throws MyException, IOException {
         this.templateItem = templateItem;
 
         add(linkTo(methodOn(ServiceController.class)
