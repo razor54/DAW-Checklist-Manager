@@ -1,6 +1,7 @@
 package group1.spring_server.domain.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import java.util.Set;

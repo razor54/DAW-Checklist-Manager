@@ -16,5 +16,4 @@ public class MVCConfiguration extends WebMvcConfigurationSupport  {
         resolvers.add(new AuthArgumentResolver());
     }
 
-
 }

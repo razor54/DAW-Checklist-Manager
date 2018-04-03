@@ -1,5 +1,7 @@
 package group1.spring_server.domain.model;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 

@@ -92,8 +92,10 @@ public class ServiceController {
 
         User user = userService.getUser(sessionCode);
 
+        Iterable<Checklist> userCheckLists = checklistService.getUserCheckLists(user.getId());
 
-        Set<ChecklistResource> collect = user.getChecklists().stream()
+        Set<ChecklistResource> collect = StreamSupport
+                .stream(userCheckLists.spliterator(), false)
                 .map(list -> {
                     try {
                         return new ChecklistResource(list);
@@ -166,7 +168,12 @@ public class ServiceController {
     public ResourceSupport getTemplates(AuthCredentials authCredentials) throws MyException {
         String sessionCode = authCredentials.getSessionCode();
 
-        Set<TemplateResource> collect = userService.getUser(sessionCode).getTemplates().stream()
+        User user = userService.getUser(sessionCode);
+
+        Iterable<Template> userTemplates = templateService.getUserTemplates(user.getId());
+
+        Set<TemplateResource> collect = StreamSupport
+                .stream(userTemplates.spliterator(),false)
                 .map(template -> {
                     try {
                         return new TemplateResource(template);
@@ -204,6 +211,7 @@ public class ServiceController {
 
     @GetMapping("/template/{templateId}/items")
     public ResourceSupport getTemplateItems(@PathVariable("templateId") int templateId, AuthCredentials authCredentials) throws MyException {
+
         Iterable<TemplateItem> itemsForTemplate = templateItemService.getItemsforTemplate(
                 templateId,
                 authCredentials.getSessionCode());

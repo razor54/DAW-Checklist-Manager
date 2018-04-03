@@ -12,8 +12,10 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
+import java.util.stream.StreamSupport;
 
 @Service
+@Transactional
 public class TemplateService {
 
     @Autowired
@@ -39,8 +41,16 @@ public class TemplateService {
 
         return templateRepository.findAll();
     }
+    public Iterable<Template> getUserTemplates(String user_id){
 
-    @Transactional(propagation = Propagation.REQUIRED, readOnly = true, noRollbackFor = Exception.class)
+        Iterable<Template> all = templateRepository.findAll();
+        return () -> StreamSupport.stream(all.spliterator(), false)
+                .filter(item -> item.getUser_id().equals(user_id))
+                .iterator();
+    }
+
+
+
     public Template getTemplate(int id, String userId) throws NoSuchChecklistException, ForbiddenException, NoSuchTemplateException {
 
         Optional<Template> optionalTemplate = templateRepository.findById(id);
@@ -51,7 +61,7 @@ public class TemplateService {
         Template checklist = optionalTemplate.get();
 
         //verification of user access to the list of the item
-        if (checklist.getUser_id().compareTo(userId) != 0) throw new ForbiddenException();
+        if (!checklist.getUser_id().equals(userId)) throw new ForbiddenException();
 
         return checklist;
 

@@ -24,6 +24,11 @@ public class UserResource extends ResourceSupport {
         add(linkTo(methodOn(ServiceController.class)
                 .getCheckLists(null))
                 .withRel("checklists"));
+
+        add(linkTo(methodOn(ServiceController.class)
+                .getTemplates(null))
+                .withRel("templates"));
+
     }
 
     public User getUser() {

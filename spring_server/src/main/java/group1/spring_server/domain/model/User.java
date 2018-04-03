@@ -2,6 +2,7 @@ package group1.spring_server.domain.model;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -18,14 +19,13 @@ public class User {
     @NotNull
     private String name;
 
-    //TODO LAZY FETCH
     @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user_id", fetch = FetchType.EAGER, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user_id", fetch = FetchType.LAZY, orphanRemoval = true)
     //@JoinColumn(name = "user_id")
     private Set<Checklist> checklists;
 
     @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user_id", fetch = FetchType.EAGER, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user_id", fetch = FetchType.LAZY, orphanRemoval = true)
     //@JoinColumn(name = "user_id")
     private Set<Template> templates;
 

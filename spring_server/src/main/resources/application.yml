@@ -21,6 +21,9 @@ spring:
        use_jdbc_metadata_defaults: false
 
     database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+    open-in-view: true
+  resources:
+      add-mappings: true
 
 server:
   port: 8080

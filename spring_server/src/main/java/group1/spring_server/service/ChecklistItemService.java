@@ -17,6 +17,7 @@ import java.util.Optional;
 import java.util.stream.StreamSupport;
 
 @Service
+@Transactional
 public class ChecklistItemService {
 
     @Autowired
@@ -38,7 +39,7 @@ public class ChecklistItemService {
     }
 
 
-    @Transactional(propagation= Propagation.REQUIRED, readOnly=true, noRollbackFor=Exception.class)
+
     public Iterable<ChecklistItem> getChecklistItems(int listId, String userId) throws ForbiddenException, NoSuchChecklistException {
 
         //listed to verify identity
@@ -52,7 +53,7 @@ public class ChecklistItemService {
                 .iterator();
     }
 
-    @Transactional(propagation=Propagation.REQUIRED, readOnly=true, noRollbackFor=Exception.class)
+
     public ChecklistItem getChecklistItem(int id, String userId) throws NoSuchChecklistItemException, ForbiddenException, NoSuchChecklistException {
 
         Optional<ChecklistItem> checklistItemOptional = checklistItemRepository.findById(id);

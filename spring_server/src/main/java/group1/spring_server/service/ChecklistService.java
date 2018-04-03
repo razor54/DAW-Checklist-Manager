@@ -11,9 +11,11 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
+import java.util.stream.StreamSupport;
 
 
 @Service
+@Transactional
 public class ChecklistService {
 
     @Autowired
@@ -25,30 +27,40 @@ public class ChecklistService {
 
         try {
             return checklistRepository.save(checklist);
-        }catch (Exception e ){
+        } catch (Exception e) {
             throw new FailedAddChecklistException();
         }
     }
 
-    @Transactional(propagation=Propagation.REQUIRED, readOnly=true, noRollbackFor=Exception.class)
+
     public Iterable<Checklist> getChecklists() {
 
         return checklistRepository.findAll();
     }
-    @Transactional(propagation= Propagation.REQUIRED, readOnly=true, noRollbackFor=Exception.class)
+
+
+    public Iterable<Checklist> getUserCheckLists(String user_id){
+
+        Iterable<Checklist> all = checklistRepository.findAll();
+        return () -> StreamSupport.stream(all.spliterator(), false)
+                .filter(item -> item.getUser_id().equals(user_id))
+                .iterator();
+    }
+
     public Checklist getChecklist(int id, String userId) throws NoSuchChecklistException, ForbiddenException {
 
-        Optional<Checklist> optionalChecklist= checklistRepository.findById(id);
+        Optional<Checklist> optionalChecklist = checklistRepository.findById(id);
 
 
         //verification if lists exists in database
-        if(!optionalChecklist.isPresent()) throw new NoSuchChecklistException();
+        if (!optionalChecklist.isPresent()) throw new NoSuchChecklistException();
 
 
-        Checklist checklist  = optionalChecklist.get();
+        Checklist checklist = optionalChecklist.get();
 
         //verification of user access to the list of the item
-        if(checklist.getUser_id().compareTo(userId)!=0) throw  new ForbiddenException();
+        if (!checklist.getUser_id().equals(userId))
+            throw new ForbiddenException();
 
 
         return checklist;

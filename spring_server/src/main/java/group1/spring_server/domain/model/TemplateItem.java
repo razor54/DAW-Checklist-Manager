@@ -1,8 +1,9 @@
 package group1.spring_server.domain.model;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-
 
 @Entity
 @Table(name = "template_item", schema = "public")

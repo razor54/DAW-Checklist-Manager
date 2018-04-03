@@ -20,9 +20,14 @@ public class ChecklistResource extends ResourceSupport {
         add(linkTo(methodOn(ServiceController.class)
                 .getCheckList(checklist.getId(), null))
                 .withSelfRel());
+
         add(linkTo(methodOn(ServiceController.class)
                 .getCheckListItems(checklist.getId(), null))
                 .withRel("items"));
+
+        add(linkTo(methodOn(ServiceController.class)
+                .getUser(checklist.getUser_id(), null))
+                .withRel("user"));
     }
 
     public Checklist getChecklist() {

@@ -13,39 +13,36 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class UserService {
 
     @Autowired
     UserRepository userRepository;
 
 
-    //public CheckListService(CheckListRepository repository){this.userRepository = repository;}
-
     public User addUser(User user) throws FailedAddUserException {
 
         try {
             return userRepository.save(user);
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             throw new FailedAddUserException();
         }
     }
 
-    @Transactional(propagation= Propagation.REQUIRED, readOnly=true, noRollbackFor=Exception.class)
-    public Iterable<User> getUsers(){
 
-        Iterable<User>users =userRepository.findAll();
-        return users;
+    public Iterable<User> getUsers() {
+
+        return userRepository.findAll();
     }
 
-    @Transactional(propagation=Propagation.REQUIRED, readOnly=true, noRollbackFor=Exception.class)
+
     public User getUser(String id) throws NoSuchUserException {
 
         Optional<User> user = userRepository.findById(id);
 
-        if(user.isPresent()) return user.get();
+        if (user.isPresent()) return user.get();
 
-        throw  new NoSuchUserException();
+        throw new NoSuchUserException();
 
     }
 }

@@ -2,6 +2,7 @@ package group1.spring_server.domain.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -30,7 +31,7 @@ public class Checklist {
     private String user_id;
 
 
-    //TODO LAZY fetch--->Mandatory
+
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @JoinColumn(name = "list_id")
