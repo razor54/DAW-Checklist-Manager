@@ -53,8 +53,10 @@ public class ServiceController {
         //TODO TEST ONLY
         String userId = authCredentials.getSessionCode();
 
-        Set<UserResource> collect = StreamSupport
-                .stream(userService.getUsers().spliterator(), false)
+        Iterable<User> users = userService.getUsers();
+
+        Iterable<UserResource> collect = () -> StreamSupport
+                .stream(users.spliterator(), false)
                 .map(user -> {
                     try {
                         return new UserResource(user);
@@ -63,7 +65,7 @@ public class ServiceController {
                         return null;
                     }
 
-                }).collect(Collectors.toSet());
+                }).iterator();
 
         Link link = linkTo(methodOn(ServiceController.class)
                 .getUsers(authCredentials)).withSelfRel();
@@ -74,7 +76,7 @@ public class ServiceController {
     }
 
     @GetMapping("/user/{id}")
-    public ResourceSupport getUser(String id, AuthCredentials authCredentials) throws MyException {
+    public ResourceSupport getUser(@PathVariable("id") String id, AuthCredentials authCredentials) throws MyException {
         String userId = authCredentials.getSessionCode();
         if (userId.compareTo(id) != 0) throw new ForbiddenException();
 
@@ -105,7 +107,10 @@ public class ServiceController {
         Link link = linkTo(methodOn(ServiceController.class)
                 .getCheckLists(authCredentials)).withSelfRel();
 
-        return new Resources<ChecklistResource>(collect, link);
+        Link user_link = linkTo(methodOn(ServiceController.class)
+                .getUser(user.getId(), null)).withSelfRel();
+
+        return new Resources<ChecklistResource>(collect, link, user_link);
 
     }
 
@@ -142,10 +147,7 @@ public class ServiceController {
         Link link = linkTo(methodOn(ServiceController.class)
                 .getCheckListItems(listId, authCredentials)).withSelfRel();
 
-        Resources<ChecklistItemResource> resources =
-                new Resources<>(collect, link);
-
-        return resources;
+        return new Resources<>(collect, link);
 
     }
 
@@ -161,7 +163,7 @@ public class ServiceController {
     }
 
     @GetMapping("/templates")
-    public ResourceSupport getTemplates(AuthCredentials authCredentials) throws UnauthorizedException, NoSuchUserException {
+    public ResourceSupport getTemplates(AuthCredentials authCredentials) throws MyException {
         String sessionCode = authCredentials.getSessionCode();
 
         Set<TemplateResource> collect = userService.getUser(sessionCode).getTemplates().stream()
@@ -177,8 +179,11 @@ public class ServiceController {
         Link link = linkTo(methodOn(ServiceController.class)
                 .getTemplates(null))
                 .withSelfRel();
+        Link user_link = linkTo(methodOn(ServiceController.class)
+                .getUser(sessionCode, null))
+                .withSelfRel();
 
-        return new Resources<>(collect, link);
+        return new Resources<>(collect, link, user_link);
     }
 
     @GetMapping("/template/{id}")
@@ -214,13 +219,15 @@ public class ServiceController {
         }).collect(Collectors.toSet());
 
         Link link = linkTo(methodOn(ServiceController.class)
-                .getTemplateItems(templateId,null))
+                .getTemplateItems(templateId, null))
                 .withSelfRel();
 
-        return new Resources<>(collect,link);
+        Link parentLink = linkTo(methodOn(ServiceController.class)
+                .getTemplate(templateId, null))
+                .withRel("parent");
+
+        return new Resources<>(collect, link, parentLink);
     }
-
-
 
 
     //Maybe receive session code differently
@@ -271,7 +278,7 @@ public class ServiceController {
                 authCredentials.getSessionCode()
         );
 
-        return new TemplateItemResource( templateItemService.addTemplateItem(templateItem));
+        return new TemplateItemResource(templateItemService.addTemplateItem(templateItem));
 
     }
 

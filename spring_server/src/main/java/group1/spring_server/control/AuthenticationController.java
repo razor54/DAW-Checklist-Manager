@@ -2,10 +2,12 @@ package group1.spring_server.control;
 
 
 import group1.spring_server.domain.model.User;
+import group1.spring_server.domain.resource.UserResource;
 import group1.spring_server.exceptions.MyException;
 import group1.spring_server.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.hateoas.ResourceSupport;
 import org.springframework.util.Base64Utils;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,7 +29,7 @@ public class AuthenticationController {
     private UserService userService;
 
     @PostMapping("/register")
-    public void getRegister(HttpServletResponse res, @RequestParam("username") String username, @RequestParam("password") String password) throws MyException {
+    public ResourceSupport getRegister(HttpServletResponse res, @RequestParam("username") String username, @RequestParam("password") String password) throws MyException {
 
 
         User user = new User();
@@ -37,6 +39,6 @@ public class AuthenticationController {
         user.setId(sessionId);
         user.setName(username);
 
-        userService.addUser(user);
+        return new UserResource(userService.addUser(user));
     }
 }

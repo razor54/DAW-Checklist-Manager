@@ -18,9 +18,14 @@ public class TemplateResource extends ResourceSupport {
         add(linkTo(methodOn(ServiceController.class)
                 .getTemplate(template.getId(), null))
                 .withSelfRel());
+
         add(linkTo(methodOn(ServiceController.class)
-                .getTemplateItems(template.getId(),null))
+                .getTemplateItems(template.getId(), null))
                 .withRel("items"));
+
+        add(linkTo(methodOn(ServiceController.class)
+                .getUser(template.getUser_id(), null))
+                .withRel("user"));
     }
 
     public Template getTemplate() {

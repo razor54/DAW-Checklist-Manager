@@ -4,10 +4,7 @@ import group1.spring_server.domain.model.Checklist;
 import group1.spring_server.domain.model.ChecklistItem;
 import group1.spring_server.domain.model.Template;
 import group1.spring_server.domain.model.TemplateItem;
-import group1.spring_server.exceptions.FailedAddChecklistException;
-import group1.spring_server.exceptions.FailedAddCheklistItemException;
-import group1.spring_server.exceptions.ForbiddenException;
-import group1.spring_server.exceptions.NoSuchChecklistException;
+import group1.spring_server.exceptions.*;
 import group1.spring_server.repository.TemplateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,13 +40,13 @@ public class TemplateService {
         return templateRepository.findAll();
     }
 
-    @Transactional(propagation= Propagation.REQUIRED, readOnly=true, noRollbackFor=Exception.class)
-    public Template getTemplate(int id, String userId) throws NoSuchChecklistException, ForbiddenException {
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = true, noRollbackFor = Exception.class)
+    public Template getTemplate(int id, String userId) throws NoSuchChecklistException, ForbiddenException, NoSuchTemplateException {
 
         Optional<Template> optionalTemplate = templateRepository.findById(id);
 
         //verification if lists exists in database
-        if (!optionalTemplate.isPresent()) throw new NoSuchChecklistException();
+        if (!optionalTemplate.isPresent()) throw new NoSuchTemplateException();
 
         Template checklist = optionalTemplate.get();
 
@@ -61,30 +58,20 @@ public class TemplateService {
     }
 
     @Transactional
-    public Checklist useTemplate(Template x, String checkListName) {
-        //TODO throw an exception instead
-        if (x == null) return null;
-
+    public Checklist useTemplate(Template x, String checkListName) throws FailedAddChecklistException {
 
         Checklist returnList = new Checklist();
         returnList.setName(checkListName);
         returnList.setUser_id(x.getUser_id());
 
-        try {
-            returnList = checklistService.addChecklist(returnList);
+        returnList = checklistService.addChecklist(returnList);
 
-            Checklist finalReturnList = returnList;
-            x.getItems().forEach(item -> {
-                mapTemplateItem(item, finalReturnList.getId());
-            });
+        Checklist finalReturnList = returnList;
+        x.getItems().forEach(item -> {
+            mapTemplateItem(item, finalReturnList.getId());
+        });
 
-            return returnList;
-
-        } catch (FailedAddChecklistException e) {
-            e.printStackTrace();
-            //TODO Send error
-            return null;
-        }
+        return returnList;
 
 
     }

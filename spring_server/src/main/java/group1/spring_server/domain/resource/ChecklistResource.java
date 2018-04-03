@@ -21,7 +21,7 @@ public class ChecklistResource extends ResourceSupport {
                 .getCheckList(checklist.getId(), null))
                 .withSelfRel());
         add(linkTo(methodOn(ServiceController.class)
-                .getCheckListItems(checklist.getId(),null))
+                .getCheckListItems(checklist.getId(), null))
                 .withRel("items"));
     }
 

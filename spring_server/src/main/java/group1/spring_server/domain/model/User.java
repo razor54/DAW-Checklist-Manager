@@ -20,12 +20,12 @@ public class User {
 
     //TODO LAZY FETCH
     @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "user_id",fetch = FetchType.EAGER,orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user_id", fetch = FetchType.EAGER, orphanRemoval = true)
     //@JoinColumn(name = "user_id")
     private Set<Checklist> checklists;
 
     @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "user_id",fetch = FetchType.EAGER,orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user_id", fetch = FetchType.EAGER, orphanRemoval = true)
     //@JoinColumn(name = "user_id")
     private Set<Template> templates;
 

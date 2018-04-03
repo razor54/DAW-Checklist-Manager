@@ -32,7 +32,7 @@ public class Checklist {
 
     //TODO LAZY fetch--->Mandatory
     @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @JoinColumn(name = "list_id")
     private Set<ChecklistItem> items;
 

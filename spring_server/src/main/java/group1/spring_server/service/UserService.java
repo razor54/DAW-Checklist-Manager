@@ -34,7 +34,8 @@ public class UserService {
     @Transactional(propagation= Propagation.REQUIRED, readOnly=true, noRollbackFor=Exception.class)
     public Iterable<User> getUsers(){
 
-        return userRepository.findAll();
+        Iterable<User>users =userRepository.findAll();
+        return users;
     }
 
     @Transactional(propagation=Propagation.REQUIRED, readOnly=true, noRollbackFor=Exception.class)
