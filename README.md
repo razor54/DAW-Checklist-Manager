@@ -47,7 +47,7 @@
 ## Resolvers - registered resolvers
 * AuthArgumentResolver - responsible for retrieve authentication header
 - - - -
-## Service - retrieves data from repository and returns an model object
+## Service - retrieves data from repository and returns a model object
 * ChecklistService
 * ChecklistItemService
 * TemplateService
