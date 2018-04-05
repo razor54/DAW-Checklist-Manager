@@ -1,33 +1,58 @@
-# DAW Project
-* View - Represents an interface to be used by application client and display rendered information
-* Control - Get requests from the view interface , access database and, manipulate models and send to view to be render
-* Model - Data base models to be render by the view and displayed
-* DAL (Data Access Layer) - Responsible to communicate do data base
+# *DAW PROJECT*
 
 # Structure of The Project
----
-## View
-* Login
-* Register
-* CheckLists Lists
-* CheckList
-* CheckList Item
----
-## Model
+- - - -
+## Control - registered controllers
+* AuthenticationController - responsible for the authentication request
+* ServiceController - responsible for the funcional requests
+- - - -
+## Domain
+* AuthCredentials - http basic authentication helper 
+### Model - JSON objects representations
+* Checklist 
+* ChecklistItem
+* Template
+* TemplateItem
 * User
-* CheckList
-* CheckList Item
----
-## Control
-* /todo/
----
-## DAL
-* DataBase
-* DTO’s
-	* UserDTO
-	* CheckListDTO
-	* CheckListItemDTO
----
+### Resource - wrappers to add functionalities to model objects
+* ChecklistResource
+* ChecklistItemResource
+* TemplateResource
+* TemplateItemResource
+* UserResource
+- - - -
+## Exceptions
+* FailedAddChecklistException
+* FailedAddChecklistItemException
+* FailedAddUserException
+* ForbiddenException
+* MyException(Abstract) - Base exception class
+* NoSuchChecklistException
+* NoSuchChecklistItemException
+* NoSuchTemplateException
+* NoSuchUserException
+* NoSuchTemplateItemException
+* UnauthorizedException
+- - - -
+## Handlers - registered handlers 
+* MyExceptionHandler - responsible for handle exceptions and return problem+json objects
+- - - -
+## Repository - communication with database
+* ChecklistRepository
+* ChecklistItemRepository
+* TemplateRepository
+* TemplateItemRepository
+* UserRepository
+- - - -
+## Resolvers - registered resolvers
+* AuthArgumentResolver - responsible for retrieve authentication header
+- - - -
+## Service - retrieves data from repository and returns an model object
+* ChecklistService
+* ChecklistItemService
+* TemplateService
+* TemplateItemService
+* UserService
 
 
 
