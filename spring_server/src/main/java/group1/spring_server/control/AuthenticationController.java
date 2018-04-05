@@ -29,7 +29,7 @@ public class AuthenticationController {
     private UserService userService;
 
     @PostMapping("/register")
-    public ResourceSupport getRegister(HttpServletResponse res, @RequestParam("username") String username, @RequestParam("password") String password) throws MyException {
+    public UserResource getRegister(HttpServletResponse res, @RequestParam("username") String username, @RequestParam("password") String password) throws MyException {
 
 
         User user = new User();
