@@ -28,12 +28,6 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 public class ServiceController {
 
 
-    //TODO see if refactor can do the job with constructor
-    //TODO POST NEW Template
-    //TODO Create the checklist and its items based on template
-    //TODO Read a Template
-
-
     @Autowired
     private UserService userService;
 
@@ -71,7 +65,7 @@ public class ServiceController {
         Link link = linkTo(methodOn(ServiceController.class)
                 .getUsers(authCredentials)).withSelfRel();
 
-        return new Resources<UserResource>(collect, link);
+        return new Resources<>(collect, link);
 
 
     }
@@ -174,12 +168,12 @@ public class ServiceController {
         Iterable<Template> userTemplates = templateService.getUserTemplates(user.getId());
 
         Set<TemplateResource> collect = StreamSupport
-                .stream(userTemplates.spliterator(),false)
+                .stream(userTemplates.spliterator(), false)
                 .map(template -> {
                     try {
                         return new TemplateResource(template);
 
-                    } catch (MyException|IOException e) {
+                    } catch (MyException | IOException e) {
                         return null;
                     }
                 }).collect(Collectors.toSet());
@@ -221,7 +215,7 @@ public class ServiceController {
         ).map(item -> {
             try {
                 return new TemplateItemResource(item);
-            } catch (MyException|IOException e) {
+            } catch (MyException | IOException e) {
                 e.printStackTrace();
                 return null;
             }
@@ -293,7 +287,7 @@ public class ServiceController {
 
 
     @PostMapping("checklist/template/{templateID}")
-    public ChecklistResource addListFromTemplate(@PathVariable("templateID") int templateId, @RequestParam("listName") String listName, AuthCredentials authCredentials) throws IOException, MyException {
+    public ChecklistResource addListFromTemplate(@PathVariable("templateID") int templateId, @RequestParam("listName") String listName, AuthCredentials authCredentials) throws MyException {
         Template template = templateService.getTemplate(templateId, authCredentials.getSessionCode());
         //TODO if template is null throw some exception
         return new ChecklistResource(templateService.useTemplate(template, listName));

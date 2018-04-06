@@ -2,15 +2,15 @@ package group1.spring_server.exceptions;
 
 import org.springframework.http.HttpStatus;
 
-public class NoSuchUserException extends MyException{
+public class NoSuchUserException extends MyException {
 
     @Override
-    public String getMessage(){
+    public String getMessage() {
         return "The requested user doesn't exist in the database ";
     }
 
     @Override
-    public HttpStatus error(){
+    public HttpStatus error() {
         return HttpStatus.BAD_REQUEST;
     }
 

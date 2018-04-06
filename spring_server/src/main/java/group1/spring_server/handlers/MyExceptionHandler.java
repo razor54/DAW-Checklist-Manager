@@ -15,15 +15,15 @@ public class MyExceptionHandler {
 
 
     @ExceptionHandler(value = MyException.class)
-    ResponseEntity<ErrorModel> handleExceptions(HttpServletRequest request, MyException e) throws IOException {
+    ResponseEntity<ErrorModel> handleExceptions(HttpServletRequest request, MyException e) {
 
         ErrorModel error = new ErrorModel(e, request.getRequestURI());
 
         MultiValueMap<String, String> header = new LinkedMultiValueMap<>();
 
-        header.add("Content-Type","application/problem+json");
+        header.add("Content-Type", "application/problem+json");
 
-        return new ResponseEntity<>(error, header,e.error());
+        return new ResponseEntity<>(error, header, e.error());
     }
 
     private static class ErrorModel {
@@ -34,11 +34,11 @@ public class MyExceptionHandler {
         public String detail;
 
 
-        ErrorModel(MyException e,String uri){
-            this.type=uri + "/" + e.type();
-            this.title=e.title();
+        ErrorModel(MyException e, String uri) {
+            this.type = uri + "/" + e.type();
+            this.title = e.title();
             this.status = e.error().value();
-            this.detail=e.getMessage();
+            this.detail = e.getMessage();
         }
 
     }

@@ -38,7 +38,7 @@ public class ChecklistService {
     }
 
 
-    public Iterable<Checklist> getUserCheckLists(String user_id){
+    public Iterable<Checklist> getUserCheckLists(String user_id) {
 
         Iterable<Checklist> all = checklistRepository.findAll();
         return () -> StreamSupport.stream(all.spliterator(), false)

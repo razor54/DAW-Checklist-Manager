@@ -13,9 +13,9 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @SpringBootApplication
 public class SpringServerApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(SpringServerApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(SpringServerApplication.class, args);
+    }
 
 
     @Bean

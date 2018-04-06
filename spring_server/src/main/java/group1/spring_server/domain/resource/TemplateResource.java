@@ -31,7 +31,7 @@ public class TemplateResource extends ResourceSupport {
 
 
         add(linkTo(methodOn(ServiceController.class)
-                .addListFromTemplate(template.getId(),null, null))
+                .addListFromTemplate(template.getId(), null, null))
                 .withRel("checklist_create"));
 
     }

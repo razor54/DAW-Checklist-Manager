@@ -7,12 +7,12 @@ public class NoSuchChecklistException extends MyException {
 
 
     @Override
-    public String getMessage(){
+    public String getMessage() {
         return "The requested checklist doesn't exist in the database ";
     }
 
     @Override
-    public HttpStatus error(){
+    public HttpStatus error() {
         return HttpStatus.BAD_REQUEST;
     }
 

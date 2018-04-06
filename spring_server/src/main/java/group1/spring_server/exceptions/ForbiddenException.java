@@ -4,12 +4,12 @@ import org.springframework.http.HttpStatus;
 
 public class ForbiddenException extends MyException {
     @Override
-    public String getMessage(){
+    public String getMessage() {
         return "The request data are not available for the current user";
     }
 
     @Override
-    public HttpStatus error(){
+    public HttpStatus error() {
 
         return HttpStatus.FORBIDDEN;
 

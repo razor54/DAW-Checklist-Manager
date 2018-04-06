@@ -30,7 +30,6 @@ public class TemplateService {
     private TemplateItemService templateItemService;
 
 
-
     public Template addTemplate(Template checklist) throws FailedAddChecklistException {
 
         try {
@@ -44,14 +43,14 @@ public class TemplateService {
 
         return templateRepository.findAll();
     }
-    public Iterable<Template> getUserTemplates(String user_id){
+
+    public Iterable<Template> getUserTemplates(String user_id) {
 
         Iterable<Template> all = templateRepository.findAll();
         return () -> StreamSupport.stream(all.spliterator(), false)
                 .filter(item -> item.getUser_id().equals(user_id))
                 .iterator();
     }
-
 
 
     public Template getTemplate(int id, String userId) throws NoSuchChecklistException, ForbiddenException, NoSuchTemplateException {
@@ -80,7 +79,7 @@ public class TemplateService {
         returnList = checklistService.addChecklist(returnList);
 
         Checklist finalReturnList = returnList;
-        templateItemService.getItemsforTemplate(x.getId(),x.getUser_id()).forEach(item -> {
+        templateItemService.getItemsforTemplate(x.getId(), x.getUser_id()).forEach(item -> {
             mapTemplateItem(item, finalReturnList.getId());
         });
 

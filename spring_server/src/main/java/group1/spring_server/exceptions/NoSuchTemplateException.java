@@ -5,12 +5,12 @@ import org.springframework.http.HttpStatus;
 public class NoSuchTemplateException extends MyException {
 
     @Override
-    public String getMessage(){
+    public String getMessage() {
         return "The requested template doesn't exist in the database ";
     }
 
     @Override
-    public HttpStatus error(){
+    public HttpStatus error() {
         return HttpStatus.BAD_REQUEST;
     }
 

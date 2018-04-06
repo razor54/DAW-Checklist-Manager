@@ -38,7 +38,6 @@ public class ChecklistItemService {
     }
 
 
-
     public Iterable<ChecklistItem> getChecklistItems(int listId, String userId) throws ForbiddenException, NoSuchChecklistException {
 
         //listed to verify identity
