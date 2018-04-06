@@ -5,7 +5,6 @@ import group1.spring_server.domain.model.User;
 import group1.spring_server.exceptions.MyException;
 import org.springframework.hateoas.ResourceSupport;
 
-import static com.sun.tools.internal.xjc.reader.Ring.add;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 

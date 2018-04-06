@@ -7,7 +7,6 @@ import org.springframework.hateoas.ResourceSupport;
 
 import java.io.IOException;
 
-import static com.sun.tools.internal.xjc.reader.Ring.add;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 

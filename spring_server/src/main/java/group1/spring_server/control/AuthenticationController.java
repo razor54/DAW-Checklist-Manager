@@ -6,23 +6,18 @@ import group1.spring_server.domain.resource.UserResource;
 import group1.spring_server.exceptions.MyException;
 import group1.spring_server.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import org.springframework.hateoas.ResourceSupport;
 import org.springframework.util.Base64Utils;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
-import java.util.Hashtable;
 
 
 @RestController
 @RequestMapping("/auth")
 public class AuthenticationController {
-
-
-    //Storage where will be saved the cookie's of the following users that access and login in the api
-    private static final Hashtable<Integer, String> cookieStorage = new Hashtable<>();
-    private static final String cookieName = "dawserver_logincookie";
 
 
     @Autowired

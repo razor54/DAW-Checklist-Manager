@@ -2,10 +2,8 @@ package group1.spring_server.domain.resource;
 
 import group1.spring_server.control.ServiceController;
 import group1.spring_server.domain.model.Template;
-import group1.spring_server.exceptions.*;
-import org.springframework.hateoas.Link;
+import group1.spring_server.exceptions.MyException;
 import org.springframework.hateoas.ResourceSupport;
-import org.springframework.hateoas.UriTemplate;
 
 import java.io.IOException;
 

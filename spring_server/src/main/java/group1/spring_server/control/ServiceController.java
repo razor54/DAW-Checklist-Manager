@@ -1,11 +1,12 @@
 package group1.spring_server.control;
 
 
-import group1.spring_server.domain.*;
-
+import group1.spring_server.domain.AuthCredentials;
 import group1.spring_server.domain.model.*;
 import group1.spring_server.domain.resource.*;
-import group1.spring_server.exceptions.*;
+import group1.spring_server.exceptions.ForbiddenException;
+import group1.spring_server.exceptions.MyException;
+import group1.spring_server.exceptions.UnauthorizedException;
 import group1.spring_server.service.*;
 import group1.spring_server.util.RequiresAuthentication;
 import org.springframework.beans.factory.annotation.Autowired;

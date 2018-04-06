@@ -1,9 +1,10 @@
 package group1.spring_server.service;
 
-import group1.spring_server.domain.model.Checklist;
 import group1.spring_server.domain.model.Template;
 import group1.spring_server.domain.model.TemplateItem;
-import group1.spring_server.exceptions.*;
+import group1.spring_server.exceptions.FailedAddCheklistItemException;
+import group1.spring_server.exceptions.MyException;
+import group1.spring_server.exceptions.NoSuchTemplateItemException;
 import group1.spring_server.repository.TemplateItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
