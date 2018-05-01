@@ -43,6 +43,11 @@ public class ServiceController {
     @Autowired
     private TemplateItemService templateItemService;
 
+    @GetMapping("/")
+    public ResourceSupport getHomePage() throws IOException, MyException {
+        return new HomePageResource();
+    }
+
     @GetMapping("/users")
     public ResourceSupport getUsers(AuthCredentials authCredentials) throws UnauthorizedException {
         //TODO TEST ONLY
