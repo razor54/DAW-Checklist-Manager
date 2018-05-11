@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Auth from './Auth';
 import Item from './Item';
+import List from './List'
 
 
 
@@ -12,11 +13,13 @@ export default class ExamplePage extends Component {
   constructor (props) {
     super(props);
 
-    this.state = {
-      afterRegister: this.afterRegister.bind(this),
-      afterLogin: this.afterLogin.bind(this),
-    }
+    this.afterRegister = this.afterRegister.bind(this)
+    this.afterLogin = this.afterLogin.bind(this)
+    this.listLoadItemDetais = this.listLoadItemDetais.bind(this)
 
+    this.state = {
+      itemUrl : ''
+    }
   }
 
   afterRegister (error,result) {
@@ -31,6 +34,11 @@ export default class ExamplePage extends Component {
     console.log(result)
   }
 
+  listLoadItemDetais(itemLink){
+    console.log(itemLink)
+    this.setState({itemUrl: itemLink})
+  }
+
   render () {
     return (
       <div align='center'>
@@ -42,7 +50,11 @@ export default class ExamplePage extends Component {
         <Auth callback={this.state.afterRegister} buttonName='Register' url='http://localhost:8080/register'/>
         <Auth callback={this.state.afterLogin} buttonName='Login' url='http://localhost:8080/listing/checklists'/>
 
-        <Item listName={'exampleList'}> </Item>
+        <List url='http://localhost:8080/listing/checklist/1/items' username='nuno'  loadItem={this.listLoadItemDetais} />
+
+
+        <Item url='http://localhost:8080/listing/checklist/item/1'> </Item>
+
 
       </div>
     );

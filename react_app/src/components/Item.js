@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
+import itemDTO from '../model/itemDTO';
 
+//props = {url, listname}
 
 
 export default class Auth extends Component {
@@ -7,30 +9,46 @@ export default class Auth extends Component {
   constructor(props){
     super(props);
 
+    this.checkStateHandle = this.checkStateHandle.bind(this)
+    this.pushChanges = this.pushChanges.bind(this)
+
     this.state = {
       url : props.url,
-      listName : props.listName,
-
-      checkStateHandle: this.checkStateHandle.bind(this),
-      pushChanges: this.pushChanges.bind(this),
-
-
-      id : '12345',
-      name : 'Item',
-      description : 'Item just for test',
-      checkState : false,
+      listname : props.listname,
+      item : {
+        id: '',
+        name: '',
+        description: '',
+        listId: '',
+        selfLink: '',
+        parentLink: '',
+        checkState: false
+      },
       hiddenButton : true,
-    };
+    }
+
+  }
+
+  componentDidMount(){
+    console.log('mounted item')
+
+    if(!this.state.url) return;
+    fetch(this.state.url, {headers:{authorization:'basic bnVubzoxMjM0NQ=='}})
+      .then(res => res.json())
+      .then(json => {
+        this.setState({item: itemDTO(json)})
+      })
 
   }
 
 
   checkStateHandle(event){
-    this.setState({checkState: event.target.checked});
-    this.setState({hiddenButton:false});
+    console.log('checkbutton changed to =>'  + event.target.checked)
 
-    console.log('checkbutton changed')
+    let updatedItem = this.state.item;
+    updatedItem.checkState = event.target.checked
 
+    this.setState({item : updatedItem, hiddenButton:false});
   }
 
   pushChanges(){
@@ -44,13 +62,12 @@ export default class Auth extends Component {
   render() {
     return (
       <div>
-        <div> Item from List - {this.state.listName} </div>
-        <div>Id = {this.state.id}</div>
-        <div>Name = {this.state.name}</div>
-        <div>Description = {this.state.description}</div>
-        <div>State = <input type="checkbox" checked={this.state.checkState} name="State" onChange={this.state.checkStateHandle}/></div>
-
-        <button hidden={this.state.hiddenButton}  onClick={this.state.pushChanges} > Save Changes</button>
+        <div> Item from List - {this.state.item.listId} </div>
+        <div>Id = {this.state.item.id}</div>
+        <div>Name = {this.state.item.name}</div>
+        <div>Description = {this.state.item.description}</div>
+        <div>State = <input type="checkbox" checked={this.state.item.checkState} onClick={this.checkStateHandle}/></div>
+        <button hidden={this.state.hiddenButton}  onClick={this.pushChanges} > Save Changes</button>
 
       </div>
 
@@ -58,3 +75,23 @@ export default class Auth extends Component {
   }
 }
 
+
+
+
+// EXAMPLE OF ITEM
+/*
+
+
+class ItemModel{
+
+  constructor (id,name,description,checkState,listId,selfLink){
+    this.id = id
+    this.name = name
+    this.description = description
+    this.checkState = checkState
+    this.listId = listId
+    this.selfLink = selfLink
+  }
+}
+
+ */

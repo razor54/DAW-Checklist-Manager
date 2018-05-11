@@ -7,17 +7,16 @@ export default class Auth extends Component {
     constructor(props){
       super(props);
 
+      this.usernameHandle = this.usernameHandle.bind(this)
+      this.passwordHandle = this.passwordHandle.bind(this)
+      this.authenticate = this.authenticate.bind(this)
+      this.callback = props.callback
+
       this.state = {
-        callback : props.callback,
         buttonName : props.buttonName,
         url : props.url,
         username : '',
         password : '',
-        usernameHandle : this.usernameHandle.bind(this),
-        passwordHandle : this.passwordHandle.bind(this),
-        authenticate : this.authenticate.bind(this),
-
-
       };
 
     }
@@ -39,7 +38,7 @@ export default class Auth extends Component {
         (res) =>{
 
           console.log(res);
-          //this.state.callback(res);
+          //this.callback(res);
         }
       )
     }
@@ -58,12 +57,12 @@ export default class Auth extends Component {
           <form onSubmit={this.state.authenticate}>
               <label>
                   Username:
-                  <input type="text" value={this.state.username} onChange={this.state.usernameHandle} />
+                  <input type="text" value={this.state.username} onChange={this.usernameHandle} />
               </label>
               <div></div>
               <label>
                    Password:
-                  <input type="text" value={this.state.password} onChange={this.state.passwordHandle} />
+                  <input type="password" value={this.state.password} onChange={this.passwordHandle} />
               </label>
             <div></div>
             <input type="submit" value={this.state.buttonName} />
