@@ -2,6 +2,11 @@
 
 
 export default function (requestBody){
+
+  if(!requestBody._embedded)
+    return new ListModel([],'')//empty list
+
+
   return new ListModel(
     requestBody._embedded.checklistResourceList,
     requestBody._links.self.href

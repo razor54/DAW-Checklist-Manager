@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import checklistDTO from '../model/checklistDTO'
-import List from './List'
+import List from '../components/List'
 
 
 export default class ChecklistsPage extends Component {
@@ -9,6 +9,7 @@ export default class ChecklistsPage extends Component {
     super(props);
 
     this.goToChecklistItem = this.goToChecklistItem.bind(this)
+    this.errorCallback = this.errorCallback.bind(this)
 
     this.state = {
       history : props.history,
@@ -21,12 +22,19 @@ export default class ChecklistsPage extends Component {
     this.state.history.push(`/checklist/${this.state.listId}/item/${itemId}`)
   }
 
+  errorCallback(err){
+    if(err==='TypeError: Failed to fetch')
+      this.state.history.push('/server-error')
+    else
+      this.state.history.push('/invalid-list')
+  }
+
   render() {
     return (
       <div>
         <div>Your Checklist</div>
         <div align="center">
-          <List url={`http://localhost:8080/listing/checklist/${this.state.listId}/items`}  loadItem={this.goToChecklistItem} loadDTO={checklistDTO}/>
+          <List url={`http://localhost:8080/listing/checklist/${this.state.listId}/items`}  loadItem={this.goToChecklistItem} loadDTO={checklistDTO} errorCallback={this.errorCallback} />
         </div>
       </div>
     );

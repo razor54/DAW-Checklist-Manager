@@ -11,6 +11,7 @@ export default class Auth extends Component {
 
     this.checkStateHandle = this.checkStateHandle.bind(this)
     this.pushChanges = this.pushChanges.bind(this)
+    this.errorCallback = props.errorCallback
 
     this.state = {
       url : props.url,
@@ -30,13 +31,10 @@ export default class Auth extends Component {
   }
 
   componentDidMount(){
-
-    fetch(this.state.url, {headers:{authorization:'basic bnVubzoxMjM0NQ=='}})
-      .then(res => res.json())
-      .then(json => {
-        this.setState({item: itemDTO(json)})
-      })
-
+    return fetch(this.state.url, {headers:{authorization:'basic bnVubzoxMjM0NQ=='}})
+      .then(res =>res.json())
+      .then(json => this.setState({item: itemDTO(json)}))
+      .catch(this.errorCallback)
   }
 
 

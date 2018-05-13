@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import userDTO from '../model/userDTO'
 
 
 //props = {callback,buttonNam,url}
@@ -19,6 +20,8 @@ export default class Auth extends Component {
 
         username : '',
         password : '',
+
+        hiddenMessage:true
       };
 
     }
@@ -26,26 +29,30 @@ export default class Auth extends Component {
 
     authenticate(){
 
-      const userCredentials = {
-        username : this.state.username,
-        password : this.state.password
+      if(!this.state.password || !this.state.username){
+        this.setState({hiddenMessage: false})
+        return
       }
+
+      let formBody = new FormData()
+      formBody.append('username',this.state.username)
+      formBody.append('password',this.state.password)
 
       const data = {
-        body : JSON.stringify(userCredentials),
-        method : 'POST'
+        body : formBody,
+        method : 'POST',
       }
 
-      /*fetch(this.state.url, data).then(
-        (res) =>{
-
-          console.log(res);
-          //this.callback();
-        }
-      )
-      */
-
-      this.callback()
+      return fetch(this.state.url, data)
+        .then(res=> {
+          console.log(res.headers.get('Set-Cookie'))
+          return res.json()
+        })
+        .then(json => {
+          console.log(json)
+          this.callback(null,userDTO(json))
+        })
+        .catch(this.errorCallback)
     }
 
     usernameHandle (event) {
@@ -59,19 +66,21 @@ export default class Auth extends Component {
 
     render() {
       return (
-          <form onSubmit={this.authenticate}>
-              <label>
-                  Username:
-                  <input type="text" value={this.state.username} onChange={this.usernameHandle} />
-              </label>
-              <div></div>
-              <label>
-                   Password:
-                  <input type="password" value={this.state.password} onChange={this.passwordHandle} />
-              </label>
-            <div></div>
-            <input type="submit" value={this.state.buttonName} />
-          </form>
+        <div>
+          <label>
+              Username:
+              <input type="text" value={this.state.username} onChange={this.usernameHandle} />
+          </label>
+          <div></div>
+          <label>
+               Password:
+              <input type="password" value={this.state.password} onChange={this.passwordHandle} />
+          </label>
+          <div></div>
+          <button onClick={this.authenticate}>{this.state.buttonName} </button>
+          <div></div>
+          <div hidden={this.state.hiddenMessage}>Please insert valid username and password!!!</div>
+        </div>
       );
     }
 }

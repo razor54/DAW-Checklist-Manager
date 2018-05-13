@@ -1,6 +1,9 @@
 
 export default function (requestBody){
 
+  if(!requestBody.checklistItem)
+    return new ItemModel('','','','','','','') //item with empty elements
+
   return new ItemModel(
     requestBody.checklistItem.id,
     requestBody.checklistItem.name,

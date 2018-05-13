@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Auth from './Auth'
+import Auth from '../components/Auth'
 
 
 export default class HomePage extends Component {
@@ -7,7 +7,8 @@ export default class HomePage extends Component {
   constructor(props) {
     super(props)
 
-    this.goToChecklists = this.goToChecklists.bind(this)
+    this.callback = this.callback.bind(this)
+
 
     this.state = {
       history : props.history,
@@ -18,7 +19,16 @@ export default class HomePage extends Component {
     this.state.history.push('/homepage')
 
   }
-  goToChecklists(){
+
+  callback(err,user){
+
+    if(err){
+      if(err==='TypeError: Failed to fetch')
+        this.state.history.push('/server-error')
+      else
+        this.state.history.push('/invalid-username-or-password')
+    }
+
     this.state.history.push('/checklists')
   }
 
@@ -27,7 +37,7 @@ export default class HomePage extends Component {
       <div >
         <div >Welcome Page</div>
         <div align="center">
-          <Auth callback={this.goToChecklists} buttonName='Register' url='http://localhost:8080/register'>
+          <Auth callback={this.callback} buttonName='Register' url='http://localhost:8080/auth/register'>
           </Auth>
         </div>
       </div>

@@ -2,7 +2,8 @@
 
 export default function (requestBody){
 
-  if(!requestBody._embedded) return {items:[] ,selfLink:requestBody._links.self.href}
+  if(!requestBody._embedded)
+    return new ListModel([],'') //empty list
 
   return new ListModel(
     requestBody._embedded.checklistItemResourceList,

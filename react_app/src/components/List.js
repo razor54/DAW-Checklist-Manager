@@ -10,6 +10,7 @@ export default class List extends Component {
     this.listToHtml = this.listToHtml.bind(this)
     this.loadItem =  props.loadItem
     this.loadDTO = props.loadDTO
+    this.errorCallback = props.errorCallback
 
 
     this.state = {
@@ -24,12 +25,10 @@ export default class List extends Component {
   }
 
   componentDidMount(){
-
-    fetch(this.state.url, {headers:{authorization:'basic bnVubzoxMjM0NQ=='}})
-      .then(res => res.json())
-      .then(json => {
-        this.setState({list: this.loadDTO(json)})
-      })
+    return fetch(this.state.url, {headers:{authorization:'basic bnVubzoxMjM0NQ=='}})
+      .then(res =>res.json())
+      .then(json =>this.setState({list: this.loadDTO(json)}))
+      .catch(this.errorCallback)
   }
 
 

@@ -1,17 +1,18 @@
 package group1.spring_server.control;
 
 
+import group1.spring_server.domain.AuthCredentials;
+import group1.spring_server.domain.model.Checklist;
 import group1.spring_server.domain.model.User;
+import group1.spring_server.domain.resource.ChecklistResource;
 import group1.spring_server.domain.resource.UserResource;
 import group1.spring_server.exceptions.MyException;
 import group1.spring_server.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Base64Utils;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 
 
@@ -34,6 +35,23 @@ public class AuthenticationController {
         user.setId(sessionId);
         user.setName(username);
 
+        res.addCookie(new Cookie("checklist-server-cookie",sessionId));
+
         return new UserResource(userService.addUser(user));
     }
+
+
+    @PostMapping("/login")
+    public UserResource getLogin(HttpServletResponse res, @RequestParam("username") String username, @RequestParam("password") String password) throws MyException {
+
+        String sessionId = Base64Utils.encodeToString((username + ":" + password).getBytes());
+
+        User user = userService.getUser(sessionId);
+
+        res.addCookie(new Cookie("checklist-server-cookie",sessionId));
+
+        return new UserResource(user);
+    }
+
+
 }

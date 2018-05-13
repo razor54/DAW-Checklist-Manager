@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import Auth from './Auth';
-import Item from './Item';
-import List from './List'
+import Auth from '../components/Auth';
+import Item from '../components/Item';
+import List from '../components/List'
 
 
 
