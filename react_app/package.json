@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "left-pad": "^1.2.0"
+    "left-pad": "^1.2.0",
+    "react-router-dom": "^4.2.2"
   },
   "devDependencies": {
     "babel-loader": "^7.1.4",

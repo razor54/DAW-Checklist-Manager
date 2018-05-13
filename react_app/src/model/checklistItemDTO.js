@@ -1,5 +1,5 @@
 
-export default function listDTO(requestBody){
+export default function (requestBody){
 
   return new ItemModel(
     requestBody.checklistItem.id,

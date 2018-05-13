@@ -1,25 +1,36 @@
 
 
+export default function (requestBody){
 
-export default function listDTO(requestBody){
+  if(!requestBody._embedded) return {items:[] ,selfLink:requestBody._links.self.href}
 
   return new ListModel(
     requestBody._embedded.checklistItemResourceList,
     requestBody._links.self.href
   )
+
 }
+
+
+
 
 
 class ListModel{
 
   constructor (items,selfLink){
-    this.items = items
+    this.items = items.map(item => {
+      return {
+        id: item.checklistItem.id,
+        name: item.checklistItem.name,
+        selfLink: item._links.self.href
+      }
+    })
     this.selfLink = selfLink
   }
 }
 
 
-// EXAMPLE OF LIST ITEMS
+
 /*
 {
   "_embedded": {

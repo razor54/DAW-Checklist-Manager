@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 
 
+//props = {callback,buttonNam,url}
 
 export default class Auth extends Component {
 
@@ -15,6 +16,7 @@ export default class Auth extends Component {
       this.state = {
         buttonName : props.buttonName,
         url : props.url,
+
         username : '',
         password : '',
       };
@@ -34,13 +36,16 @@ export default class Auth extends Component {
         method : 'POST'
       }
 
-      fetch(this.state.url, data).then(
+      /*fetch(this.state.url, data).then(
         (res) =>{
 
           console.log(res);
-          //this.callback(res);
+          //this.callback();
         }
       )
+      */
+
+      this.callback()
     }
 
     usernameHandle (event) {
@@ -54,7 +59,7 @@ export default class Auth extends Component {
 
     render() {
       return (
-          <form onSubmit={this.state.authenticate}>
+          <form onSubmit={this.authenticate}>
               <label>
                   Username:
                   <input type="text" value={this.state.username} onChange={this.usernameHandle} />

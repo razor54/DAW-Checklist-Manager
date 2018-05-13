@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import itemDTO from '../model/itemDTO';
+import itemDTO from '../model/checklistItemDTO';
 
 //props = {url, listname}
 
@@ -30,9 +30,7 @@ export default class Auth extends Component {
   }
 
   componentDidMount(){
-    console.log('mounted item')
 
-    if(!this.state.url) return;
     fetch(this.state.url, {headers:{authorization:'basic bnVubzoxMjM0NQ=='}})
       .then(res => res.json())
       .then(json => {
@@ -43,7 +41,6 @@ export default class Auth extends Component {
 
 
   checkStateHandle(event){
-    console.log('checkbutton changed to =>'  + event.target.checked)
 
     let updatedItem = this.state.item;
     updatedItem.checkState = event.target.checked
