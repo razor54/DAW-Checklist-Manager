@@ -2,7 +2,7 @@
 export default function (requestBody){
 
   if(!requestBody.checklistItem)
-    return new ItemModel('','','','','','','') //item with empty elements
+    return new ItemModel('','','',false,'','','') //item with empty elements
 
   return new ItemModel(
     requestBody.checklistItem.id,
@@ -25,7 +25,7 @@ class ItemModel{
     this.id = id
     this.name = name
     this.description = description
-    this.checkState = checkState
+    this.checkState = checkState==='true'
     this.listId = listId
     this.selfLink = selfLink
     this.parentLin = parentLink

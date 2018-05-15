@@ -49,9 +49,19 @@ export default class List extends Component {
 
 
   listToHtml(){
-    return this.state.list.items.map(item =>
-      <div  key={item.id}><button onClick={()=>this.loadItem(item.id)}> {item.name} </button></div>
-    )
+    return this.state.list.items.map(item => {
+
+      if (!item.checkState)
+        return <div key={item.id}>
+          <button onClick={() => this.loadItem(item.id)}> {item.name} </button>
+        </div>
+
+      return <div key={item.id}>
+        <button onClick={() => this.loadItem(item.id)} > {item.name} </button>
+        <input type="checkbox" disabled={true} checked={item.checkState}/>
+      </div>
+    }
+  )
   }
 
 

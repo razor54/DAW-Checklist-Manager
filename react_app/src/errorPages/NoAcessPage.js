@@ -18,7 +18,7 @@ export default class NoAcessPage extends Component {
     return (
       <div>
         <div>You need to be authenticate to access this {this.state.errorType}, please proceed to home page!</div>
-        <Link to='/homepage'>Home Page</Link>
+        <Link to='/loginpage'>Login Page</Link>
       </div>
     );
   }

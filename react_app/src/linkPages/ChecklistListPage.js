@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import List from '../components/List'
 import checklistListDTO from '../model/checklistListDTO'
 import ChecklistForm from '../components/ChecklistForm'
+import GoHome from '../components/GoHome'
 
 
 export default class ChecklistListPage extends Component {
@@ -42,12 +43,14 @@ export default class ChecklistListPage extends Component {
     return (
       <div>
         <div>Your Checklists</div>
+        <GoHome history={this.state.history}/>
+        <div align="right">
+          <ChecklistForm url='http://localhost:8080/listing/checklist' callback={this.checkListFormCallback}/>
+        </div>
         <div align="center">
           <List url='http://localhost:8080/listing/checklists' loadItem={this.goToCheckList} loadDTO={checklistListDTO} errorCallback={this.errorCallback}/>
         </div>
-        <div>
-          <ChecklistForm url='http://localhost:8080/listing/checklist' callback={this.checkListFormCallback}/>
-        </div>
+
       </div>
     );
   }

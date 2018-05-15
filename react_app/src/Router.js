@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
-import HomePage from './linkPages/HomePage'
+import LoginPage from './linkPages/LoginPage'
 import ChecklistListPage from './linkPages/ChecklistListPage'
 import ChecklistsPage from './linkPages/ChecklistPage'
 import ChecklistItemPage from './linkPages/ChecklistItemPage'
 import InvalidPage from './errorPages/InvalidPage'
 import NoAccessPage from './errorPages/NoAcessPage'
 import ServerErrorPage from './errorPages/ServerErrorPage'
+import HomePage from './linkPages/HomePage'
 
 
 export default class Router extends Component {
@@ -16,6 +17,7 @@ export default class Router extends Component {
     return <BrowserRouter>
       <Switch>
         <Route path='/' exact component={HomePage}/>
+        <Route path='/loginpage' exact component={LoginPage}/>}/>
         <Route path='/homepage' exact component={HomePage}/>}/>
 
         <Route path='/checklists' exact component={ChecklistListPage}/>}/>

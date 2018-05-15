@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
-import Auth from '../components/Auth'
 
 
-export default class HomePage extends Component {
+export default class LoginPage extends Component {
 
   constructor(props) {
     super(props)
 
-    this.callback = this.callback.bind(this)
-
+    this.goToChecklists = this.goToChecklists.bind(this)
+    this.logout = this.logout.bind(this)
 
     this.state = {
       history : props.history,
@@ -17,39 +16,32 @@ export default class HomePage extends Component {
 
   componentDidMount(){
 
-    if(localStorage.getItem('session-id')){
-      return this.state.history.push('/checklists')
+    if(!localStorage.getItem('session-id')){
+      return this.state.history.push('/loginpage')
     }
 
     this.state.history.push('/homepage')
 
   }
 
-  callback(err,user){
-
-    if(err){
-      if(err==='TypeError: Failed to fetch')
-        return this.state.history.push('/server-error')
-      else
-        return this.state.history.push('/invalid-listname-or-password')
-    }
-
-    localStorage.setItem('session-id',user.id)
-
+  goToChecklists(){
     this.state.history.push('/checklists')
+  }
+
+  logout(){
+    localStorage.removeItem('session-id')
+    this.state.history.push('/loginpage')
   }
 
   render() {
     return (
       <div >
         <div >Welcome Page</div>
-        <div align="center">
-          <Auth callback={this.callback} buttonName='Register' url='http://localhost:8080/auth/register'>
-          </Auth>
+        <div>
+          <button onClick={this.logout}> Logout</button>
         </div>
         <div align="center">
-          <Auth callback={this.callback} buttonName='Login' url='http://localhost:8080/auth/login'>
-          </Auth>
+          <button onClick={this.goToChecklists}> My Checklists</button>
         </div>
       </div>
     );

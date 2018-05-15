@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 
-
 //props = {url, listname, loadItem}
 export default class List extends Component {
 
@@ -9,13 +8,14 @@ export default class List extends Component {
 
     this.callback = props.callback
     this.addList = this.addList.bind(this)
-    this.dateHandler = this.dateHandler.bind(this)
+    this.descriptionHandler = this.descriptionHandler.bind(this)
     this.nameHandler = this.nameHandler.bind(this)
 
     this.state = {
       url: props.url,
-      listname: '',
-      date: null,
+      listId: props.listId,
+      name : '',
+      description : '',
       hiddenMessage : true,
     }
 
@@ -23,15 +23,17 @@ export default class List extends Component {
 
   addList(){
 
-    if(!this.state.listname || !this.state.date){
-     return this.setState({hiddenMessage: false})
+    if(!this.state.listId || !this.state.name || !this.state.description){
+      return this.setState({hiddenMessage: false})
     }
 
     const session_id = localStorage.getItem('session-id')
 
     const body = {
-      completionDate: this.state.date,
-      name : this.state.listname,
+      list_id : this.state.listId,
+      name : this.state.name,
+      description : this.state.description,
+      state : false,
     }
 
     const header = {
@@ -51,17 +53,17 @@ export default class List extends Component {
           if(!res.ok) return this.setState({hiddenMessage: false})
           return res.json()
         })
-        .then(json =>this.callback(json.checklist))
+        .then(json =>this.callback(json.checklistItem))
   }
 
   nameHandler (event) {
-    this.setState({listname: event.target.value, hiddenMessage:true})
+    this.setState({name: event.target.value, hiddenMessage:true})
   }
 
-
-  dateHandler (event) {
-    this.setState({date: event.target.value, hiddenMessage:true})
+  descriptionHandler (event) {
+    this.setState({description: event.target.value, hiddenMessage:true})
   }
+
 
 
   render() {
@@ -71,17 +73,17 @@ export default class List extends Component {
         <div/>
         <label>
           Name:
-          <input type="text" value={this.state.listname} onChange={this.nameHandler} />
+          <input type="text" value={this.state.name} onChange={this.nameHandler} />
         </label>
         <div/>
         <label>
-          Completion Date:
-          <input type="date" onChange={this.dateHandler} />
+          Description:
+          <input type="text" value={this.state.description} onChange={this.descriptionHandler} />
         </label>
         <div/>
-        <button onClick={this.addList}>Add List</button>
+        <button onClick={this.addList}>Add Item</button>
         <div/>
-        <div hidden={this.state.hiddenMessage}>Invalid name or date, please insert a valid list</div>
+        <div hidden={this.state.hiddenMessage}>Invalid name or description, please insert a valid item</div>
       </div>
     );
   }

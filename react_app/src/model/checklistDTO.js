@@ -20,6 +20,7 @@ class ListModel{
       return {
         id: item.checklistItem.id,
         name: item.checklistItem.name,
+        checkState : item.checklistItem.state==='true',
         selfLink: item._links.self.href
       }
     })
