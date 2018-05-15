@@ -3,6 +3,7 @@ import checklistDTO from '../model/checklistDTO'
 import List from '../components/List'
 import ChecklistItemForm from '../components/ChecklistItemForm'
 import GoHome from '../components/GoHome'
+import GoBack from '../components/GoBack'
 
 
 export default class ChecklistsPage extends Component {
@@ -43,6 +44,7 @@ export default class ChecklistsPage extends Component {
       <div>
         <div>Your Checklist</div>
         <GoHome history={this.state.history}/>
+        <GoBack history={this.state.history}/>
         <div align="right">
           <ChecklistItemForm listId={this.state.listId} url='http://localhost:8080/listing/checklist/item' callback={this.checklistItemFormCallback}/>
         </div>

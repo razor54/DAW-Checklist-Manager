@@ -28,10 +28,10 @@ public class ChecklistItemService {
     //public ChecklistItemService(ChecklistItemRepository checklistItemRepository) { this.checklistItemRepository = checklistItemRepository; }
 
 
-    public ChecklistItem addCheckListItem(ChecklistItem checklist) throws FailedAddCheklistItemException {
+    public ChecklistItem addCheckListItem(ChecklistItem checklistItem) throws FailedAddCheklistItemException {
 
         try {
-            return checklistItemRepository.save(checklist);
+            return checklistItemRepository.save(checklistItem);
         } catch (Exception e) {
             throw new FailedAddCheklistItemException();
         }
@@ -70,6 +70,16 @@ public class ChecklistItemService {
 
 
         return checklistItem;
+    }
+
+    @Transactional
+    public ChecklistItem updateChecklistItem(int id, ChecklistItem checklistItem)throws FailedAddCheklistItemException{
+        try {
+            checklistItemRepository.deleteById(id);
+            return checklistItemRepository.save(checklistItem);
+        } catch (Exception e) {
+            throw new FailedAddCheklistItemException();
+        }
     }
 
 }

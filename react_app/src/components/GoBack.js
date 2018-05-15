@@ -1,28 +1,27 @@
 import React, {Component} from 'react';
 
+
 export default class GoHome extends Component {
 
   constructor(props){
     super(props);
 
-    this.goToHome = this.goToHome.bind(this)
+    this.goBack = this.goBack.bind(this)
 
     this.state = {
       history : props.history,
     }
   }
 
-
-  goToHome(){
-
-    this.state.history.push('/homepage')
+  goBack(){
+    this.state.history.goBack()
   }
 
   render() {
     return (
       <div>
-        <button onClick={this.goToHome}>
-          Home
+        <button onClick={this.goBack}>
+          Back
         </button>
       </div>
 

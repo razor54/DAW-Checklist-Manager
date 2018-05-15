@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Item from '../components/Item'
 import GoHome from '../components/GoHome'
+import GoBack from '../components/GoBack'
 
 export default class ChecklistItemPage extends Component {
 
@@ -30,6 +31,7 @@ export default class ChecklistItemPage extends Component {
       <div>
         <div>Your Item</div>
         <GoHome history={this.state.history}/>
+        <GoBack history={this.state.history}/>
         <div align="center">
           <Item url={`http://localhost:8080/listing/checklist/item/${this.state.itemId}` } errorCallback={this.errorCallback}/>
         </div>

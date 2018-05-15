@@ -298,4 +298,22 @@ public class ServiceController {
         return new ChecklistResource(templateService.useTemplate(template, listName));
 
     }
+
+
+    @PutMapping("/checklist/item")
+    public ChecklistItemResource updateChecklistItem(@RequestBody ChecklistItem checklistItem, AuthCredentials authCredentials) throws MyException {
+
+        Checklist ch = checklistService.getChecklist(
+                checklistItem.getlist_id(),
+                authCredentials.getSessionCode()
+        );
+
+
+
+
+        return new ChecklistItemResource(
+                checklistItemService.updateChecklistItem(checklistItem.getId(),checklistItem)
+        );
+
+    }
 }
