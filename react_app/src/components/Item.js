@@ -142,7 +142,7 @@ export default class Auth extends Component {
         </div>
         <div>
           {'State '}
-          <input type="checkbox" disabled={this.state.disabled} value={this.state.item.name} onChange={this.checkStateHandler} />
+          <input type="checkbox" disabled={this.state.disabled} checked={this.state.item.checkState} onChange={this.checkStateHandler} />
         </div>
         <div>
           <button onClick={this.edit_save}>
