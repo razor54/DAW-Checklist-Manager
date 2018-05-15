@@ -13,9 +13,6 @@ export default function (requestBody){
 }
 
 
-
-
-
 class ListModel{
 
   constructor (items,selfLink){

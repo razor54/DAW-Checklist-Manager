@@ -41,26 +41,27 @@ export default class Auth extends Component {
       const data = {
         body : formBody,
         method : 'POST',
+        credentials: 'same-origin',
       }
 
       return fetch(this.state.url, data)
         .then(res=> {
-          console.log(res.headers.get('Set-Cookie'))
           return res.json()
         })
         .then(json => {
-          console.log(json)
           this.callback(null,userDTO(json))
         })
         .catch(this.errorCallback)
     }
 
     usernameHandle (event) {
+      this.setState({hiddenMessage: true})
       this.setState({username: event.target.value})
     }
 
 
     passwordHandle (event) {
+      this.setState({hiddenMessage: true})
       this.setState({password: event.target.value})
     }
 

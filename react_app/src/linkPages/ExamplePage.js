@@ -29,7 +29,7 @@ export default class ExamplePage extends Component {
   }
 
   afterLogin (error,result) {
-    if(error) console.log('Not possible to login, invalid username or password')
+    if(error) console.log('Not possible to login, invalid listname or password')
 
     console.log(result)
   }

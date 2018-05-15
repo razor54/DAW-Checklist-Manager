@@ -23,7 +23,8 @@ public class MVCConfiguration extends WebMvcConfigurationSupport {
 
         registry.addMapping("/**")
                 .allowedOrigins("http://localhost:3000")
-                .allowedMethods("*");
+                .allowedMethods("*")
+                .allowedHeaders("*");
     }
 
 }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import List from '../components/List'
 import checklistListDTO from '../model/checklistListDTO'
+import ChecklistForm from '../components/ChecklistForm'
 
 
 export default class ChecklistListPage extends Component {
@@ -10,6 +11,8 @@ export default class ChecklistListPage extends Component {
 
     this.goToCheckList = this.goToCheckList.bind(this)
     this.errorCallback = this.errorCallback.bind(this)
+    this.checkListFormCallback = this.checkListFormCallback.bind(this)
+
 
     this.state = {
       history : props.history,
@@ -21,8 +24,19 @@ export default class ChecklistListPage extends Component {
   }
 
   errorCallback(err){
+
+    if(err==='TypeError: Failed to fetch')
       this.state.history.push('/server-error')
+    if(err==='no-access')
+      this.state.history.push('/no-access-checklist-list')
+    else
+      this.state.history.push('/invalid-list')
   }
+
+  checkListFormCallback(checklist){
+    this.state.history.push('/checklist/'+ checklist.id)
+  }
+
 
   render() {
     return (
@@ -30,6 +44,9 @@ export default class ChecklistListPage extends Component {
         <div>Your Checklists</div>
         <div align="center">
           <List url='http://localhost:8080/listing/checklists' loadItem={this.goToCheckList} loadDTO={checklistListDTO} errorCallback={this.errorCallback}/>
+        </div>
+        <div>
+          <ChecklistForm url='http://localhost:8080/listing/checklist' callback={this.checkListFormCallback}/>
         </div>
       </div>
     );

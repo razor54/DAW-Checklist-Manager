@@ -1,13 +1,14 @@
 import React, {Component} from 'react';
 
 
-//props = {url, username, loadItem}
+//props = {url, listname, loadItem}
 export default class List extends Component {
 
   constructor(props){
     super(props);
 
     this.listToHtml = this.listToHtml.bind(this)
+    this.request =     this.request.bind(this)
     this.loadItem =  props.loadItem
     this.loadDTO = props.loadDTO
     this.errorCallback = props.errorCallback
@@ -15,18 +16,32 @@ export default class List extends Component {
 
     this.state = {
       url: props.url,
-      username: props.username,
+      listname: props.listname,
       list: {
         items: [], // item = {id, name,selfLink}
         selfLink : ''
       }
     }
 
+
+
   }
 
   componentDidMount(){
-    return fetch(this.state.url, {headers:{authorization:'basic bnVubzoxMjM0NQ=='}})
-      .then(res =>res.json())
+    this.request()
+  }
+
+
+  request(){
+    const session_id = localStorage.getItem('session-id')
+
+    if(!session_id) return this.errorCallback('no-access')
+
+    return fetch(this.state.url, {headers:{authorization:`basic ${session_id}`}})
+      .then(res =>{
+        if(!res.ok) return this.errorCallback(res.status)
+        return res.json()
+      })
       .then(json =>this.setState({list: this.loadDTO(json)}))
       .catch(this.errorCallback)
   }
@@ -44,8 +59,7 @@ export default class List extends Component {
 
   render() {
     return (
-
-      <ul>{this.listToHtml()}</ul>
+      <div>{this.listToHtml()}</div>
 
     );
   }

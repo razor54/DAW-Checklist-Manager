@@ -16,6 +16,11 @@ export default class HomePage extends Component {
   }
 
   componentDidMount(){
+
+    if(localStorage.getItem('session-id')){
+      return this.state.history.push('/checklists')
+    }
+
     this.state.history.push('/homepage')
 
   }
@@ -24,10 +29,12 @@ export default class HomePage extends Component {
 
     if(err){
       if(err==='TypeError: Failed to fetch')
-        this.state.history.push('/server-error')
+        return this.state.history.push('/server-error')
       else
-        this.state.history.push('/invalid-username-or-password')
+        return this.state.history.push('/invalid-listname-or-password')
     }
+
+    localStorage.setItem('session-id',user.id)
 
     this.state.history.push('/checklists')
   }
@@ -38,6 +45,10 @@ export default class HomePage extends Component {
         <div >Welcome Page</div>
         <div align="center">
           <Auth callback={this.callback} buttonName='Register' url='http://localhost:8080/auth/register'>
+          </Auth>
+        </div>
+        <div align="center">
+          <Auth callback={this.callback} buttonName='Login' url='http://localhost:8080/auth/login'>
           </Auth>
         </div>
       </div>

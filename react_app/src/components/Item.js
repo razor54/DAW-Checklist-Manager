@@ -31,8 +31,16 @@ export default class Auth extends Component {
   }
 
   componentDidMount(){
-    return fetch(this.state.url, {headers:{authorization:'basic bnVubzoxMjM0NQ=='}})
-      .then(res =>res.json())
+
+    const session_id = localStorage.getItem('session-id')
+
+    if(!session_id) return this.errorCallback('no-access')
+
+    return fetch(this.state.url, {headers:{authorization:`basic ${session_id}`}})
+      .then(res =>{
+        if(!res.ok)this.errorCallback(res.status)
+        return res.json()
+      })
       .then(json => this.setState({item: itemDTO(json)}))
       .catch(this.errorCallback)
   }

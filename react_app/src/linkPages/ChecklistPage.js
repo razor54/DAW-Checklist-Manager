@@ -25,6 +25,8 @@ export default class ChecklistsPage extends Component {
   errorCallback(err){
     if(err==='TypeError: Failed to fetch')
       this.state.history.push('/server-error')
+    if(err==='no-access')
+      this.state.history.push('/no-access-checklist')
     else
       this.state.history.push('/invalid-list')
   }

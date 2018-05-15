@@ -35,8 +35,6 @@ public class AuthenticationController {
         user.setId(sessionId);
         user.setName(username);
 
-        res.addCookie(new Cookie("checklist-server-cookie",sessionId));
-
         return new UserResource(userService.addUser(user));
     }
 
@@ -47,8 +45,6 @@ public class AuthenticationController {
         String sessionId = Base64Utils.encodeToString((username + ":" + password).getBytes());
 
         User user = userService.getUser(sessionId);
-
-        res.addCookie(new Cookie("checklist-server-cookie",sessionId));
 
         return new UserResource(user);
     }
