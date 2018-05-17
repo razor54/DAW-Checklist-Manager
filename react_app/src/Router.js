@@ -1,14 +1,13 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import LoginPage from './linkPages/LoginPage'
 import ChecklistListPage from './linkPages/ChecklistListPage'
 import ChecklistsPage from './linkPages/ChecklistPage'
 import ChecklistItemPage from './linkPages/ChecklistItemPage'
 import InvalidPage from './errorPages/InvalidPage'
-import NoAccessPage from './errorPages/NoAcessPage'
+import NoAccessPage from './errorPages/NoAccessPage'
 import ServerErrorPage from './errorPages/ServerErrorPage'
 import HomePage from './linkPages/HomePage'
-
 
 export default class Router extends Component {
 
