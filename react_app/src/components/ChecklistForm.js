@@ -23,7 +23,7 @@ export default class List extends Component {
 
   addList(){
 
-    if(!this.state.listname || !this.state.date){
+    if(!this.state.listname){
      return this.setState({hiddenMessage: false})
     }
 

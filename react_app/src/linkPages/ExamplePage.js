@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Auth from '../components/Auth';
+import AuthForm from '../components/AuthForm';
 import Item from '../components/Item';
 import List from '../components/List'
 
@@ -47,8 +47,8 @@ export default class ExamplePage extends Component {
         </div>
 
 
-        <Auth callback={this.state.afterRegister} buttonName='Register' url='http://localhost:8080/register'/>
-        <Auth callback={this.state.afterLogin} buttonName='Login' url='http://localhost:8080/listing/checklists'/>
+        <AuthForm callback={this.state.afterRegister} buttonName='Register' url='http://localhost:8080/register'/>
+        <AuthForm callback={this.state.afterLogin} buttonName='Login' url='http://localhost:8080/listing/checklists'/>
 
         <List url='http://localhost:8080/listing/checklist/1/items' username='nuno'  loadItem={this.listLoadItemDetais} />
 

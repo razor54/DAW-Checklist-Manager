@@ -4,7 +4,7 @@ import userDTO from '../model/userDTO'
 
 //props = {callback,buttonNam,url}
 
-export default class Auth extends Component {
+export default class AuthForm extends Component {
 
     constructor(props){
       super(props);
@@ -46,12 +46,13 @@ export default class Auth extends Component {
 
       return fetch(this.state.url, data)
         .then(res=> {
+          if(!res.ok) return this.callback(res.status)
           return res.json()
         })
         .then(json => {
           this.callback(null,userDTO(json))
         })
-        .catch(this.errorCallback)
+        .catch(this.callback)
     }
 
     usernameHandle (event) {

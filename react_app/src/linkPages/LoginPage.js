@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Auth from '../components/Auth'
+import AuthForm from '../components/AuthForm'
 
 
 export default class LoginPage extends Component {
@@ -22,10 +22,11 @@ export default class LoginPage extends Component {
     }
   }
 
-  callback(err,user){
+  callback(error,user){
 
-    if(err){
-      if(err==='TypeError: Failed to fetch')
+    console.log(error)
+    if(error){
+      if(error==='TypeError: Failed to fetch')
         return this.state.history.push('/server-error')
       else
         return this.state.history.push('/invalid-listname-or-password')
@@ -41,12 +42,12 @@ export default class LoginPage extends Component {
       <div >
         <div >Login Page</div>
         <div align="center">
-          <Auth callback={this.callback} buttonName='Register' url='http://localhost:8080/auth/register'>
-          </Auth>
+          <AuthForm callback={this.callback} buttonName='Register' url='http://localhost:8080/auth/register'>
+          </AuthForm>
         </div>
         <div align="center">
-          <Auth callback={this.callback} buttonName='Login' url='http://localhost:8080/auth/login'>
-          </Auth>
+          <AuthForm callback={this.callback} buttonName='Login' url='http://localhost:8080/auth/login'>
+          </AuthForm>
         </div>
       </div>
     );
