@@ -316,4 +316,12 @@ public class ServiceController {
         );
 
     }
+    @PutMapping("/checklist/")
+    public ChecklistResource updateChecklist(@RequestBody Checklist checklist, AuthCredentials authCredentials) throws MyException {
+        
+        return new ChecklistResource(
+                checklistService.updateChecklist(checklist)
+        );
+
+    }
 }

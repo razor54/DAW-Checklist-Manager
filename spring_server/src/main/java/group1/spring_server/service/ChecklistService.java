@@ -65,4 +65,21 @@ public class ChecklistService {
         return checklist;
 
     }
+
+    public Checklist updateChecklist(Checklist checklist) throws NoSuchChecklistException {
+        Optional<Checklist> optionalChecklist = checklistRepository.findById(checklist.getId());
+
+
+        //verification if lists exists in database
+        if (!optionalChecklist.isPresent()) throw new NoSuchChecklistException();
+
+
+        Checklist checklistToEdit = optionalChecklist.get();
+        checklistToEdit.setCompletionDate(checklist.getCompletionDate());
+        checklistToEdit.setName(checklist.getName());
+
+        checklistRepository.save(checklistToEdit);
+        return checklistToEdit;
+
+    }
 }
