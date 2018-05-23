@@ -318,9 +318,34 @@ public class ServiceController {
     }
     @PutMapping("/checklist/")
     public ChecklistResource updateChecklist(@RequestBody Checklist checklist, AuthCredentials authCredentials) throws MyException {
-        
+
         return new ChecklistResource(
                 checklistService.updateChecklist(checklist)
+        );
+
+    }
+    @PutMapping("/template/item")
+    public TemplateItemResource updateTemplateItem(@RequestBody TemplateItem templateItem, AuthCredentials authCredentials) throws MyException, IOException {
+
+        Template ch = templateService.getTemplate(
+                templateItem.getTemplate_id(),
+                authCredentials.getSessionCode()
+        );
+
+
+
+
+        return new TemplateItemResource(
+                templateItemService.updateTemplateItem(templateItem)
+        );
+
+    }
+
+    @PutMapping("/template/")
+    public TemplateResource updateTemplate(@RequestBody Template checklist, AuthCredentials authCredentials) throws MyException, IOException {
+
+        return new TemplateResource(
+                templateService.updateTemplate(checklist)
         );
 
     }

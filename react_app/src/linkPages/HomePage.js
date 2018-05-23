@@ -8,6 +8,7 @@ export default class LoginPage extends Component {
 
     this.goToChecklists = this.goToChecklists.bind(this)
     this.logout = this.logout.bind(this)
+    this.goToTemplates = this.goToTemplates.bind(this)
 
     this.state = {
       history : props.history,
@@ -28,6 +29,10 @@ export default class LoginPage extends Component {
     this.state.history.push('/checklists')
   }
 
+  goToTemplates(){
+    this.state.history.push('/templates')
+  }
+
   logout(){
     localStorage.removeItem('session-id')
     this.state.history.push('/loginpage')
@@ -42,6 +47,9 @@ export default class LoginPage extends Component {
         </div>
         <div align="center">
           <button onClick={this.goToChecklists}> My Checklists</button>
+        </div>
+        <div align="center">
+          <button onClick={this.goToTemplates}> My Templates</button>
         </div>
       </div>
     );

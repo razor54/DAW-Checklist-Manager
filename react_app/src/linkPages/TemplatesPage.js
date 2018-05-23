@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import List from '../components/List'
-import checklistListDTO from '../model/checklistListDTO'
-import ChecklistForm from '../components/ChecklistForm'
+
 import GoHome from '../components/GoHome'
 import GoBack from '../components/GoBack'
+import templateItemsDTO from '../model/templatesListDTO'
+import TemplateForm from '../components/templateForm'
 
 
 export default class extends Component {
@@ -11,9 +12,9 @@ export default class extends Component {
   constructor (props) {
     super(props);
 
-    this.goToCheckList = this.goToCheckList.bind(this)
+    this.goToTemplate = this.goToTemplate.bind(this)
     this.errorCallback = this.errorCallback.bind(this)
-    this.checkListFormCallback = this.checkListFormCallback.bind(this)
+    this.templatesFormCallback = this.templatesFormCallback.bind(this)
 
 
     this.state = {
@@ -21,8 +22,8 @@ export default class extends Component {
     }
   }
 
-  goToCheckList(checklistId){
-    this.state.history.push(`/checklist/${checklistId}`)
+  goToTemplate(templateId){
+    this.state.history.push(`/template/${templateId}`)
   }
 
   errorCallback(err){
@@ -35,22 +36,22 @@ export default class extends Component {
       this.state.history.push('/invalid-list')
   }
 
-  checkListFormCallback(checklist){
-    this.state.history.push('/checklist/'+ checklist.id)
+  templatesFormCallback(template){
+    this.state.history.push('/template/'+ template.id)
   }
 
 
   render() {
     return (
       <div>
-        <div>Your Checklists</div>
+        <div>Your Templates</div>
         <GoHome history={this.state.history}/>
         <GoBack history={this.state.history}/>
         <div align="right">
-          <ChecklistForm url='http://localhost:8080/listing/checklist' callback={this.checkListFormCallback}/>
+          <TemplateForm url='http://localhost:8080/listing/template' callback={this.templatesFormCallback}/>
         </div>
         <div align="center">
-          <List url='http://localhost:8080/listing/checklists' loadItem={this.goToCheckList} loadDTO={checklistListDTO} errorCallback={this.errorCallback}/>
+          <List url='http://localhost:8080/listing/templates' loadItem={this.goToTemplate} loadDTO={templateItemsDTO} errorCallback={this.errorCallback}/>
         </div>
 
       </div>

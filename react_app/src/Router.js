@@ -9,6 +9,9 @@ import NoAccessPage from './errorPages/NoAccessPage'
 import ServerErrorPage from './errorPages/ServerErrorPage'
 import HomePage from './linkPages/HomePage'
 import InvalidCredentials from './errorPages/InvalidCredentials'
+import TemplatesPage from './linkPages/TemplatesPage'
+import templateItemPage from './linkPages/templateItemPage'
+import templatePage from './linkPages/templatePage'
 
 export default class Router extends Component {
 
@@ -23,6 +26,10 @@ export default class Router extends Component {
         <Route path='/checklists' exact component={ChecklistListPage}/>}/>
         <Route path='/checklist/:listId' exact component={ChecklistsPage}/>
         <Route path='/checklist/:listId/item/:itemId' exact component={ChecklistItemPage}/>
+
+        <Route path='/templates' exact component={TemplatesPage}/>}/>
+        <Route path='/template/:templateId' exact component={templatePage}/>
+        <Route path='/template/:templateId/item/:itemId' exact component={templateItemPage}/>
 
         <Route path='/invalid-checklist-item' exact render={()=><InvalidPage errorType='checklist item'/>}/>
         <Route path='/invalid-checklist' exact render={()=><InvalidPage errorType='checklist'/>}/>

@@ -104,4 +104,19 @@ public class TemplateService {
 
 
     }
+    public Template updateTemplate(Template checklist) throws NoSuchChecklistException {
+        Optional<Template> optionalChecklist = templateRepository.findById(checklist.getId());
+
+
+        //verification if lists exists in database
+        if (!optionalChecklist.isPresent()) throw new NoSuchChecklistException();
+
+
+        Template checklistToEdit = optionalChecklist.get();
+        checklistToEdit.setName(checklist.getName());
+
+        templateRepository.save(checklistToEdit);
+        return checklistToEdit;
+
+    }
 }

@@ -62,4 +62,14 @@ public class TemplateItemService {
 
         return templateItem;
     }
+
+    @Transactional
+    public TemplateItem updateTemplateItem(TemplateItem templateItem)throws FailedAddCheklistItemException{
+        try {
+            //checklistItemRepository.deleteById(id);
+            return templateItemRepository.save(templateItem);
+        } catch (Exception e) {
+            throw new FailedAddCheklistItemException();
+        }
+    }
 }

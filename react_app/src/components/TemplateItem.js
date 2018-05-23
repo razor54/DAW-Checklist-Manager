@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import itemDTO from '../model/checklistItemDTO';
+import itemDTO from '../model/TemplateItemDTO';
 
 //props = {url, listname}
 
@@ -91,14 +91,14 @@ export default class extends Component {
       method : 'PUT',
       body : JSON.stringify({
         id : this.state.item.id,
-        list_id : this.state.item.listId,
+        template_id : this.state.item.templateId,
         name : this.state.item.name,
         description : this.state.item.description,
         state : this.state.item.checkState,
       })
     }
 
-    fetch('http://localhost:8080/listing/checklist/item', data)
+    fetch('http://localhost:8080/listing/template/item', data)
       .then(res =>{
         if(!res.ok)this.errorCallback(res.status)
         return res.json()
@@ -130,7 +130,7 @@ export default class extends Component {
   render() {
     return (
       <div>
-        <div> Item from List - {this.state.item.listId} </div>
+        <div> Item from List - {this.state.item.templateId} </div>
         <div>Id = {this.state.item.id}</div>
         <div>
           {'Name '}
@@ -139,10 +139,6 @@ export default class extends Component {
         <div>
           {'Description '}
           <input type="text" disabled={this.state.disabled} value={this.state.item.description} onChange={this.descriptionHandler} />
-        </div>
-        <div>
-          {'State '}
-          <input type="checkbox" disabled={this.state.disabled} checked={this.state.item.checkState} onChange={this.checkStateHandler} />
         </div>
         <div>
           <button onClick={this.edit_save}>

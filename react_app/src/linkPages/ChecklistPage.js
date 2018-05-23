@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import checklistDTO from '../model/checklistDTO'
+import checklistDTO from '../model/checklistItemsListDTO'
 import List from '../components/List'
 import ChecklistItemForm from '../components/ChecklistItemForm'
 import GoHome from '../components/GoHome'
