@@ -50,6 +50,7 @@ export default class extends Component {
           <ChecklistForm url='http://localhost:8080/listing/checklist' callback={this.checkListFormCallback}/>
         </div>
         <div align="center">
+          <strong>Checklists List</strong>
           <List url='http://localhost:8080/listing/checklists' loadItem={this.goToCheckList} loadDTO={checklistListDTO} errorCallback={this.errorCallback}/>
         </div>
 

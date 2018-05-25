@@ -46,10 +46,11 @@ export default class LoginPage extends Component {
           <button onClick={this.logout}> Logout</button>
         </div>
         <div align="center">
-          <button onClick={this.goToChecklists}> My Checklists</button>
-        </div>
-        <div align="center">
+          <strong>Go To</strong>
+          <div/>
           <button onClick={this.goToTemplates}> My Templates</button>
+          <div/>
+          <button onClick={this.goToChecklists}> My Checklists</button>
         </div>
       </div>
     );
