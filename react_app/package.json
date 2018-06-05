@@ -2,9 +2,11 @@
   "name": "react_app",
   "version": "0.1.0",
   "private": true,
+
   "dependencies": {
     "left-pad": "^1.2.0",
-    "react-router-dom": "^4.2.2"
+    "react-router-dom": "^4.2.2",
+    "oidc-client": "^1.5.1-beta.1"
   },
   "devDependencies": {
     "babel-loader": "^7.1.4",

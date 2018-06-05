@@ -46,14 +46,14 @@ export default class ChecklistsPage extends Component {
         <div>Your Checklist</div>
         <GoHome history={this.state.history}/>
         <GoBack history={this.state.history}/>
-        <CheckListDetail id={this.state.listId} url = {`http://localhost:8080/listing/checklist/${this.state.listId}`} errorCallback={this.errorCallback}  updateUrl = {`http://localhost:8080/listing/checklist/`} />
+        <CheckListDetail id={this.state.listId} url = {`http://localhost:9000/listing/checklist/${this.state.listId}`} errorCallback={this.errorCallback}  updateUrl = {`http://localhost:9000/listing/checklist/`} />
         <div align="right">
-          <ChecklistItemForm listId={this.state.listId} url='http://localhost:8080/listing/checklist/item' callback={this.checklistItemFormCallback}/>
+          <ChecklistItemForm listId={this.state.listId} url='http://localhost:9000/listing/checklist/item' callback={this.checklistItemFormCallback}/>
 
         </div>
         <div align="center">
           <strong>Checklist Items</strong>
-          <List url={`http://localhost:8080/listing/checklist/${this.state.listId}/items`}  loadItem={this.goToChecklistItem} loadDTO={checklistDTO} errorCallback={this.errorCallback} />
+          <List url={`http://localhost:9000/listing/checklist/${this.state.listId}/items`}  loadItem={this.goToChecklistItem} loadDTO={checklistDTO} errorCallback={this.errorCallback} />
         </div>
 
       </div>

@@ -2,6 +2,7 @@ package group1.spring_server.control;
 
 
 import group1.spring_server.domain.AuthCredentials;
+import group1.spring_server.domain.BearerToken;
 import group1.spring_server.domain.model.*;
 import group1.spring_server.domain.resource.*;
 import group1.spring_server.exceptions.ForbiddenException;
@@ -44,40 +45,14 @@ public class ServiceController {
     private TemplateItemService templateItemService;
 
     @GetMapping("/")
-    public ResourceSupport getHomePage() throws IOException, MyException {
+    public ResourceSupport getHomePage(BearerToken bearerToke) throws IOException, MyException {
         return new HomePageResource();
     }
 
-    @GetMapping("/users")
-    public ResourceSupport getUsers(AuthCredentials authCredentials) throws UnauthorizedException {
-        //TODO TEST ONLY
-        String userId = authCredentials.getSessionCode();
-
-        Iterable<User> users = userService.getUsers();
-
-        Iterable<UserResource> collect = () -> StreamSupport
-                .stream(users.spliterator(), false)
-                .map(user -> {
-                    try {
-                        return new UserResource(user);
-                    } catch (MyException e) {
-                        e.printStackTrace();
-                        return null;
-                    }
-
-                }).iterator();
-
-        Link link = linkTo(methodOn(ServiceController.class)
-                .getUsers(authCredentials)).withSelfRel();
-
-        return new Resources<>(collect, link);
-
-
-    }
 
     @GetMapping("/user/{id}")
-    public ResourceSupport getUser(@PathVariable("id") String id, AuthCredentials authCredentials) throws MyException {
-        String userId = authCredentials.getSessionCode();
+    public ResourceSupport getUser(@PathVariable("id") String id, BearerToken bearerToken) throws MyException {
+        String userId = bearerToken.getSessionCode();
         if (userId.compareTo(id) != 0) throw new ForbiddenException();
 
         return new UserResource(userService.getUser(id));

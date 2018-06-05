@@ -26,6 +26,6 @@ spring:
       add-mappings: true
 
 server:
-  port: 8080
+  port: 9000
 
 

@@ -17,12 +17,17 @@ export default class LoginPage extends Component {
 
   componentDidMount(){
 
-    if(!localStorage.getItem('session-id')){
+    if(!localStorage.getItem('bearer-token')){
       return this.state.history.push('/loginpage')
     }
 
-    this.state.history.push('/homepage')
-
+    fetch('http://localhost:9000/listing/',)
+      .then(res=> {
+        if(res.status=403){
+          return this.logout()
+        }
+        this.state.history.push('/homepage')
+      })
   }
 
   goToChecklists(){
@@ -34,7 +39,7 @@ export default class LoginPage extends Component {
   }
 
   logout(){
-    localStorage.removeItem('session-id')
+    localStorage.removeItem('bearer-token')
     this.state.history.push('/loginpage')
   }
 

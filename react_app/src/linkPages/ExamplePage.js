@@ -47,13 +47,13 @@ export default class ExamplePage extends Component {
         </div>
 
 
-        <AuthForm callback={this.state.afterRegister} buttonName='Register' url='http://localhost:8080/register'/>
-        <AuthForm callback={this.state.afterLogin} buttonName='Login' url='http://localhost:8080/listing/checklists'/>
+        <AuthForm callback={this.state.afterRegister} buttonName='Register' url='http://localhost:9000/register'/>
+        <AuthForm callback={this.state.afterLogin} buttonName='Login' url='http://localhost:9000/listing/checklists'/>
 
-        <List url='http://localhost:8080/listing/checklist/1/items' username='nuno'  loadItem={this.listLoadItemDetais} />
+        <List url='http://localhost:9000/listing/checklist/1/items' username='nuno'  loadItem={this.listLoadItemDetais} />
 
 
-        <Item url='http://localhost:8080/listing/checklist/item/1'> </Item>
+        <Item url='http://localhost:9000/listing/checklist/item/1'> </Item>
 
 
       </div>

@@ -61,7 +61,7 @@ export default class ChecklistsPage extends Component {
     }
 
     if (session_id)
-      return fetch(`http://localhost:8080/listing/checklist/template/${this.state.listId}?listName=${listName}`, data)
+      return fetch(`http://localhost:9000/listing/checklist/template/${this.state.listId}?listName=${listName}`, data)
         .then(res => {
           if (!res.ok) return this.setState({hiddenMessage: false})
           return res.json()
@@ -76,8 +76,8 @@ export default class ChecklistsPage extends Component {
         <div>Your Template</div>
         <GoHome history={this.state.history}/>
         <GoBack history={this.state.history}/>
-        <TemplateDetail id={this.state.listId} url={`http://localhost:8080/listing/template/${this.state.listId}`}
-                        errorCallback={this.errorCallback} updateUrl={`http://localhost:8080/listing/template/`}/>
+        <TemplateDetail id={this.state.listId} url={`http://localhost:9000/listing/template/${this.state.listId}`}
+                        errorCallback={this.errorCallback} updateUrl={`http://localhost:9000/listing/template/`}/>
         <p/>
         <div>
           <strong>Add a list with this template</strong>
@@ -90,14 +90,14 @@ export default class ChecklistsPage extends Component {
           <button onClick={this.addList}>Add New List</button>
         </div>
         <div align="right">
-          <TemplateItemForm listId={this.state.listId} url='http://localhost:8080/listing/template/item'
+          <TemplateItemForm listId={this.state.listId} url='http://localhost:9000/listing/template/item'
                             callback={this.checklistItemFormCallback}/>
 
 
         </div>
         <div align="center">
           <strong>Template Items</strong>
-          <List url={`http://localhost:8080/listing/template/${this.state.listId}/items`}
+          <List url={`http://localhost:9000/listing/template/${this.state.listId}/items`}
                 loadItem={this.goToChecklistItem} loadDTO={templateDTO} errorCallback={this.errorCallback}/>
         </div>
 

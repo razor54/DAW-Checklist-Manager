@@ -98,7 +98,7 @@ export default class extends Component {
       })
     }
 
-    fetch('http://localhost:8080/listing/template/item', data)
+    fetch('http://localhost:9000/listing/template/item', data)
       .then(res =>{
         if(!res.ok)this.errorCallback(res.status)
         return res.json()

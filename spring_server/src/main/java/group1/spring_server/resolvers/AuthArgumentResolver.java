@@ -1,6 +1,7 @@
 package group1.spring_server.resolvers;
 
 import group1.spring_server.domain.AuthCredentials;
+import group1.spring_server.domain.BearerToken;
 import org.springframework.core.MethodParameter;
 import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
@@ -25,6 +26,6 @@ public class AuthArgumentResolver implements HandlerMethodArgumentResolver {
 
         String auth = webRequest.getNativeRequest(HttpServletRequest.class).getHeader("authorization");
 
-        return new AuthCredentials(auth);
+        return new BearerToken(auth);
     }
 }
