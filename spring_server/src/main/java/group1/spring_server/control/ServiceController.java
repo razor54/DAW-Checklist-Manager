@@ -45,7 +45,10 @@ public class ServiceController {
     private TemplateItemService templateItemService;
 
     @GetMapping("/")
-    public ResourceSupport getHomePage(BearerToken bearerToke) throws IOException, MyException {
+    public ResourceSupport getHomePage(BearerToken bearerToken) throws IOException, MyException {
+
+        bearerToken.getSessionCode();
+
         return new HomePageResource();
     }
 
@@ -61,9 +64,9 @@ public class ServiceController {
 
     @GetMapping("/checklists")
     @RequiresAuthentication
-    public Resources<ChecklistResource> getCheckLists(AuthCredentials authCredentials) throws MyException {
+    public Resources<ChecklistResource> getCheckLists(BearerToken bearerToken) throws MyException {
 
-        String sessionCode = authCredentials.getSessionCode();
+        String sessionCode = bearerToken.getSessionCode();
 
         User user = userService.getUser(sessionCode);
 
@@ -82,7 +85,7 @@ public class ServiceController {
                 }).collect(Collectors.toSet());
 
         Link link = linkTo(methodOn(ServiceController.class)
-                .getCheckLists(authCredentials)).withSelfRel();
+                .getCheckLists(bearerToken)).withSelfRel();
 
         Link user_link = linkTo(methodOn(ServiceController.class)
                 .getUser(user.getId(), null)).withSelfRel();
@@ -93,22 +96,22 @@ public class ServiceController {
 
     @RequiresAuthentication
     @GetMapping("/checklist/{listId}")
-    public ChecklistResource getCheckList(@PathVariable("listId") int listId, AuthCredentials authCredentials) throws MyException {
+    public ChecklistResource getCheckList(@PathVariable("listId") int listId, BearerToken bearerToken) throws MyException {
 
         return new ChecklistResource(checklistService.getChecklist(
                 listId,
-                authCredentials.getSessionCode()
+                bearerToken.getSessionCode()
         ));
 
     }
 
     @RequiresAuthentication
     @GetMapping("/checklist/{listId}/items")
-    public Resources<ChecklistItemResource> getCheckListItems(@PathVariable("listId") int listId, AuthCredentials authCredentials) throws MyException {
+    public Resources<ChecklistItemResource> getCheckListItems(@PathVariable("listId") int listId, BearerToken bearerToken) throws MyException {
 
         Iterable<ChecklistItem> checklistItems = checklistItemService.getChecklistItems(
                 listId,
-                authCredentials.getSessionCode()
+                bearerToken.getSessionCode()
         );
 
         Set<ChecklistItemResource> collect = StreamSupport.stream(checklistItems.spliterator(), false)
@@ -122,26 +125,26 @@ public class ServiceController {
                 }).collect(Collectors.toSet());
 
         Link link = linkTo(methodOn(ServiceController.class)
-                .getCheckListItems(listId, authCredentials)).withSelfRel();
+                .getCheckListItems(listId, bearerToken)).withSelfRel();
 
         return new Resources<>(collect, link);
 
     }
 
     @GetMapping("/checklist/item/{itemId}")
-    public ChecklistItemResource getChecklistItem(@PathVariable("itemId") int itemId, AuthCredentials authCredentials) throws MyException {
+    public ChecklistItemResource getChecklistItem(@PathVariable("itemId") int itemId, BearerToken bearerToken) throws MyException {
 
         return new ChecklistItemResource(
                 checklistItemService.getChecklistItem(
                         itemId,
-                        authCredentials.getSessionCode()
+                        bearerToken.getSessionCode()
                 ));
 
     }
 
     @GetMapping("/templates")
-    public Resources<TemplateResource> getTemplates(AuthCredentials authCredentials) throws MyException {
-        String sessionCode = authCredentials.getSessionCode();
+    public Resources<TemplateResource> getTemplates(BearerToken bearerToken) throws MyException {
+        String sessionCode = bearerToken.getSessionCode();
 
         User user = userService.getUser(sessionCode);
 
@@ -169,27 +172,27 @@ public class ServiceController {
     }
 
     @GetMapping("/template/{id}")
-    public TemplateResource getTemplate(@PathVariable("id") int id, AuthCredentials authCredentials) throws MyException, IOException {
-        String sessionCode = authCredentials.getSessionCode();
+    public TemplateResource getTemplate(@PathVariable("id") int id, BearerToken bearerToken) throws MyException, IOException {
+        String sessionCode = bearerToken.getSessionCode();
 
         return new TemplateResource(templateService.getTemplate(id, sessionCode));
     }
 
     @GetMapping("/template/item/{itemId}")
-    public TemplateItemResource getTemplateItem(@PathVariable("itemId") int itemId, AuthCredentials authCredentials) throws MyException, IOException {
+    public TemplateItemResource getTemplateItem(@PathVariable("itemId") int itemId, BearerToken bearerToken) throws MyException, IOException {
 
         return new TemplateItemResource(
                 templateItemService.getTemplateItem(
                         itemId,
-                        authCredentials.getSessionCode()));
+                        bearerToken.getSessionCode()));
     }
 
     @GetMapping("/template/{templateId}/items")
-    public Resources<TemplateItemResource> getTemplateItems(@PathVariable("templateId") int templateId, AuthCredentials authCredentials) throws MyException, IOException {
+    public Resources<TemplateItemResource> getTemplateItems(@PathVariable("templateId") int templateId, BearerToken bearerToken) throws MyException, IOException {
 
         Iterable<TemplateItem> itemsForTemplate = templateItemService.getItemsforTemplate(
                 templateId,
-                authCredentials.getSessionCode());
+                bearerToken.getSessionCode());
 
         Set<TemplateItemResource> collect = StreamSupport.stream(itemsForTemplate.spliterator(), false
         ).map(item -> {
@@ -216,9 +219,9 @@ public class ServiceController {
     //Maybe receive session code differently
 
     @PostMapping("/checklist")
-    public ChecklistResource addChecklist(@RequestBody Checklist checklist, AuthCredentials authCredentials) throws MyException {
+    public ChecklistResource addChecklist(@RequestBody Checklist checklist, BearerToken bearerToken) throws MyException {
 
-        String sessionCode = authCredentials.getSessionCode();
+        String sessionCode = bearerToken.getSessionCode();
 
         checklist.setUser_id(sessionCode);
 
@@ -229,11 +232,11 @@ public class ServiceController {
     }
 
     @PostMapping("/checklist/item")
-    public ChecklistItemResource addChecklistItem(@RequestBody ChecklistItem checklistItem, AuthCredentials authCredentials) throws MyException {
+    public ChecklistItemResource addChecklistItem(@RequestBody ChecklistItem checklistItem, BearerToken bearerToken) throws MyException {
 
         Checklist ch = checklistService.getChecklist(
                 checklistItem.getlist_id(),
-                authCredentials.getSessionCode()
+                bearerToken.getSessionCode()
         );
 
         return new ChecklistItemResource(
@@ -243,22 +246,22 @@ public class ServiceController {
     }
 
     @PostMapping("/template")
-    public TemplateResource addTemplate(@RequestBody Template template, AuthCredentials authCredentials) throws MyException, IOException {
+    public TemplateResource addTemplate(@RequestBody Template template, BearerToken bearerToken) throws MyException, IOException {
 
 
-        template.setUser_id(authCredentials.getSessionCode());
+        template.setUser_id(bearerToken.getSessionCode());
 
         return new TemplateResource(templateService.addTemplate(template));
 
     }
 
     @PostMapping("/template/item")
-    public TemplateItemResource addTemplateItem(@RequestBody TemplateItem templateItem, AuthCredentials authCredentials) throws MyException, IOException {
+    public TemplateItemResource addTemplateItem(@RequestBody TemplateItem templateItem, BearerToken bearerToken) throws MyException, IOException {
 
         //Throws exception if no user is logged or if no list exists with specified id
         Template ch = templateService.getTemplate(
                 templateItem.getTemplate_id(),
-                authCredentials.getSessionCode()
+                bearerToken.getSessionCode()
         );
 
         return new TemplateItemResource(templateItemService.addTemplateItem(templateItem));
@@ -267,8 +270,8 @@ public class ServiceController {
 
 
     @PostMapping("checklist/template/{templateID}")
-    public ChecklistResource addListFromTemplate(@PathVariable("templateID") int templateId, @RequestParam("listName") String listName, AuthCredentials authCredentials) throws MyException {
-        Template template = templateService.getTemplate(templateId, authCredentials.getSessionCode());
+    public ChecklistResource addListFromTemplate(@PathVariable("templateID") int templateId, @RequestParam("listName") String listName, BearerToken bearerToken) throws MyException {
+        Template template = templateService.getTemplate(templateId, bearerToken.getSessionCode());
         //TODO if template is null throw some exception
         return new ChecklistResource(templateService.useTemplate(template, listName));
 
@@ -276,11 +279,11 @@ public class ServiceController {
 
 
     @PutMapping("/checklist/item")
-    public ChecklistItemResource updateChecklistItem(@RequestBody ChecklistItem checklistItem, AuthCredentials authCredentials) throws MyException {
+    public ChecklistItemResource updateChecklistItem(@RequestBody ChecklistItem checklistItem, BearerToken bearerToken) throws MyException {
 
         Checklist ch = checklistService.getChecklist(
                 checklistItem.getlist_id(),
-                authCredentials.getSessionCode()
+                bearerToken.getSessionCode()
         );
 
 
@@ -292,7 +295,7 @@ public class ServiceController {
 
     }
     @PutMapping("/checklist/")
-    public ChecklistResource updateChecklist(@RequestBody Checklist checklist, AuthCredentials authCredentials) throws MyException {
+    public ChecklistResource updateChecklist(@RequestBody Checklist checklist, BearerToken bearerToken) throws MyException {
 
         return new ChecklistResource(
                 checklistService.updateChecklist(checklist)
@@ -300,11 +303,11 @@ public class ServiceController {
 
     }
     @PutMapping("/template/item")
-    public TemplateItemResource updateTemplateItem(@RequestBody TemplateItem templateItem, AuthCredentials authCredentials) throws MyException, IOException {
+    public TemplateItemResource updateTemplateItem(@RequestBody TemplateItem templateItem, BearerToken bearerToken) throws MyException, IOException {
 
         Template ch = templateService.getTemplate(
                 templateItem.getTemplate_id(),
-                authCredentials.getSessionCode()
+                bearerToken.getSessionCode()
         );
 
 
@@ -317,7 +320,7 @@ public class ServiceController {
     }
 
     @PutMapping("/template/")
-    public TemplateResource updateTemplate(@RequestBody Template checklist, AuthCredentials authCredentials) throws MyException, IOException {
+    public TemplateResource updateTemplate(@RequestBody Template checklist, BearerToken bearerToken) throws MyException, IOException {
 
         return new TemplateResource(
                 templateService.updateTemplate(checklist)

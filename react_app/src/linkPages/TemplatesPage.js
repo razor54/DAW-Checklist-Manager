@@ -48,7 +48,7 @@ export default class extends Component {
         <GoHome history={this.state.history}/>
         <GoBack history={this.state.history}/>
         <div align="right">
-          <TemplateForm url='http://localhost:9000/listing/template' callback={this.templatesFormCallback}/>
+          <TemplateForm url='http://localhost:9000/listing/template' callback={this.templatesFormCallback} errorCallback={this.errorCallback}/>
         </div>
         <div align="center">
           <strong>Templates List</strong>

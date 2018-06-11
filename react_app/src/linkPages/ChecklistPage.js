@@ -48,7 +48,7 @@ export default class ChecklistsPage extends Component {
         <GoBack history={this.state.history}/>
         <CheckListDetail id={this.state.listId} url = {`http://localhost:9000/listing/checklist/${this.state.listId}`} errorCallback={this.errorCallback}  updateUrl = {`http://localhost:9000/listing/checklist/`} />
         <div align="right">
-          <ChecklistItemForm listId={this.state.listId} url='http://localhost:9000/listing/checklist/item' callback={this.checklistItemFormCallback}/>
+          <ChecklistItemForm listId={this.state.listId} url='http://localhost:9000/listing/checklist/item' callback={this.checklistItemFormCallback} errorCallback={this.errorCallback}/>
 
         </div>
         <div align="center">

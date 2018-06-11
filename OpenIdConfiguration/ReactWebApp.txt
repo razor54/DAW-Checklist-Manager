@@ -1,0 +1,11 @@
+client_name : React Web App
+
+cient_id : react-web-app
+
+client_secret : 
+XifoBArqYrf9mqXaYaJwRWTSmvEbhekyJ22hPTO7eQbbMNxKa6Jv4MTRThimShETdxt_yUFhVK9CFbeU4KOXKQ
+
+grant_type : implicit & authorization_code
+
+response_type : token id_token
+

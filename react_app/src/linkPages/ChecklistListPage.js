@@ -26,7 +26,6 @@ export default class extends Component {
   }
 
   errorCallback(err){
-
     if(err==='TypeError: Failed to fetch')
       this.state.history.push('/server-error')
     if(err==='no-access')
@@ -47,7 +46,7 @@ export default class extends Component {
         <GoHome history={this.state.history}/>
         <GoBack history={this.state.history}/>
         <div align="right">
-          <ChecklistForm url='http://localhost:9000/listing/checklist' callback={this.checkListFormCallback}/>
+          <ChecklistForm url='http://localhost:9000/listing/checklist' callback={this.checkListFormCallback} errorCallback={this.errorCallback}/>
         </div>
         <div align="center">
           <strong>Checklists List</strong>

@@ -1,0 +1,10 @@
+Insert users:
+
+Admin
+id = admin
+name = admin User
+
+User
+id = user
+name = user User
+

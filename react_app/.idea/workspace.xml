@@ -3,22 +3,28 @@
   <component name="ChangeListManager">
     <list default="true" id="34f34c30-5b9a-4ed1-a1c5-b81feb2dd4f3" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Router.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Router.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/CheckListDetail.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CheckListDetail.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ChecklistForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ChecklistForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ChecklistItemForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ChecklistItemForm.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Item.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Item.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/List.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/List.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/TemplateItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/TemplateItem.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/linkPages/ChecklistItemPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/linkPages/ChecklistItemPage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/templateDetail.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/templateDetail.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/templateForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/templateForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/templateItemForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/templateItemForm.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/linkPages/ChecklistListPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/linkPages/ChecklistListPage.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/linkPages/ChecklistPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/linkPages/ChecklistPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/linkPages/ExamplePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/linkPages/ExamplePage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/linkPages/ExamplePage.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/linkPages/HomePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/linkPages/HomePage.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/linkPages/LoginPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/linkPages/LoginPage.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/linkPages/TemplatesPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/linkPages/TemplatesPage.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/linkPages/templateItemPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/linkPages/templateItemPage.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/linkPages/templatePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/linkPages/templatePage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../spring_server/src/main/java/group1/spring_server/control/ServiceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../spring_server/src/main/java/group1/spring_server/control/ServiceController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring_server/src/main/java/group1/spring_server/domain/BearerToken.java" beforeDir="false" afterPath="$PROJECT_DIR$/../spring_server/src/main/java/group1/spring_server/domain/BearerToken.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring_server/src/main/java/group1/spring_server/domain/model/MItreidAuthResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/../spring_server/src/main/java/group1/spring_server/domain/model/MitreIdBody.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../spring_server/src/main/java/group1/spring_server/resolvers/AuthArgumentResolver.java" beforeDir="false" afterPath="$PROJECT_DIR$/../spring_server/src/main/java/group1/spring_server/resolvers/AuthArgumentResolver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../spring_server/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../spring_server/src/main/resources/application.yml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -32,23 +38,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="LoginPage.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/linkPages/LoginPage.js">
+      <file leaf-file-name="List.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/List.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="26" column="3" selection-start-line="26" selection-start-column="3" selection-end-line="26" selection-end-column="3" />
-              <folding>
-                <element signature="e#0#41#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ChecklistItemPage.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/linkPages/ChecklistItemPage.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="480">
-              <caret line="35" column="44" lean-forward="true" selection-start-line="35" selection-start-column="22" selection-end-line="35" selection-end-column="44" />
+            <state relative-caret-position="271">
+              <caret line="40" selection-start-line="40" selection-end-line="40" />
             </state>
           </provider>
         </entry>
@@ -56,35 +50,80 @@
       <file leaf-file-name="HomePage.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/linkPages/HomePage.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="219">
-              <caret line="21" column="5" lean-forward="true" selection-start-line="21" selection-start-column="5" selection-end-line="21" selection-end-column="5" />
+            <state relative-caret-position="475">
+              <caret line="46" column="40" lean-forward="true" selection-start-line="46" selection-start-column="40" selection-end-line="46" selection-end-column="40" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="package.json" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/package.json">
+      <file leaf-file-name="Item.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/Item.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="8" column="10" selection-start-line="8" selection-start-column="10" selection-end-line="8" selection-end-column="10" />
+            <state relative-caret-position="170">
+              <caret line="86" column="30" selection-start-line="86" selection-start-column="30" selection-end-line="86" selection-end-column="30" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AuthForm.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/AuthForm.js">
+      <file leaf-file-name="templateForm.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/templateForm.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="214">
-              <caret line="18" column="8" selection-start-line="18" selection-start-column="8" selection-end-line="18" selection-end-column="8" />
+            <state relative-caret-position="151">
+              <caret line="28" column="30" selection-start-line="28" selection-start-column="30" selection-end-line="28" selection-end-column="30" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Router.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Router.js">
+      <file leaf-file-name="TemplateItem.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/TemplateItem.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="22" column="54" selection-start-line="22" selection-start-column="54" selection-end-line="22" selection-end-column="54" />
+            <state relative-caret-position="806">
+              <caret line="87" column="38" lean-forward="true" selection-start-line="87" selection-start-column="38" selection-end-line="87" selection-end-column="38" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="templateItemForm.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/templateItemForm.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="366">
+              <caret line="31" column="30" selection-start-line="31" selection-start-column="30" selection-end-line="31" selection-end-column="30" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="templateDetail.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/templateDetail.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-170">
+              <caret line="28" column="30" selection-start-line="28" selection-start-column="30" selection-end-line="28" selection-end-column="30" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ChecklistItemForm.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/ChecklistItemForm.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="98">
+              <caret line="29" column="30" selection-start-line="29" selection-start-column="30" selection-end-line="29" selection-end-column="30" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ChecklistForm.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/ChecklistForm.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-452">
+              <caret line="30" column="30" selection-start-line="30" selection-start-column="30" selection-end-line="30" selection-end-column="30" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CheckListDetail.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/CheckListDetail.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="534">
+              <caret line="102" column="30" selection-start-line="102" selection-start-column="30" selection-end-line="102" selection-end-column="30" />
             </state>
           </provider>
         </entry>
@@ -106,6 +145,8 @@
       <find>check</find>
       <find>errorCall</find>
       <find>8080</find>
+      <find>user</find>
+      <find>sigins</find>
     </findStrings>
     <replaceStrings>
       <replace>9000</replace>
@@ -122,8 +163,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/components/Router.js" />
-        <option value="$PROJECT_DIR$/src/components/HomePage.js" />
         <option value="$PROJECT_DIR$/src/components/ChecklistListPage.js" />
         <option value="$PROJECT_DIR$/src/components/ChecklistItemPage.js" />
         <option value="$PROJECT_DIR$/src/components/ChecklistPage.js" />
@@ -137,22 +176,15 @@
         <option value="$PROJECT_DIR$/src/components/Auth.js" />
         <option value="$PROJECT_DIR$/src/errorPages/NoAcessPage.js" />
         <option value="$PROJECT_DIR$/src/linkPages/Login Page.js" />
-        <option value="$PROJECT_DIR$/src/components/ChecklistItemForm.js" />
         <option value="$PROJECT_DIR$/src/model/checklistDTO.js" />
-        <option value="$PROJECT_DIR$/src/components/List.js" />
         <option value="$PROJECT_DIR$/src/components/GoHome.js" />
         <option value="$PROJECT_DIR$/src/components/GoBack.js" />
         <option value="$PROJECT_DIR$/src/errorPages/NoAccessPage.js" />
         <option value="$PROJECT_DIR$/src/components/AuthForm.js" />
         <option value="$PROJECT_DIR$/src/errorPages/InvalidCredentials.js" />
-        <option value="$PROJECT_DIR$/src/components/ChecklistForm.js" />
-        <option value="$PROJECT_DIR$/src/components/CheckListDetail.js" />
         <option value="$PROJECT_DIR$/src/linkPages/TemplatesPage" />
         <option value="$PROJECT_DIR$/src/linkPages/TemplateListPage.js" />
         <option value="$PROJECT_DIR$/src/model/templateItemsDTO.js" />
-        <option value="$PROJECT_DIR$/src/components/templateForm.js" />
-        <option value="$PROJECT_DIR$/src/components/templateDetail.js" />
-        <option value="$PROJECT_DIR$/src/Router.js" />
         <option value="$PROJECT_DIR$/src/model/templateListDTO.js" />
         <option value="$PROJECT_DIR$/src/model/checklistItemsListDTO.js" />
         <option value="$PROJECT_DIR$/src/model/checklistItemDTO.js" />
@@ -160,19 +192,28 @@
         <option value="$PROJECT_DIR$/src/model/templatesListDTO.js" />
         <option value="$PROJECT_DIR$/src/model/templateItemListDTO.js" />
         <option value="$PROJECT_DIR$/src/model/TemplateItemDTO.js" />
+        <option value="$PROJECT_DIR$/src/linkPages/ChecklistItemPage.js" />
+        <option value="$PROJECT_DIR$/src/linkPages/ExamplePage.js" />
+        <option value="$PROJECT_DIR$/package.json" />
+        <option value="$PROJECT_DIR$/src/linkPages/RedirectPage.js" />
+        <option value="$PROJECT_DIR$/src/Router.js" />
+        <option value="$PROJECT_DIR$/src/linkPages/Redirect.js" />
+        <option value="$PROJECT_DIR$/src/linkPages/LoginPage.js" />
+        <option value="$PROJECT_DIR$/src/linkPages/ChecklistPage.js" />
+        <option value="$PROJECT_DIR$/src/linkPages/TemplatesPage.js" />
+        <option value="$PROJECT_DIR$/src/linkPages/templateItemPage.js" />
+        <option value="$PROJECT_DIR$/src/linkPages/ChecklistListPage.js" />
+        <option value="$PROJECT_DIR$/src/components/ChecklistForm.js" />
+        <option value="$PROJECT_DIR$/src/components/ChecklistItemForm.js" />
+        <option value="$PROJECT_DIR$/src/components/templateForm.js" />
         <option value="$PROJECT_DIR$/src/components/templateItemForm.js" />
+        <option value="$PROJECT_DIR$/src/linkPages/HomePage.js" />
+        <option value="$PROJECT_DIR$/src/linkPages/templatePage.js" />
+        <option value="$PROJECT_DIR$/src/components/List.js" />
         <option value="$PROJECT_DIR$/src/components/Item.js" />
         <option value="$PROJECT_DIR$/src/components/TemplateItem.js" />
-        <option value="$PROJECT_DIR$/src/linkPages/ChecklistItemPage.js" />
-        <option value="$PROJECT_DIR$/src/linkPages/ChecklistListPage.js" />
-        <option value="$PROJECT_DIR$/src/linkPages/ChecklistPage.js" />
-        <option value="$PROJECT_DIR$/src/linkPages/ExamplePage.js" />
-        <option value="$PROJECT_DIR$/src/linkPages/templateItemPage.js" />
-        <option value="$PROJECT_DIR$/src/linkPages/templatePage.js" />
-        <option value="$PROJECT_DIR$/src/linkPages/TemplatesPage.js" />
-        <option value="$PROJECT_DIR$/package.json" />
-        <option value="$PROJECT_DIR$/src/linkPages/HomePage.js" />
-        <option value="$PROJECT_DIR$/src/linkPages/LoginPage.js" />
+        <option value="$PROJECT_DIR$/src/components/templateDetail.js" />
+        <option value="$PROJECT_DIR$/src/components/CheckListDetail.js" />
       </list>
     </option>
   </component>
@@ -347,6 +388,9 @@
       <workItem from="1527343157993" duration="89000" />
       <workItem from="1528118831974" duration="266000" />
       <workItem from="1528210063667" duration="1903000" />
+      <workItem from="1528586811578" duration="2097000" />
+      <workItem from="1528649981038" duration="11894000" />
+      <workItem from="1528725403657" duration="3982000" />
     </task>
     <task id="LOCAL-00001" summary="changed name of component">
       <created>1526596642745</created>
@@ -359,7 +403,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="99794000" />
+    <option name="totallyTimeSpent" value="117767000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
@@ -376,14 +420,15 @@
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.32820514" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="TypeScript" order="8" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="Messages" order="7" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32923076" />
+      <window_info anchor="bottom" id="Messages" order="7" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -399,19 +444,10 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="12" />
+      <option name="time" value="15" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/node_modules/react-fetch/example/dist/example.js" />
-    <entry file="jar://$APPLICATION_HOME_DIR$/lib/webstorm.jar!/resources/html5-schema/html5/web-forms.rnc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7545">
-          <caret line="503" column="16" selection-start-line="503" selection-start-column="16" selection-end-line="503" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/exampleApp/App.test.js" />
     <entry file="file://$PROJECT_DIR$/src/exampleApp/App.css" />
     <entry file="file://$PROJECT_DIR$/src/model/listDTO.js" />
     <entry file="file://$PROJECT_DIR$/src/model/itemDTO.js" />
@@ -442,83 +478,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/CheckListDetail.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" selection-start-line="4" selection-end-line="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/ChecklistForm.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="21" lean-forward="true" selection-start-line="15" selection-start-column="21" selection-end-line="15" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/GoHome.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="39" selection-start-column="39" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/GoBack.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" column="29" selection-start-line="16" selection-start-column="29" selection-end-line="16" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/ChecklistItemForm.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="87">
-          <caret line="23" column="5" selection-start-line="23" selection-start-column="5" selection-end-line="23" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/templateDetail.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="774">
-          <caret line="120" column="16" selection-start-line="120" selection-start-column="16" selection-end-line="120" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Item.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="327">
-          <caret line="100" column="32" selection-start-line="100" selection-start-column="32" selection-end-line="100" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/List.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="4" column="18" lean-forward="true" selection-start-line="4" selection-start-column="18" selection-end-line="4" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/templateItemForm.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="444">
-          <caret line="63" column="50" selection-start-line="63" selection-start-column="32" selection-end-line="63" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/TemplateItem.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="732">
-          <caret line="127" column="3" selection-start-line="127" selection-start-column="3" selection-end-line="127" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/templateForm.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="15" selection-start-line="3" selection-start-column="15" selection-end-line="3" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/errorPages/InvalidCredentials.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
@@ -544,60 +503,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
           <caret line="4" column="36" selection-start-line="4" selection-start-column="21" selection-end-line="4" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/linkPages/ChecklistListPage.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="520">
-          <caret line="41" lean-forward="true" selection-start-line="41" selection-end-line="41" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/linkPages/ChecklistPage.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="700">
-          <caret line="55" column="43" selection-start-line="55" selection-start-column="43" selection-end-line="55" selection-end-column="43" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/linkPages/ExamplePage.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="670">
-          <caret line="55" column="40" selection-start-line="55" selection-start-column="40" selection-end-line="55" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/linkPages/templatePage.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="685">
-          <caret line="99" column="43" selection-start-line="99" selection-start-column="43" selection-end-line="99" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/linkPages/templateItemPage.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="525">
-          <caret line="35" column="43" selection-start-line="35" selection-start-column="43" selection-end-line="35" selection-end-column="43" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/linkPages/TemplatesPage.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="700">
-          <caret line="54" column="42" selection-start-line="54" selection-start-column="42" selection-end-line="54" selection-end-column="42" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -643,13 +548,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Router.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="22" column="54" selection-start-line="22" selection-start-column="54" selection-end-line="22" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/model/checklistListDTO.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="600">
@@ -660,38 +558,182 @@
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
-          <caret line="8" column="10" selection-start-line="8" selection-start-column="10" selection-end-line="8" selection-end-column="10" />
+          <caret line="8" column="16" selection-start-line="8" selection-start-column="5" selection-end-line="8" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/linkPages/RedirectPage.js" />
+    <entry file="file://$PROJECT_DIR$/src/Router.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
+          <folding>
+            <element signature="e#0#40#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/oidc-client/index.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="691">
+          <caret line="173" column="37" lean-forward="true" selection-start-line="173" selection-start-column="37" selection-end-line="173" selection-end-column="37" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/AuthForm.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="214">
+        <state relative-caret-position="255">
           <caret line="18" column="8" selection-start-line="18" selection-start-column="8" selection-end-line="18" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/GoHome.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="39" selection-start-column="39" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/linkPages/ExamplePage.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="526">
+          <caret line="55" column="40" selection-start-line="55" selection-start-column="40" selection-end-line="55" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/GoBack.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="29" selection-start-line="16" selection-start-column="29" selection-end-line="16" selection-end-column="29" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/linkPages/ChecklistItemPage.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="480">
-          <caret line="35" column="44" lean-forward="true" selection-start-line="35" selection-start-column="22" selection-end-line="35" selection-end-column="44" />
+          <caret line="35" column="12" selection-start-line="35" selection-start-column="12" selection-end-line="35" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/linkPages/ChecklistListPage.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="532">
+          <caret line="52" column="12" lean-forward="true" selection-start-line="52" selection-start-column="12" selection-end-line="52" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/linkPages/ChecklistPage.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="50" column="183" selection-start-line="50" selection-start-column="183" selection-end-line="50" selection-end-column="183" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/linkPages/LoginPage.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="26" column="3" selection-start-line="26" selection-start-column="3" selection-end-line="26" selection-end-column="3" />
+        <state relative-caret-position="357">
+          <caret line="37" column="12" lean-forward="true" selection-start-line="37" selection-start-column="12" selection-end-line="37" selection-end-column="12" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/linkPages/Redirect.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="435">
+          <caret line="30" column="33" selection-start-line="30" selection-start-column="33" selection-end-line="30" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/linkPages/templateItemPage.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="417">
+          <caret line="33" column="46" lean-forward="true" selection-start-line="33" selection-start-column="46" selection-end-line="33" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/linkPages/TemplatesPage.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="50" column="20" selection-start-line="50" selection-start-column="20" selection-end-line="50" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/linkPages/templatePage.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/List.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="271">
+          <caret line="40" selection-start-line="40" selection-end-line="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Item.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="86" column="30" selection-start-line="86" selection-start-column="30" selection-end-line="86" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/templateForm.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="151">
+          <caret line="28" column="30" selection-start-line="28" selection-start-column="30" selection-end-line="28" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/templateItemForm.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="366">
+          <caret line="31" column="30" selection-start-line="31" selection-start-column="30" selection-end-line="31" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/TemplateItem.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="806">
+          <caret line="87" column="38" lean-forward="true" selection-start-line="87" selection-start-column="38" selection-end-line="87" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/templateDetail.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-170">
+          <caret line="28" column="30" selection-start-line="28" selection-start-column="30" selection-end-line="28" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/ChecklistItemForm.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="98">
+          <caret line="29" column="30" selection-start-line="29" selection-start-column="30" selection-end-line="29" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/ChecklistForm.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-452">
+          <caret line="30" column="30" selection-start-line="30" selection-start-column="30" selection-end-line="30" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/CheckListDetail.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="534">
+          <caret line="102" column="30" selection-start-line="102" selection-start-column="30" selection-end-line="102" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/linkPages/HomePage.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="219">
-          <caret line="21" column="5" lean-forward="true" selection-start-line="21" selection-start-column="5" selection-end-line="21" selection-end-column="5" />
+        <state relative-caret-position="475">
+          <caret line="46" column="40" lean-forward="true" selection-start-line="46" selection-start-column="40" selection-end-line="46" selection-end-column="40" />
         </state>
       </provider>
     </entry>

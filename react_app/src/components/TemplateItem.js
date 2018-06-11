@@ -3,6 +3,8 @@ import itemDTO from '../model/TemplateItemDTO';
 
 //props = {url, listname}
 
+const token_key = 'oidc.user:http://localhost:8080/openid-connect-server-webapp:react-web-app';
+
 
 export default class extends Component {
 
@@ -40,11 +42,11 @@ export default class extends Component {
 
   componentDidMount(){
 
-    const session_id = localStorage.getItem('session-id')
+    const session = sessionStorage.getItem(token_key)
+    if(!session) return this.errorCallback('no-access')
+    const token =  JSON.parse(session)
 
-    if(!session_id) return this.errorCallback('no-access')
-
-    return fetch(this.state.url, {headers:{authorization:`basic ${session_id}`}})
+    return fetch(this.state.url, {headers:{authorization:`${token.token_type} ${token.access_token}`}})
       .then(res =>{
         if(!res.ok)this.errorCallback(res.status)
         return res.json()
@@ -81,11 +83,13 @@ export default class extends Component {
 
   pushChanges(){
 
-    const session_id = localStorage.getItem('session-id')
+    const session = sessionStorage.getItem(token_key)
+    if(!session) return this.errorCallback('no-access')
+    const token =  JSON.parse(session)
 
     const data = {
       headers:{
-        authorization : `basic ${session_id}`,
+        authorization:`${token.token_type} ${token.access_token}`,
         'Content-Type' : 'application/json',
       },
       method : 'PUT',

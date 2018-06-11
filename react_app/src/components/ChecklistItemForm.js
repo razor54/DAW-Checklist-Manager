@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+const token_key = 'oidc.user:http://localhost:8080/openid-connect-server-webapp:react-web-app';
 
 //props = {url, listname, loadItem}
 export default class List extends Component {
@@ -7,6 +8,7 @@ export default class List extends Component {
     super(props);
 
     this.callback = props.callback
+    this.errorCallback = props.errorCallback
     this.addList = this.addList.bind(this)
     this.descriptionHandler = this.descriptionHandler.bind(this)
     this.nameHandler = this.nameHandler.bind(this)
@@ -23,11 +25,13 @@ export default class List extends Component {
 
   addList(){
 
+    const session = sessionStorage.getItem(token_key)
+    if(!session) return this.errorCallback('no-access')
+    const token =  JSON.parse(session)
+
     if(!this.state.listId || !this.state.name || !this.state.description){
       return this.setState({hiddenMessage: false})
     }
-
-    const session_id = localStorage.getItem('session-id')
 
     const body = {
       list_id : this.state.listId,
@@ -37,7 +41,7 @@ export default class List extends Component {
     }
 
     const header = {
-      authorization : `basic ${session_id}`,
+      authorization:`${token.token_type} ${token.access_token}`,
       'Content-Type' : 'application/json',
     }
 
@@ -47,13 +51,13 @@ export default class List extends Component {
       headers: header,
     }
 
-    if(session_id)
-      return fetch(this.state.url,data)
-        .then(res =>{
-          if(!res.ok) return this.setState({hiddenMessage: false})
-          return res.json()
-        })
-        .then(json =>this.callback(json.checklistItem))
+    return fetch(this.state.url,data)
+      .then(res =>{
+        if(!res.ok) return this.setState({hiddenMessage: false})
+        return res.json()
+      })
+      .then(json =>this.callback(json.checklistItem))
+      .catch(this.errorCallback)
   }
 
   nameHandler (event) {

@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 
+const token_key = 'oidc.user:http://localhost:8080/openid-connect-server-webapp:react-web-app';
 
 //props = {url, listname, loadItem}
 export default class List extends Component {
@@ -33,11 +34,12 @@ export default class List extends Component {
 
 
   request(){
-    const session_id = localStorage.getItem('session-id')
 
-    if(!session_id) return this.errorCallback('no-access')
+    const session = sessionStorage.getItem(token_key)
+    if(!session) return this.errorCallback('no-access')
+    const token =  JSON.parse(session)
 
-    return fetch(this.state.url, {headers:{authorization:`basic ${session_id}`}})
+    return fetch(this.state.url, {headers:{authorization:`${token.token_type} ${token.access_token}`}})
       .then(res =>{
         if(!res.ok) return this.errorCallback(res.status)
         return res.json()

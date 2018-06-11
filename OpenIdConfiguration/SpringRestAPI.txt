@@ -1,0 +1,11 @@
+client_name : Spring Rest API
+
+cient_id : spring-rest-api
+
+client_secret : 
+AMsb-sf0Wg5zgPB1DKs9vDRzo0AfcNGBkP-Oi5jBTe2Jrpkjr0GrATZ7hhu8lTZRP1AmjVoAjm8ZZy3yqE24pNk
+
+grant_type : implicit & authorization_code
+
+response_type : code
+

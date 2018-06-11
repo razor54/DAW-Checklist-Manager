@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 public class AuthArgumentResolver implements HandlerMethodArgumentResolver {
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
-        return parameter.getParameterType().equals(AuthCredentials.class);
+        return parameter.getParameterType().equals(BearerToken.class);
     }
 
     @Override

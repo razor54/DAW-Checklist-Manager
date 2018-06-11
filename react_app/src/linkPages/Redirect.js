@@ -17,47 +17,24 @@ var mitreIDsettings = {
   loadUserInfo: true
 }
 
-const token_key = 'oidc.user:http://localhost:8080/openid-connect-server-webapp:react-web-app';
 
 const manager = new UserManager(mitreIDsettings)
 
-
-
-export default class LoginPage extends Component {
+export default class Redirect extends Component {
 
   constructor(props) {
     super(props)
-
-    this.login = this.login.bind(this)
-
-    this.state = {
-      history : props.history,
-    }
+    this.state = {}
   }
-
-  login () {
-
-    manager.signinPopup()
-      .then(user => {
-        manager.storeUser(user)
-        return this.state.history.push('/homepage')
-      })
-      .catch(error=> console.log(error))
-  }
-
-
 
   componentDidMount(){
-    if(sessionStorage.getItem(token_key)){
-      return this.state.history.push('/homepage')
-    }
+    manager.signinPopupCallback()
   }
 
   render() {
     return (
       <div >
-        <div >Login Page</div>
-        <button title='Login' onClick={this.login}>Login</button>
+        <div >Redirect Page</div>
       </div>
     );
   }

@@ -33,7 +33,7 @@ export default class extends Component {
         <GoHome history={this.state.history}/>
         <GoBack history={this.state.history}/>
         <div align="center">
-          <Item url={`http://localhost:9000/listing/template/item/${this.state.itemId}` } errorCallback={this.errorCallback}/>
+          <Item url={`http://localhost:9000/listing/template/item/${this.state.itemId}`} errorCallback={this.errorCallback}/>
         </div>
       </div>
     );

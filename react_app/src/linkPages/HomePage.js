@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 
 
+const token_key = 'oidc.user:http://localhost:8080/openid-connect-server-webapp:react-web-app';
+
+
 export default class LoginPage extends Component {
 
   constructor(props) {
@@ -17,16 +20,18 @@ export default class LoginPage extends Component {
 
   componentDidMount(){
 
-    if(!localStorage.getItem('bearer-token')){
-      return this.state.history.push('/loginpage')
-    }
+    const session = sessionStorage.getItem(token_key)
+    if(!session) return this.state.history.push('/loginpage')
+    const token =  JSON.parse(session)
 
-    fetch('http://localhost:9000/listing/',)
+    fetch('http://localhost:9000/listing/',{headers:{authorization:`${token.token_type} ${token.access_token}`}})
       .then(res=> {
-        if(res.status=403){
+
+        if(!res.ok){
           return this.logout()
         }
         this.state.history.push('/homepage')
+
       })
   }
 
@@ -39,7 +44,7 @@ export default class LoginPage extends Component {
   }
 
   logout(){
-    localStorage.removeItem('bearer-token')
+    sessionStorage.removeItem(token_key)
     this.state.history.push('/loginpage')
   }
 

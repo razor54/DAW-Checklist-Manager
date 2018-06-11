@@ -6,6 +6,10 @@ import GoHome from '../components/GoHome'
 import GoBack from '../components/GoBack'
 import TemplateDetail from '../components/templateDetail'
 
+
+const token_key = 'oidc.user:http://localhost:8080/openid-connect-server-webapp:react-web-app';
+
+
 export default class ChecklistsPage extends Component {
 
   constructor (props) {
@@ -47,12 +51,14 @@ export default class ChecklistsPage extends Component {
       return
     }
 
-    const session_id = localStorage.getItem('session-id')
+    const session = sessionStorage.getItem(token_key)
+    if(!session) return this.errorCallback('no-access')
+    const token =  JSON.parse(session)
 
     const listName= this.state.newListName;
 
     const header = {
-      authorization: `basic ${session_id}`,
+      authorization:`${token.token_type} ${token.access_token}`,
     }
 
     const data = {
@@ -60,14 +66,13 @@ export default class ChecklistsPage extends Component {
       headers: header,
     }
 
-    if (session_id)
-      return fetch(`http://localhost:9000/listing/checklist/template/${this.state.listId}?listName=${listName}`, data)
-        .then(res => {
-          if (!res.ok) return this.setState({hiddenMessage: false})
-          return res.json()
-        })
-        .then((list) => this.state.history.push(`/checklist/${list.checklist.id}`))
-        .catch(console.log)
+    return fetch(`http://localhost:9000/listing/checklist/template/${this.state.listId}?listName=${listName}`, data)
+      .then(res => {
+        if (!res.ok) return this.setState({hiddenMessage: false})
+        return res.json()
+      })
+      .then((list) => this.state.history.push(`/checklist/${list.checklist.id}`))
+      .catch(console.log)
   }
 
   render () {
@@ -91,7 +96,7 @@ export default class ChecklistsPage extends Component {
         </div>
         <div align="right">
           <TemplateItemForm listId={this.state.listId} url='http://localhost:9000/listing/template/item'
-                            callback={this.checklistItemFormCallback}/>
+                            callback={this.checklistItemFormCallback} errorCallback={this.errorCallback}/>
 
 
         </div>

@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
 
+
+const token_key = 'oidc.user:http://localhost:8080/openid-connect-server-webapp:react-web-app';
+
 //TODO improve this because its is almost the same as checklistForm
 export default class extends Component {
 
@@ -7,6 +10,7 @@ export default class extends Component {
     super(props);
 
     this.callback = props.callback
+    this.errorCallback = props.errorCallback
     this.addList = this.addList.bind(this)
     this.nameHandler = this.nameHandler.bind(this)
 
@@ -20,18 +24,21 @@ export default class extends Component {
 
   addList(){
 
+    const session = sessionStorage.getItem(token_key)
+    if(!session) return this.errorCallback('no-access')
+    const token =  JSON.parse(session)
+
     if(!this.state.listname){
       return this.setState({hiddenMessage: false})
     }
 
-    const session_id = localStorage.getItem('session-id')
 
     const body = {
       name : this.state.listname,
     }
 
     const header = {
-      authorization : `basic ${session_id}`,
+      authorization:`${token.token_type} ${token.access_token}`,
       'Content-Type' : 'application/json',
     }
 
@@ -41,13 +48,13 @@ export default class extends Component {
       headers: header,
     }
 
-    if(session_id)
-      return fetch(this.state.url,data)
-        .then(res =>{
-          if(!res.ok) return this.setState({hiddenMessage: false})
-          return res.json()
-        })
-        .then(json =>this.callback(json.template))
+    return fetch(this.state.url,data)
+      .then(res =>{
+        if(!res.ok) return this.setState({hiddenMessage: false})
+        return res.json()
+      })
+      .then(json =>this.callback(json.template))
+      .catch(this.errorCallback)
   }
 
   nameHandler (event) {

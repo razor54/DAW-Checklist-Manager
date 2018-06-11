@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 
+const token_key = 'oidc.user:http://localhost:8080/openid-connect-server-webapp:react-web-app';
+
 //props = {url, listname, loadItem}
 export default class extends Component {
 
@@ -22,10 +24,12 @@ export default class extends Component {
 
   getList () {
 
-    const session_id = localStorage.getItem('session-id')
+    const session = sessionStorage.getItem(token_key)
+    if(!session) return this.errorCallback('no-access')
+    const token =  JSON.parse(session)
 
     const header = {
-      authorization: `basic ${session_id}`,
+      authorization:`${token.token_type} ${token.access_token}`,
       'Content-Type': 'application/json',
     }
 
@@ -34,21 +38,20 @@ export default class extends Component {
       headers: header,
     }
 
-    if (session_id)
-      return fetch(this.props.url, data)
-        .then(res => {
-          if (!res.ok) return this.setState({hiddenMessage: false})
-          return res.json()
-        })
-        .then(json => json.template)
-        .then(list => {
-          this.setState(
-            {
-              name: list.name,
-            })
+    return fetch(this.props.url, data)
+      .then(res => {
+        if (!res.ok) return this.setState({hiddenMessage: false})
+        return res.json()
+      })
+      .then(json => json.template)
+      .then(list => {
+        this.setState(
+          {
+            name: list.name,
+          })
 
-        })
-        .catch(this.errorCallback)
+      })
+      .catch(this.errorCallback)
   }
 
   nameHandler (event) {
@@ -58,20 +61,21 @@ export default class extends Component {
 
 
   updateList () {
-    const id = this.props.id
-    const name = this.state.name
-    const completionDate = this.state.completionDate
 
-    const session_id = localStorage.getItem('session-id')
+
+    const session = sessionStorage.getItem(token_key)
+    if(!session) return this.errorCallback('no-access')
+    const token =  JSON.parse(session)
 
     const body = {
-      completionDate,
-      name,
-      id
+      id : this.props.id,
+      name : this.state.name,
+      completionDate :this.state.completionDate,
+
     }
 
     const header = {
-      authorization: `basic ${session_id}`,
+      authorization:`${token.token_type} ${token.access_token}`,
       'Content-Type': 'application/json',
     }
 
@@ -81,20 +85,19 @@ export default class extends Component {
       headers: header,
     }
 
-    if (session_id)
-      return fetch(this.updateUrl, data)
-        .then(res => {
-          if (!res.ok) return this.setState({hiddenMessage: false})
-          return res.json()
-        })
-        .then(json => json.template)
-        .then(checklist => this.setState(
-          {
-            edit: false,
-            name: checklist.name,
-            completionDate: checklist.completionDate
-          }))
-        .catch(this.errorCallback)
+    return fetch(this.updateUrl, data)
+      .then(res => {
+        if (!res.ok) return this.setState({hiddenMessage: false})
+        return res.json()
+      })
+      .then(json => json.template)
+      .then(checklist => this.setState(
+        {
+          edit: false,
+          name: checklist.name,
+          completionDate: checklist.completionDate
+        }))
+      .catch(this.errorCallback)
 
   }
 
