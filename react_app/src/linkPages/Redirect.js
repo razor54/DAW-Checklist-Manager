@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { UserManager } from 'oidc-client'
 
 var mitreIDsettings = {
-  authority: 'http://localhost:8080/openid-connect-server-webapp',
-  client_id: 'react-web-app',
+  authority: 'http://35.228.51.77/openid-connect-server-webapp',
+  client_id: '061b7558-463e-4adb-8a47-cf22f334f06b',
   client_secret: 'XifoBArqYrf9mqXaYaJwRWTSmvEbhekyJ22hPTO7eQbbMNxKa6Jv4MTRThimShETdxt_yUFhVK9CFbeU4KOXKQ',
   grant_type:'authorization_code',
   redirect_uri: 'http://localhost:3000/redirect',

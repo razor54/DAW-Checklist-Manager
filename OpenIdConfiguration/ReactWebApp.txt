@@ -1,6 +1,6 @@
 client_name : React Web App
 
-cient_id : react-web-app
+cient_id : 061b7558-463e-4adb-8a47-cf22f334f06b
 
 client_secret : 
 XifoBArqYrf9mqXaYaJwRWTSmvEbhekyJ22hPTO7eQbbMNxKa6Jv4MTRThimShETdxt_yUFhVK9CFbeU4KOXKQ

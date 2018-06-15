@@ -3,7 +3,7 @@ import itemDTO from '../model/checklistItemDTO';
 
 //props = {url, listname}
 
-const token_key = 'oidc.user:http://localhost:8080/openid-connect-server-webapp:react-web-app';
+const token_key = 'oidc.user:http://35.228.51.77/openid-connect-server-webapp:061b7558-463e-4adb-8a47-cf22f334f06b';
 
 export default class extends Component {
 

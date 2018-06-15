@@ -14,7 +14,7 @@ public class BearerToken {
     private  String sessionCode;
     private boolean noAcess;
 
-    private final String clientId ="spring-rest-api";
+    private final String clientId ="ab866e69-755c-4ab1-a859-ef42d71cb0df";
     private final String clientSecret= "AMsb-sf0Wg5zgPB1DKs9vDRzo0AfcNGBkP-Oi5jBTe2Jrpkjr0GrATZ7hhu8lTZRP1AmjVoAjm8ZZy3yqE24pNk";
 
 
@@ -30,7 +30,7 @@ public class BearerToken {
 
         String basicAuth = Base64Utils.encodeToString((clientId + ":" + clientSecret).getBytes());
 
-        HttpURLConnection connection = (HttpURLConnection) new URL("http://localhost:8080/openid-connect-server-webapp/introspect").openConnection();
+        HttpURLConnection connection = (HttpURLConnection) new URL("http://35.228.51.77/openid-connect-server-webapp/introspect").openConnection();
 
         connection.setDoOutput(true);
         connection.setInstanceFollowRedirects( false );
