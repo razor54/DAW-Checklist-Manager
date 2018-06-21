@@ -21,9 +21,9 @@ export default class Router extends Component {
   render() {
     return <BrowserRouter>
       <Switch>
-        <Route path='/' exact component={HomePage}/>
+        <Route path='/webapp' exact component={HomePage}/>
 
-        <Route path='/redirect' exact component={Redirect}/>}/>
+        <Route path='/webapp/redirect' exact component={Redirect}/>}/>
 
         <Route path='/loginpage' exact component={LoginPage}/>}/>
         <Route path='/homepage' exact component={HomePage}/>}/>

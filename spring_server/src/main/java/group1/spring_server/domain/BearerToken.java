@@ -30,7 +30,7 @@ public class BearerToken {
 
         String basicAuth = Base64Utils.encodeToString((clientId + ":" + clientSecret).getBytes());
 
-        HttpURLConnection connection = (HttpURLConnection) new URL("http://35.228.51.77/openid-connect-server-webapp/introspect").openConnection();
+        HttpURLConnection connection = (HttpURLConnection) new URL("http://35.234.140.198/openid-connect-server-webapp/introspect").openConnection();
 
         connection.setDoOutput(true);
         connection.setInstanceFollowRedirects( false );

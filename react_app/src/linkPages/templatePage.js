@@ -7,7 +7,7 @@ import GoBack from '../components/GoBack'
 import TemplateDetail from '../components/templateDetail'
 
 
-const token_key = 'oidc.user:http://35.228.51.77/openid-connect-server-webapp:061b7558-463e-4adb-8a47-cf22f334f06b';
+const token_key = 'oidc.user:http://35.234.140.198/openid-connect-server-webapp:061b7558-463e-4adb-8a47-cf22f334f06b';
 
 
 export default class ChecklistsPage extends Component {
@@ -66,7 +66,7 @@ export default class ChecklistsPage extends Component {
       headers: header,
     }
 
-    return fetch(`http://localhost:9000/listing/checklist/template/${this.state.listId}?listName=${listName}`, data)
+    return fetch(`http://35.234.136.49/api/listing/checklist/template/${this.state.listId}?listName=${listName}`, data)
       .then(res => {
         if (!res.ok) return this.setState({hiddenMessage: false})
         return res.json()
@@ -81,8 +81,8 @@ export default class ChecklistsPage extends Component {
         <div>Your Template</div>
         <GoHome history={this.state.history}/>
         <GoBack history={this.state.history}/>
-        <TemplateDetail id={this.state.listId} url={`http://localhost:9000/listing/template/${this.state.listId}`}
-                        errorCallback={this.errorCallback} updateUrl={`http://localhost:9000/listing/template/`}/>
+        <TemplateDetail id={this.state.listId} url={`http://35.234.136.49/api/listing/template/${this.state.listId}`}
+                        errorCallback={this.errorCallback} updateUrl={`http://35.234.136.49/api/listing/template/`}/>
         <p/>
         <div>
           <strong>Add a list with this template</strong>
@@ -95,14 +95,14 @@ export default class ChecklistsPage extends Component {
           <button onClick={this.addList}>Add New List</button>
         </div>
         <div align="right">
-          <TemplateItemForm listId={this.state.listId} url='http://localhost:9000/listing/template/item'
+          <TemplateItemForm listId={this.state.listId} url='http://35.234.136.49/api/listing/template/item'
                             callback={this.checklistItemFormCallback} errorCallback={this.errorCallback}/>
 
 
         </div>
         <div align="center">
           <strong>Template Items</strong>
-          <List url={`http://localhost:9000/listing/template/${this.state.listId}/items`}
+          <List url={`http://35.234.136.49/api/listing/template/${this.state.listId}/items`}
                 loadItem={this.goToChecklistItem} loadDTO={templateDTO} errorCallback={this.errorCallback}/>
         </div>
 

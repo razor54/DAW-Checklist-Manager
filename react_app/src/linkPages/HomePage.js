@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 
-const token_key = 'oidc.user:http://35.228.51.77/openid-connect-server-webapp:061b7558-463e-4adb-8a47-cf22f334f06b';
+const token_key = 'oidc.user:http://35.234.140.198/openid-connect-server-webapp:061b7558-463e-4adb-8a47-cf22f334f06b';
 
 
 export default class LoginPage extends Component {
@@ -24,7 +24,7 @@ export default class LoginPage extends Component {
     if(!session) return this.state.history.push('/loginpage')
     const token =  JSON.parse(session)
 
-    fetch('http://localhost:9000/listing/',{headers:{authorization:`${token.token_type} ${token.access_token}`}})
+    fetch('http://35.234.136.49/api/listing/',{headers:{authorization:`${token.token_type} ${token.access_token}`}})
       .then(res=> {
 
         if(!res.ok){

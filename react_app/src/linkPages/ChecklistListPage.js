@@ -46,11 +46,11 @@ export default class extends Component {
         <GoHome history={this.state.history}/>
         <GoBack history={this.state.history}/>
         <div align="right">
-          <ChecklistForm url='http://localhost:9000/listing/checklist' callback={this.checkListFormCallback} errorCallback={this.errorCallback}/>
+          <ChecklistForm url='http://35.234.136.49/api/listing/checklist' callback={this.checkListFormCallback} errorCallback={this.errorCallback}/>
         </div>
         <div align="center">
           <strong>Checklists List</strong>
-          <List url='http://localhost:9000/listing/checklists' loadItem={this.goToCheckList} loadDTO={checklistListDTO} errorCallback={this.errorCallback}/>
+          <List url='http://35.234.136.49/api/listing/checklists' loadItem={this.goToCheckList} loadDTO={checklistListDTO} errorCallback={this.errorCallback}/>
         </div>
 
       </div>

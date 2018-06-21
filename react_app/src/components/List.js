@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-const token_key = 'oidc.user:http://35.228.51.77/openid-connect-server-webapp:061b7558-463e-4adb-8a47-cf22f334f06b';
+const token_key = 'oidc.user:http://35.234.140.198/openid-connect-server-webapp:061b7558-463e-4adb-8a47-cf22f334f06b';
 
 //props = {url, listname, loadItem}
 export default class List extends Component {

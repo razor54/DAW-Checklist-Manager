@@ -3,7 +3,7 @@ import itemDTO from '../model/checklistItemDTO';
 
 //props = {url, listname}
 
-const token_key = 'oidc.user:http://35.228.51.77/openid-connect-server-webapp:061b7558-463e-4adb-8a47-cf22f334f06b';
+const token_key = 'oidc.user:http://35.234.140.198/openid-connect-server-webapp:061b7558-463e-4adb-8a47-cf22f334f06b';
 
 export default class extends Component {
 
@@ -101,7 +101,7 @@ export default class extends Component {
       })
     }
 
-    fetch('http://localhost:9000/listing/checklist/item', data)
+    fetch('http://35.234.136.49/api/listing/checklist/item', data)
       .then(res =>{
         if(!res.ok)this.errorCallback(res.status)
         return res.json()
