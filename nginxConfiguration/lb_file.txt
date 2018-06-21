@@ -1,0 +1,28 @@
+upstream backend {
+    server 10.154.0.2;
+    server 10.154.0.5;
+}
+
+server {
+    listen         80;
+    listen         [::]:80;
+    server_name    35.234.136.49;
+
+    location /webapp/ {
+        root /var/www/webapp;
+        index index.html;
+    }
+
+    location ˜* \.(js) {
+        root /var/www/webapp/static/js;
+    }
+
+    location ˜* \.(css) {
+        root /var/www/webapp/static/css;
+    }
+
+    location / {
+        proxy_pass http://backend;
+    }
+}
+~ 
