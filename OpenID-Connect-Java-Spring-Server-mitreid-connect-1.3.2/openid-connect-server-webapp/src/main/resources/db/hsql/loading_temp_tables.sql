@@ -71,3 +71,8 @@ CREATE TEMPORARY TABLE IF NOT EXISTS system_scope_TEMP (
 	restricted BOOLEAN,
 	default_scope BOOLEAN
 );
+
+CREATE TEMPORARY TABLE IF NOT EXISTS client_response_type_TEMP (
+	owner_id VARCHAR(256),
+	response_type VARCHAR(2000)
+);
