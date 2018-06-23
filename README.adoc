@@ -12,6 +12,7 @@ image::./architecture/architecture.png[]
 
 Este servidor contém uma instância da API realizada na primeira fase. Esta API consiste numa aplicação Spring Boot RESTful que irá fornecer informações sobre checklists através de pedidos HTTP.
 
+
 == Data Base
 
 Servidor responsável por garantir a persistência de dados da aplicação servidora back-end. Esta componente utiliza base de dados PostgreSQL.
@@ -22,7 +23,17 @@ Este servidor é responsável pela autêntificação do utilizador. Contem uma i
 
 
 == Front-End Server
-=== Load Balancer
-=== Client Application
+responsável por fazer o balanceamento de carga e disponibilizar uma aplicação react através dos recursos estáticos.
 
-== Tomcat Babysitting
+=== Load Balancer
+O balanceamento de carga tem por objetivo a otimizar a utilização de recursos, maximizar o desempenho, minimizar o tempo de resposta e evitar sobrecarga.
+Com esta técnica são utilizados múltiplos componentes com as mesmas funcionalidades, podendo aumentar a fiabilidade através da redundância.
+
+=== Client Application
+Aplicação React desenvolvida na segunda fase do projeto, com o objetivo de fazer uso da API disponibilizada pelo back-end server.
+
+== Google Cloud Platform
+As componentes apresentadas anteriormente foram deployed no Google Cloud Platform (GCP), com o objetivo de aumentar a sua disponibilidade.
+Como tal, foram usadas máquinas virtuais, disponíveis nesta plataforma, para hospedar as aplicações dos vários componentes.
+
+Uma das situações que requereu atenção foi a disponibilidade das aplicações como serviços do sistema operativo bem como as devidas configurações. Assim, quando existir algum problema com o serviço, foi definido que o este reinicia automaticamente para, mais uma vez aumentar a sua disponibilidade.

@@ -99,3 +99,4 @@ react_app/package-lock.json
 react_app/yarn.lock
 react_app/yarn.lock
 react_app/package-lock.json
+.DS_Store
